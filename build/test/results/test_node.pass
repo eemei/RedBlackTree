@@ -1,0 +1,23 @@
+---
+:source:
+  :path: test
+  :file: test_node.c
+:successes:
+- :test: test_create_a_new_node_with_the_node_value_is_40
+  :line: 8
+  :message: ''
+- :test: test_insert_a_child_into_the_tree_right_side
+  :line: 20
+  :message: ''
+- :test: test_insert_a_child_into_the_tree_left_side
+  :line: 33
+  :message: ''
+:failures: []
+:ignores: []
+:counts:
+  :total: 3
+  :passed: 3
+  :failed: 0
+  :ignored: 0
+:stdout:
+- ''
