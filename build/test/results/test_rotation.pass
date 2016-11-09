@@ -3,14 +3,41 @@
   :path: test
   :file: test_rotation.c
 :successes:
-- :test: test_left_rotation
-  :line: 8
+- :test: test_left_rotation_with_node80_and_one_child
+  :line: 44
+  :message: ''
+- :test: test_left_rotation_with_node150
+  :line: 61
+  :message: ''
+- :test: test_left_rotation_with_node_60_and_two_children
+  :line: 79
+  :message: ''
+- :test: test_left_rotation_with_node_100_and_left_channel
+  :line: 100
+  :message: ''
+- :test: test_right_rotation_with_node5
+  :line: 123
+  :message: ''
+- :test: test_right_rotation_with_node10
+  :line: 140
+  :message: ''
+- :test: test_right_rotation_with_node_60_and_two_children
+  :line: 159
+  :message: ''
+- :test: test_right_rotation_with_node_120_and_two_children
+  :line: 181
+  :message: ''
+- :test: test_left_right_rotation_with_node_100_and_child_80
+  :line: 206
+  :message: ''
+- :test: test_left_right_rotation_with_node_150_and_child_20
+  :line: 229
   :message: ''
 :failures: []
 :ignores: []
 :counts:
-  :total: 1
-  :passed: 1
+  :total: 10
+  :passed: 10
   :failed: 0
   :ignored: 0
 :stdout:
