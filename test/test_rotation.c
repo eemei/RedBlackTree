@@ -1,18 +1,17 @@
 #include "unity.h"
 #include "rotation.h"
 #include "node.h"
+#include "CustomAssert.h"
 
-typedef enum{
-  RED, BLACK,DOUBLE_BLACK
-}Color;
 
-void initNode(Node *root ,int value, Node *left, Node *right, int color){
+
+void initNode(Node *root ,int value, Node *left, Node *right, Color color){
   root->left = left;
   root->right = right;
   root->colour = color;
   root->value = value;
 }
-Node node5, node10, node20, node25, node50, node60, node80, node100, \
+Node node5, node10, node20, node25, node50, node60, node70, node80, node100, node110,\
     node120, node150, node170, node250;
 
 void setUp(void){
@@ -22,8 +21,10 @@ void setUp(void){
   initNode(&node25, 25, NULL, NULL, BLACK);   
   initNode(&node50, 50, NULL, NULL, BLACK);
   initNode(&node60, 60, NULL, NULL, BLACK);
+  initNode(&node70, 70, NULL, NULL, BLACK);    
   initNode(&node80, 80, NULL, NULL, BLACK);
   initNode(&node100, 100, NULL, NULL, BLACK);
+  initNode(&node110, 110, NULL, NULL, BLACK);
   initNode(&node120, 120, NULL, NULL, BLACK);    
   initNode(&node150, 150, NULL, NULL, BLACK);  
   initNode(&node170, 170, NULL, NULL, BLACK);  
@@ -40,7 +41,7 @@ void tearDown(void){}
 *   null null                  
 *
 */
-
+                                                                                            
 void test_left_rotation_with_node80_and_one_child(void){
   Node *root = &node80;
   initNode(&node80, 80, NULL, &node150, BLACK);
@@ -49,6 +50,7 @@ void test_left_rotation_with_node80_and_one_child(void){
   
   TEST_ASSERT_EQUAL_PTR(root, &node150);
   TEST_ASSERT_EQUAL_PTR(root->left, &node80);
+  TEST_ASSERT_EQUAL_NODE(80, NULL, NULL, BLACK, &node80);
 }
 
 /*
@@ -64,8 +66,7 @@ void test_left_rotation_with_node150(void){
   rotateLeft(&root);
   
   TEST_ASSERT_EQUAL_PTR(root, &node150);
-  TEST_ASSERT_EQUAL_PTR(root->left, NULL);
-  TEST_ASSERT_EQUAL_PTR(root->right, NULL);
+  TEST_ASSERT_EQUAL_NODE(150, NULL, NULL, BLACK, &node150);
 }
 
 /*
@@ -237,21 +238,61 @@ void test_left_right_rotation_with_node_150_and_child_20(void){
   rotateLeftRight(&root);
   
   TEST_ASSERT_EQUAL_PTR(root, &node50);
-  TEST_ASSERT_EQUAL_PTR(root->left, &node20);
-  TEST_ASSERT_EQUAL_PTR(root->right, &node150);
-  TEST_ASSERT_EQUAL_PTR(root->left->left, &node5);
-  //....
-}
+  TEST_ASSERT_EQUAL_NODE(50, &node20, &node150, BLACK, &node50);
+  TEST_ASSERT_EQUAL_NODE(20, &node5, &node25, BLACK, &node20);
+  TEST_ASSERT_EQUAL_NODE(150, &node100, &node250, BLACK, &node150);
+  TEST_ASSERT_EQUAL_NODE(5, NULL, NULL, BLACK, &node5);
+  TEST_ASSERT_EQUAL_NODE(25, NULL, NULL, BLACK, &node25);
+  TEST_ASSERT_EQUAL_NODE(100, NULL, NULL, BLACK, &node100);  
+  TEST_ASSERT_EQUAL_NODE(250, NULL, NULL, BLACK, &node250);
+  }
 
 /*
-*         60                          
-*        / \        rightLeft
-*       50  100     ----------->
-*           / \
-*         80  170
-*             / \
-*            150 250
+*       100   right     100     left    120
+*         \   ---->       \    ---->    / \
+*         170            120          100  170
+*         /               \
+*         120            170        
+*/
+void test_right_left_rotation_simple_with_node_100(void){
+  Node *root = &node100;
+  initNode(&node100, 100, NULL, &node170, BLACK);
+  initNode(&node170, 170, &node120, NULL, BLACK);;  
+  initNode(&node120, 120, NULL, NULL, BLACK);    
+  rotateRightLeft(&root);
+  
+  TEST_ASSERT_EQUAL_PTR(root, &node120);
+  TEST_ASSERT_EQUAL_NODE(120, &node100, &node170, BLACK, &node120);
+  TEST_ASSERT_EQUAL_NODE(100, NULL, NULL, BLACK, &node100);  
+  TEST_ASSERT_EQUAL_NODE(170, NULL, NULL, BLACK, &node170);
+}
+  
+/*
+*         100                  100                120
+*        / \        right      / \      left      / \
+*       70 150     ------->  70  120   ----->   100 150
+*           / \                  / \           / \  / \
+*         120  170              80 150       70 80 110 170
+*         /\                       / \   
+*        80 110                  110 170
 *
 */
-
-
+void test_right_left_rotation_with_node_100(void){
+  Node *root = &node100;
+  initNode(&node100, 100, &node70, &node150, BLACK);
+  initNode(&node150, 150, &node120, &node170, BLACK);
+  initNode(&node120, 120, &node80, &node110, BLACK);
+  initNode(&node70, 70, NULL, NULL, BLACK);
+  initNode(&node80, 80, NULL, NULL, BLACK); 
+  initNode(&node110, 110, NULL, NULL, BLACK);  
+  initNode(&node170, 170, NULL, NULL, BLACK);    
+  rotateRightLeft(&root);
+  
+  TEST_ASSERT_EQUAL_PTR(root, &node120);
+  TEST_ASSERT_EQUAL_NODE(100, &node70, &node80, BLACK, &node100);
+  TEST_ASSERT_EQUAL_NODE(150, &node110, &node170, BLACK, &node150);
+  TEST_ASSERT_EQUAL_NODE(70, NULL, NULL, BLACK, &node70);
+  TEST_ASSERT_EQUAL_NODE(80, NULL, NULL, BLACK, &node80);
+  TEST_ASSERT_EQUAL_NODE(110, NULL, NULL, BLACK, &node110);  
+  TEST_ASSERT_EQUAL_NODE(170, NULL, NULL, BLACK, &node170);
+}

@@ -40,6 +40,8 @@ extern void test_right_rotation_with_node_60_and_two_children(void);
 extern void test_right_rotation_with_node_120_and_two_children(void);
 extern void test_left_right_rotation_with_node_100_and_child_80(void);
 extern void test_left_right_rotation_with_node_150_and_child_20(void);
+extern void test_right_left_rotation_simple_with_node_100(void);
+extern void test_right_left_rotation_with_node_100(void);
 
 
 //=======Test Reset Option=====
@@ -55,16 +57,18 @@ void resetTest(void)
 int main(void)
 {
   UnityBegin("test_rotation.c");
-  RUN_TEST(test_left_rotation_with_node80_and_one_child, 44);
-  RUN_TEST(test_left_rotation_with_node150, 61);
-  RUN_TEST(test_left_rotation_with_node_60_and_two_children, 79);
-  RUN_TEST(test_left_rotation_with_node_100_and_left_channel, 100);
-  RUN_TEST(test_right_rotation_with_node5, 123);
-  RUN_TEST(test_right_rotation_with_node10, 140);
-  RUN_TEST(test_right_rotation_with_node_60_and_two_children, 159);
-  RUN_TEST(test_right_rotation_with_node_120_and_two_children, 181);
-  RUN_TEST(test_left_right_rotation_with_node_100_and_child_80, 206);
-  RUN_TEST(test_left_right_rotation_with_node_150_and_child_20, 229);
+  RUN_TEST(test_left_rotation_with_node80_and_one_child, 45);
+  RUN_TEST(test_left_rotation_with_node150, 63);
+  RUN_TEST(test_left_rotation_with_node_60_and_two_children, 80);
+  RUN_TEST(test_left_rotation_with_node_100_and_left_channel, 101);
+  RUN_TEST(test_right_rotation_with_node5, 124);
+  RUN_TEST(test_right_rotation_with_node10, 141);
+  RUN_TEST(test_right_rotation_with_node_60_and_two_children, 160);
+  RUN_TEST(test_right_rotation_with_node_120_and_two_children, 182);
+  RUN_TEST(test_left_right_rotation_with_node_100_and_child_80, 207);
+  RUN_TEST(test_left_right_rotation_with_node_150_and_child_20, 230);
+  RUN_TEST(test_right_left_rotation_simple_with_node_100, 257);
+  RUN_TEST(test_right_left_rotation_with_node_100, 280);
 
   return (UnityEnd());
 }

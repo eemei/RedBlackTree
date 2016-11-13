@@ -5,46 +5,55 @@
 /*
 *     X      <                      Y
 *    / \      \    left rotate     / \
-*   a   Y     /   ---------->    X   c  
+*   a  [Y]     /   ---------->    X   c  
 *      / \                      / \
-*     b  c                     a   b
+*   [b]  c                     a   b
 *
 */
 
-void rotateLeft(Node **nodePtr){  
-  if((*nodePtr)->right != NULL){
-  Node *tmpNode = *nodePtr;   // X
-  Node *tmpNodeRightLeft = (*nodePtr)->right->left; //  b
+
+void rotateLeft(Node **nodePtr){
+  Node *root, *child, *grandChild; 
+  root = *nodePtr;
+  child = root->right;
   
-  *nodePtr = (*nodePtr)->right;   // Y  
-  (*nodePtr)->left = tmpNode;
-  (*nodePtr)->left->right = tmpNodeRightLeft;  
+  if(child != NULL){
+  grandChild = root->right->left;
+ 
+  *nodePtr = child;   
+  (*nodePtr)->left = root;
+  (*nodePtr)->left->right = grandChild;  
   }
   else 
-      *nodePtr = *nodePtr; 
+      *nodePtr = root; 
 }
+
 
 /*
 *   >       X                         Y
 *  /      / \      right rotate      / \
-*  \     Y  c      ---------->      a  X  
+*  \    [Y] c      ---------->      a  X  
 *       / \                           / \  
-*       a  b                         b  c
+*      a  [b]                        b  c
 *
 */
 
 void rotateRight(Node **nodePtr){
-  if((*nodePtr)->left != NULL){
-  Node *tmpNode = *nodePtr;   // X
-  Node *tmpNodeLeftRight = (*nodePtr)->left->right; //  b
+  Node *root, *child, *grandChild; 
+  root = *nodePtr;
+  child = root->left;
   
-  *nodePtr = (*nodePtr)->left;   // Y  
-  (*nodePtr)->right = tmpNode;
-  (*nodePtr)->right->left = tmpNodeLeftRight;  
+  if(child != NULL){
+  grandChild = root->left->right;
+ 
+  *nodePtr = child;   
+  (*nodePtr)->right = root;
+  (*nodePtr)->right->left = grandChild;  
   }
   else 
-      *nodePtr = *nodePtr; 
+      *nodePtr = root; 
 }
+
 
 void rotateLeftRight(Node **nodePtr){
   rotateLeft(&((*nodePtr)->left));

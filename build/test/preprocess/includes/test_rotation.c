@@ -2,3 +2,4 @@
 - unity.h
 - rotation.h
 - node.h
+- CustomAssert.h

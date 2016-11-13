@@ -4,40 +4,46 @@
   :file: test_rotation.c
 :successes:
 - :test: test_left_rotation_with_node80_and_one_child
-  :line: 44
+  :line: 45
   :message: ''
 - :test: test_left_rotation_with_node150
-  :line: 61
+  :line: 63
   :message: ''
 - :test: test_left_rotation_with_node_60_and_two_children
-  :line: 79
+  :line: 80
   :message: ''
 - :test: test_left_rotation_with_node_100_and_left_channel
-  :line: 100
+  :line: 101
   :message: ''
 - :test: test_right_rotation_with_node5
-  :line: 123
+  :line: 124
   :message: ''
 - :test: test_right_rotation_with_node10
-  :line: 140
+  :line: 141
   :message: ''
 - :test: test_right_rotation_with_node_60_and_two_children
-  :line: 159
+  :line: 160
   :message: ''
 - :test: test_right_rotation_with_node_120_and_two_children
-  :line: 181
+  :line: 182
   :message: ''
 - :test: test_left_right_rotation_with_node_100_and_child_80
-  :line: 206
+  :line: 207
   :message: ''
 - :test: test_left_right_rotation_with_node_150_and_child_20
-  :line: 229
+  :line: 230
+  :message: ''
+- :test: test_right_left_rotation_simple_with_node_100
+  :line: 257
+  :message: ''
+- :test: test_right_left_rotation_with_node_100
+  :line: 280
   :message: ''
 :failures: []
 :ignores: []
 :counts:
-  :total: 10
-  :passed: 10
+  :total: 12
+  :passed: 12
   :failed: 0
   :ignored: 0
 :stdout:
