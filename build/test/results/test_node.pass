@@ -12,11 +12,14 @@
 - :test: test_insert_a_child_into_the_tree_left_side
   :line: 33
   :message: ''
+- :test: test_insert_two_layer_into_the_tree
+  :line: 46
+  :message: ''
 :failures: []
 :ignores: []
 :counts:
-  :total: 3
-  :passed: 3
+  :total: 4
+  :passed: 4
   :failed: 0
   :ignored: 0
 :stdout:

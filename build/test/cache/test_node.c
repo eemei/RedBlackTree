@@ -83,3 +83,45 @@ void test_insert_a_child_into_the_tree_left_side(void){
   UnityAssertEqualNumber((_U_SINT)(_UP)((newNode->right)), (_U_SINT)(_UP)((((void *)0))), (((void *)0)), (_U_UINT)43, UNITY_DISPLAY_STYLE_HEX32);
 
 }
+
+
+
+void test_insert_two_layer_into_the_tree(void){
+
+  int color = 2;
+
+  int data = 80;
+
+  int data2 = 40;
+
+  int data3 = 100;
+
+  int data4 = 20;
+
+  Node *newNode, *child1, *child2, *grandChild;
+
+  newNode = createNode(color, data);
+
+  child1 = createNode(color, data2);
+
+  child2 = createNode(color, data3);
+
+  grandChild = createNode(color, data4);
+
+  insert(newNode, child1);
+
+  insert(newNode, child2);
+
+  insert(newNode, grandChild);
+
+
+
+  UnityAssertEqualNumber((_U_SINT)(_UP)((newNode->left)), (_U_SINT)(_UP)((child1)), (((void *)0)), (_U_UINT)61, UNITY_DISPLAY_STYLE_HEX32);
+
+  UnityAssertEqualNumber((_U_SINT)(_UP)((newNode->right)), (_U_SINT)(_UP)((child2)), (((void *)0)), (_U_UINT)62, UNITY_DISPLAY_STYLE_HEX32);
+
+  UnityAssertEqualNumber((_U_SINT)(_UP)((newNode->left->left)), (_U_SINT)(_UP)((grandChild)), (((void *)0)), (_U_UINT)63, UNITY_DISPLAY_STYLE_HEX32);
+
+  UnityAssertEqualNumber((_U_SINT)(_UP)((newNode->left->right)), (_U_SINT)(_UP)((((void *)0))), (((void *)0)), (_U_UINT)64, UNITY_DISPLAY_STYLE_HEX32);
+
+}

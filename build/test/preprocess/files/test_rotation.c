@@ -368,9 +368,11 @@ void test_right_left_rotation_with_node_100(void){
 
 }
 
-void test_case_one_recolor_the_grandparent(void){
+void test_case_one_recolor_the_grandparent_one_righe_side(void){
 
   Node *root = &node100;
+
+  Node *addNode = &node70;
 
   initNode(&node100, 100, &node80, &node120, BLACK);
 
@@ -378,20 +380,74 @@ void test_case_one_recolor_the_grandparent(void){
 
   initNode(&node120, 120, ((void *)0), ((void *)0), RED);
 
-  initNode(&node70, 70, ((void *)0), ((void *)0), RED);
+
+
+  violationCaseOneRight(&root, addNode);
+
+  UnityAssertEqualNumber((_U_SINT)(_UP)((root)), (_U_SINT)(_UP)((&node100)), (((void *)0)), (_U_UINT)316, UNITY_DISPLAY_STYLE_HEX32);
+
+  testAssertNode(100, &node80, &node120, RED, &node100, 317);;
+
+  testAssertNode(80, &node70, ((void *)0), BLACK, &node80, 318);;
+
+  testAssertNode(120, ((void *)0), ((void *)0), BLACK, &node120, 319);;
+
+  testAssertNode(70, ((void *)0), ((void *)0), RED, &node70, 320);;
+
+}
+
+void test_case_one_recolor_on_right_Side_of_addnode_parent(void){
+
+  Node *root = &node100;
+
+  Node *addNode = &node80;
+
+  initNode(&node100, 100, &node70, &node120, BLACK);
+
+  initNode(&node70, 70, ((void *)0), &node80, RED);
+
+  initNode(&node120, 120, ((void *)0), ((void *)0), RED);
 
 
 
-  case1Recolour(&root);
+  violationCaseOneRight(&root, addNode);
+
+  UnityAssertEqualNumber((_U_SINT)(_UP)((root)), (_U_SINT)(_UP)((&node100)), (((void *)0)), (_U_UINT)338, UNITY_DISPLAY_STYLE_HEX32);
+
+  testAssertNode(100, &node70, &node120, RED, &node100, 339);;
+
+  testAssertNode(70, ((void *)0), &node80, BLACK, &node70, 340);;
+
+  testAssertNode(120, ((void *)0), ((void *)0), BLACK, &node120, 341);;
+
+  testAssertNode(80, ((void *)0), ((void *)0), RED, &node80, 342);;
+
+}
+
+void test_case_two_recolor_the_grandparent_one_righe_side(void){
+
+  Node *root = &node120;
+
+  Node *addNode = &node100;
+
+  initNode(&node120, 120, &node80, &node170, BLACK);
+
+  initNode(&node80, 80, ((void *)0), &node100, RED);
+
+  initNode(&node170, 170, ((void *)0), ((void *)0), BLACK);
 
 
 
+  violationCaseTwoRight(&root, addNode);
 
+  UnityAssertEqualNumber((_U_SINT)(_UP)((root)), (_U_SINT)(_UP)((&node120)), (((void *)0)), (_U_UINT)363, UNITY_DISPLAY_STYLE_HEX32);
 
+  testAssertNode(120, &node80, &node170, RED, &node120, 364);;
 
+  testAssertNode(80, &node100, ((void *)0), RED, &node80, 365);;
 
+  testAssertNode(170, ((void *)0), ((void *)0), BLACK, &node170, 366);;
 
-
-
+  testAssertNode(100, ((void *)0), ((void *)0), RED, &node100, 367);;
 
 }

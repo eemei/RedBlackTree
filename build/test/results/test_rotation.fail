@@ -39,15 +39,21 @@
 - :test: test_right_left_rotation_with_node_100
   :line: 280
   :message: ''
-- :test: test_case_one_recolor_the_grandparent
-  :line: 315
+- :test: test_case_one_recolor_the_grandparent_one_righe_side
+  :line: 308
   :message: ''
-:failures: []
+- :test: test_case_one_recolor_on_right_Side_of_addnode_parent
+  :line: 330
+  :message: ''
+:failures:
+- :test: test_case_two_recolor_the_grandparent_one_righe_side
+  :line: 364
+  :message: Expect node 120 is red colour, but it is Black
 :ignores: []
 :counts:
-  :total: 13
-  :passed: 13
-  :failed: 0
+  :total: 15
+  :passed: 14
+  :failed: 1
   :ignored: 0
 :stdout:
 - ''

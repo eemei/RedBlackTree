@@ -298,13 +298,6 @@ void test_right_left_rotation_with_node_100(void){
 }
 
 /*
-*   @func
-*   if uncle is black
-*     1)change colour of P and U as Black
-*     2)colour of Grandparent as Red
-*     3)change current node = current node's grandparent 
-*
-*
 *              100(B)<-Grandparent                    100(R)<- current node
 *             /   \                                    /  \
 * Parent-> 80(R)  120(R)<-Uncle         ------>     80(B) 120(B)
@@ -312,17 +305,65 @@ void test_right_left_rotation_with_node_100(void){
 *       70(R)<-current node                       70(R)
 *
 */
-void test_case_one_recolor_the_grandparent(void){
+void test_case_one_recolor_the_grandparent_one_righe_side(void){
   Node *root = &node100;
+  Node *addNode = &node70;
   initNode(&node100, 100, &node80, &node120, BLACK);
   initNode(&node80, 80, &node70, NULL, RED);
   initNode(&node120, 120, NULL, NULL, RED);
-  initNode(&node70, 70, NULL, NULL, RED);
 
-  case1Recolour(&root);
-  // TEST_ASSERT_EQUAL_PTR(root, &node100);
-  // TEST_ASSERT_EQUAL_NODE(100, &node80, &node120, RED, &node100);
-  // TEST_ASSERT_EQUAL_NODE(80, &node70, NULL, BLACK, &node80);
-  // TEST_ASSERT_EQUAL_NODE(120, NULL, NULL, BLACK, &node120); 
-  // TEST_ASSERT_EQUAL_NODE(70, NULL, NULL, RED, &node70);
-} 
+  violationCaseOneRight(&root, addNode);
+  TEST_ASSERT_EQUAL_PTR(root, &node100);
+  TEST_ASSERT_EQUAL_NODE(100, &node80, &node120, RED, &node100);
+  TEST_ASSERT_EQUAL_NODE(80, &node70, NULL, BLACK, &node80);
+  TEST_ASSERT_EQUAL_NODE(120, NULL, NULL, BLACK, &node120); 
+  TEST_ASSERT_EQUAL_NODE(70, NULL, NULL, RED, &node70);
+}
+/*
+*     100(B)                100(R)      
+*     / \         ---->     /  \
+* 70(R) 120(R)          70(B)  120(B)
+*  \                     \
+* 80(R)                 80(R)
+*
+*/
+void test_case_one_recolor_on_right_Side_of_addnode_parent(void){
+  Node *root = &node100;
+  Node *addNode = &node80;
+  initNode(&node100, 100, &node70, &node120, BLACK);
+  initNode(&node70, 70, NULL, &node80, RED);
+  initNode(&node120, 120, NULL, NULL, RED);
+
+  violationCaseOneRight(&root, addNode);
+  TEST_ASSERT_EQUAL_PTR(root, &node100);
+  TEST_ASSERT_EQUAL_NODE(100, &node70, &node120, RED, &node100);
+  TEST_ASSERT_EQUAL_NODE(70, NULL, &node80, BLACK, &node70);
+  TEST_ASSERT_EQUAL_NODE(120, NULL, NULL, BLACK, &node120); 
+  TEST_ASSERT_EQUAL_NODE(80, NULL, NULL, RED, &node80);
+}
+
+/*  
+*       120 (B)                              120(B)
+*       / \        left rotate(parent)       / \   
+*  (R)80  170(B)   ----------------->    80(R) 170(B)
+*    / \                                   /
+*      100(R)                            100(R)
+*
+*
+*
+*/
+void test_case_two_recolor_the_grandparent_one_righe_side(void){
+  Node *root = &node120;
+  Node *addNode = &node100;
+  initNode(&node120, 120, &node80, &node170, BLACK);
+  initNode(&node80, 80, NULL, &node100, RED);
+  initNode(&node170, 170, NULL, NULL, BLACK);
+
+  violationCaseTwoRight(&root, addNode);
+  TEST_ASSERT_EQUAL_PTR(root, &node120);
+  TEST_ASSERT_EQUAL_NODE(120, &node80, &node170, BLACK, &node120);
+  TEST_ASSERT_EQUAL_NODE(80, &node100, NULL, RED, &node80);
+  TEST_ASSERT_EQUAL_NODE(170, NULL, NULL, BLACK, &node170); 
+  TEST_ASSERT_EQUAL_NODE(100, NULL, NULL, RED, &node100);  
+}
+ 
