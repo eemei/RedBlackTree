@@ -153,7 +153,7 @@ void violationCaseThreeLeft(Node **nodePtr, Node *addNode){
     }
   }
 }
-/*__________________________________________________________________*/
+/*####################### reflection #################################*/
 
 void violationCaseOneRight(Node **nodePtr, Node *addNode){
   Node *grandParent, *parent, *uncle; 
@@ -227,14 +227,80 @@ void violationCaseThreeRight(Node **nodePtr, Node *addNode){
 }
 
 
-// void insert(Node **nodePtr, Node *addNode){
-  // Node *grandparent, *parent;
-  // if ((*nodePtr)->value != (*addNode)->value){
-    // if ((*nodePtr)->value < (*addNode)->value){
-      
-    // }
-  // }
-// }
+
+
+
+
+void rbtAdd(Node **nodePtr, Node *addNode){
+  if(*nodePtr == NULL){
+    *nodePtr = addNode;
+		(*nodePtr)->colour = BLACK;
+		return;
+  }
+ 
+
+  
+  printf("0nodePtr = value = %d\n", (*nodePtr)->value);  
+  if((*nodePtr)->value < addNode->value){ 
+    rbtAdd(&((*nodePtr)->right), addNode);
+    addNode->colour = RED;
+    addNode->left = NULL;
+    addNode->right = NULL;
+    printf("1nodePtr = value = %d\n", (*nodePtr)->value);
+  }
+        
+  else if ((*nodePtr)->value > addNode->value){
+    rbtAdd(&((*nodePtr)->left), addNode);
+    addNode->colour = RED;
+    addNode->left = NULL;
+    addNode->right = NULL;
+  }
+  
+  if((*nodePtr)->left != NULL && (*nodePtr)->right != NULL){
+    violationCaseOneRight(&(*nodePtr), addNode); 
+    violationCaseOneLeft(&(*nodePtr), addNode);
+    //violationCaseTwoRight(&(*nodePtr), addNode); 
+    //violationCaseTwoLeft(&(*nodePtr), addNode);     
+  }
+  
+  //violationCaseTwoRight(&(*nodePtr), addNode); 
+ //violationCaseOneRight(&(*nodePtr), addNode); 
+  printf("2nodePtr = value = %d\n", (*nodePtr)->value);
+  //(*nodePtr)->colour = BLACK;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //http://quiz.geeksforgeeks.org/c-program-red-black-tree-insertion/

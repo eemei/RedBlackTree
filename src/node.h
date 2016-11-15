@@ -16,5 +16,6 @@ struct Node{
 };
 
 Node *createNode (int color, int data);
-void insert(Node *root, Node *child);
+void insert(Node *root, Node *addNode);
+
 #endif // node_H

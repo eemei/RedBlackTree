@@ -4,68 +4,111 @@
   :file: test_rotation.c
 :successes:
 - :test: test_left_rotation_with_node80_and_one_child
-  :line: 46
+  :line: 50
   :message: ''
-- :test: test_left_rotation_with_node150
-  :line: 64
+- :test: test_left_rotation_with_node_one_five_zero
+  :line: 68
   :message: ''
-- :test: test_left_rotation_with_node_60_and_two_children
-  :line: 81
+- :test: test_left_rotation_with_node_sixty_and_two_children
+  :line: 85
   :message: ''
-- :test: test_left_rotation_with_node_100_and_left_channel
-  :line: 102
+- :test: test_left_rotation_with_node_hundred_and_left_channel
+  :line: 106
   :message: ''
-- :test: test_right_rotation_with_node5
-  :line: 125
+- :test: test_right_rotation_with_nodeFive
+  :line: 129
   :message: ''
-- :test: test_right_rotation_with_node10
-  :line: 142
+- :test: test_right_rotation_with_nodeTen
+  :line: 146
   :message: ''
-- :test: test_right_rotation_with_node_60_and_two_children
-  :line: 161
+- :test: test_right_rotation_with_node_sixty_and_two_children
+  :line: 165
   :message: ''
-- :test: test_right_rotation_with_node_120_and_two_children
-  :line: 183
+- :test: test_right_rotation_with_node_one_hundred_and_twenty_and_two_children
+  :line: 187
   :message: ''
-- :test: test_left_right_rotation_with_node_100_and_child_80
-  :line: 208
+- :test: test_left_right_rotation_with_node_hundred_and_child_eighty
+  :line: 212
   :message: ''
-- :test: test_left_right_rotation_with_node_150_and_child_20
-  :line: 231
+- :test: test_left_right_rotation_with_node_one_hundred_and_fifty_and_child_twenty
+  :line: 235
   :message: ''
-- :test: test_right_left_rotation_simple_with_node_100
-  :line: 258
+- :test: test_right_left_rotation_simple_with_node_hundred
+  :line: 262
   :message: ''
-- :test: test_right_left_rotation_with_node_100
-  :line: 281
+- :test: test_right_left_rotation_with_node_hundred
+  :line: 285
   :message: ''
 - :test: test_parent_of_addNode_is_left_child_of_Grandparent_of_addNode_and_addNode_is_left_child_of_parent
-  :line: 309
+  :line: 313
   :message: ''
 - :test: test_parent_of_addNode_is_left_child_of_Grandparent_of_addNode_and_addNode_is_right_child_of_parent
-  :line: 332
+  :line: 336
   :message: ''
 - :test: test_case_two_uncle_is_black_and_addNode_at_left_right_of_root
-  :line: 358
+  :line: 362
   :message: ''
 - :test: test_case_three_uncle_is_black_and_addNode_at_left_left_of_root
-  :line: 381
+  :line: 385
   :message: ''
 - :test: test_parent_of_addNode_is_right_child_of_Grandparent_of_addNode
-  :line: 405
+  :line: 409
   :message: ''
 - :test: test_case_two_uncle_is_black_and_addNode_at_right_left_of_root
-  :line: 431
+  :line: 435
   :message: ''
 - :test: test_case_three_uncle_is_black_and_addNode_at_right_right_of_root
-  :line: 455
+  :line: 459
+  :message: ''
+- :test: test_pointer_attract_to_a_node_fifty_and_return_null
+  :line: 482
+  :message: ''
+- :test: test_add_a_node_at_right_of_root
+  :line: 497
+  :message: ''
+- :test: test_add_a_node_at_right_of_right_of_root
+  :line: 513
+  :message: ''
+- :test: test_add_a_node_and_recolour
+  :line: 535
+  :message: ''
+- :test: test_add_a_node_and_recolour_five_level
+  :line: 568
   :message: ''
 :failures: []
 :ignores: []
 :counts:
-  :total: 19
-  :passed: 19
+  :total: 24
+  :passed: 24
   :failed: 0
   :ignored: 0
 :stdout:
+- 0nodePtr = value = 80
+- 1nodePtr = value = 80
+- 2nodePtr = value = 80
+- 0nodePtr = value = 50
+- 0nodePtr = value = 80
+- 1nodePtr = value = 80
+- 2nodePtr = value = 80
+- 1nodePtr = value = 50
+- 2nodePtr = value = 50
+- 0nodePtr = value = 60
+- 0nodePtr = value = 100
+- 0nodePtr = value = 70
+- 1nodePtr = value = 70
+- 2nodePtr = value = 70
+- 2nodePtr = value = 100
+- 1nodePtr = value = 60
+- 2nodePtr = value = 60
+- 0nodePtr = value = 60
+- 0nodePtr = value = 100
+- 0nodePtr = value = 70
+- 0nodePtr = value = 80
+- 1nodePtr = value = 80
+- 2nodePtr = value = 80
+- 1nodePtr = value = 70
+- 2nodePtr = value = 70
+- 2nodePtr = value = 100
+- 1nodePtr = value = 60
+- 2nodePtr = value = 60
 - ''

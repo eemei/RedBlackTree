@@ -11,5 +11,6 @@ void violationCaseTwoRight(Node **nodePtr, Node *addNode);
 void violationCaseTwoLeft(Node **nodePtr, Node *addNode);
 void violationCaseThreeRight(Node **nodePtr, Node *addNode);
 void violationCaseThreeLeft(Node **nodePtr, Node *addNode);
+void rbtAdd(Node **root, Node *child);
 #endif // rotation_H
  

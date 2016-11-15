@@ -30,10 +30,9 @@ char* GlobalOrderError;
 //=======External Functions This Runner Calls=====
 extern void setUp(void);
 extern void tearDown(void);
-extern void test_create_a_new_node_with_the_node_value_is_40(void);
+extern void test_create_a_new_node_with_the_node_value_is_forty(void);
 extern void test_insert_a_child_into_the_tree_right_side(void);
 extern void test_insert_a_child_into_the_tree_left_side(void);
-extern void test_insert_two_layer_into_the_tree(void);
 
 
 //=======Test Reset Option=====
@@ -49,10 +48,9 @@ void resetTest(void)
 int main(void)
 {
   UnityBegin("test_node.c");
-  RUN_TEST(test_create_a_new_node_with_the_node_value_is_40, 8);
+  RUN_TEST(test_create_a_new_node_with_the_node_value_is_forty, 8);
   RUN_TEST(test_insert_a_child_into_the_tree_right_side, 20);
   RUN_TEST(test_insert_a_child_into_the_tree_left_side, 33);
-  RUN_TEST(test_insert_two_layer_into_the_tree, 46);
 
   return (UnityEnd());
 }

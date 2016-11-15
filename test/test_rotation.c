@@ -11,8 +11,9 @@ void initNode(Node *root ,int value, Node *left, Node *right, Color color){
   root->colour = color;
   root->value = value;
 }
-Node node5, node10, node20, node25, node50, node60, node70, node80, node100, node110,\
-    node120, node130, node150, node170, node250;
+Node node5, node10, node20, node25, node50, node60, \
+node65, node70, node75, node80, node90, node100, node110,\
+node120, node130, node150, node170, node250;
 
 void setUp(void){
   initNode(&node5, 5, NULL, NULL, BLACK);
@@ -21,8 +22,11 @@ void setUp(void){
   initNode(&node25, 25, NULL, NULL, BLACK);   
   initNode(&node50, 50, NULL, NULL, BLACK);
   initNode(&node60, 60, NULL, NULL, BLACK);
-  initNode(&node70, 70, NULL, NULL, BLACK);    
+  initNode(&node65, 65, NULL, NULL, BLACK);  
+  initNode(&node70, 70, NULL, NULL, BLACK);
+  initNode(&node75, 75, NULL, NULL, BLACK);  
   initNode(&node80, 80, NULL, NULL, BLACK);
+  initNode(&node90, 90, NULL, NULL, BLACK);  
   initNode(&node100, 100, NULL, NULL, BLACK);
   initNode(&node110, 110, NULL, NULL, BLACK);
   initNode(&node120, 120, NULL, NULL, BLACK);
@@ -61,7 +65,7 @@ void test_left_rotation_with_node80_and_one_child(void){
 *    
 */
 
-void test_left_rotation_with_node150(void){
+void test_left_rotation_with_node_one_five_zero(void){
   Node *root = &node150;
   initNode(&node150, 150, NULL, NULL, BLACK);
   rotateLeft(&root);
@@ -78,7 +82,7 @@ void test_left_rotation_with_node150(void){
 *                            50
 */
 
-void test_left_rotation_with_node_60_and_two_children(void){
+void test_left_rotation_with_node_sixty_and_two_children(void){
   Node *root = &node60;
   initNode(&node60, 60, &node50, &node100, BLACK);
   initNode(&node50, 50, NULL, NULL, BLACK);
@@ -99,7 +103,7 @@ void test_left_rotation_with_node_60_and_two_children(void){
 *   120 170                   80  120
 *
 */
-void test_left_rotation_with_node_100_and_left_channel(void){
+void test_left_rotation_with_node_hundred_and_left_channel(void){
   Node *root = &node100;
   initNode(&node100, 100, &node80, &node150, BLACK);
   initNode(&node150, 150, &node120, &node170, BLACK);
@@ -122,7 +126,7 @@ void test_left_rotation_with_node_100_and_left_channel(void){
 *    
 */
 
-void test_right_rotation_with_node5(void){
+void test_right_rotation_with_nodeFive(void){
   Node *root = &node5;
   initNode(&node5, 5, NULL, NULL, BLACK);
   rotateRight(&root);
@@ -139,7 +143,7 @@ void test_right_rotation_with_node5(void){
 *    
 */
 
-void test_right_rotation_with_node10(void){
+void test_right_rotation_with_nodeTen(void){
   Node *root = &node50;
   initNode(&node50, 50, &node10, NULL, BLACK);
   initNode(&node10, 10, NULL, NULL, BLACK);
@@ -158,7 +162,7 @@ void test_right_rotation_with_node10(void){
 *                                   100
 */
 
-void test_right_rotation_with_node_60_and_two_children(void){
+void test_right_rotation_with_node_sixty_and_two_children(void){
   Node *root = &node60;
   initNode(&node60, 60, &node50, &node100, BLACK);
   initNode(&node50, 50, NULL, NULL, BLACK);
@@ -180,7 +184,7 @@ void test_right_rotation_with_node_60_and_two_children(void){
 *
 */
 
-void test_right_rotation_with_node_120_and_two_children(void){
+void test_right_rotation_with_node_one_hundred_and_twenty_and_two_children(void){
   Node *root = &node120;
   initNode(&node120, 120, &node80, &node150, BLACK);
   initNode(&node80, 80, &node5, &node100, BLACK);
@@ -205,7 +209,7 @@ void test_right_rotation_with_node_120_and_two_children(void){
 *                                 
 */
 
-void test_left_right_rotation_with_node_100_and_child_80(void){
+void test_left_right_rotation_with_node_hundred_and_child_eighty(void){
   Node *root = &node120;
   initNode(&node120, 120, &node80, NULL, BLACK);
   initNode(&node80, 80, &node60, &node100, BLACK);
@@ -228,7 +232,7 @@ void test_left_right_rotation_with_node_100_and_child_80(void){
 *         / \
 *        25 100
 */
-void test_left_right_rotation_with_node_150_and_child_20(void){
+void test_left_right_rotation_with_node_one_hundred_and_fifty_and_child_twenty(void){
   Node *root = &node150;
   initNode(&node150, 150, &node20, &node250, BLACK);
   initNode(&node20, 20, &node5, &node50, BLACK);
@@ -255,7 +259,7 @@ void test_left_right_rotation_with_node_150_and_child_20(void){
 *         /               \
 *         120            170        
 */
-void test_right_left_rotation_simple_with_node_100(void){
+void test_right_left_rotation_simple_with_node_hundred(void){
   Node *root = &node100;
   initNode(&node100, 100, NULL, &node170, BLACK);
   initNode(&node170, 170, &node120, NULL, BLACK);;  
@@ -278,7 +282,7 @@ void test_right_left_rotation_simple_with_node_100(void){
 *        80 130                  130 170
 *
 */
-void test_right_left_rotation_with_node_100(void){
+void test_right_left_rotation_with_node_hundred(void){
   Node *root = &node100;
   initNode(&node100, 100, &node70, &node150, BLACK);
   initNode(&node150, 150, &node120, &node170, BLACK);
@@ -467,3 +471,121 @@ void test_case_three_uncle_is_black_and_addNode_at_right_right_of_root(void){
   TEST_ASSERT_EQUAL_NODE(120, &node80, NULL, RED, &node120); 
   TEST_ASSERT_EQUAL_NODE(80, NULL, NULL, BLACK, &node80);  
 }
+
+/*
+*      node  ----> node
+*        |          |
+*      NULL         50
+*                   |
+*                 NULL
+*/
+void test_pointer_attract_to_a_node_fifty_and_return_null(void){
+ Node *rootPtr = NULL; 
+ Node *addNode = &node50;
+ rbtAdd(&rootPtr, addNode);
+ 
+  TEST_ASSERT_EQUAL_PTR(rootPtr, &node50);
+  TEST_ASSERT_EQUAL_NODE(50, NULL, NULL, BLACK, &node50); 
+}
+/*
+*      node  ----> node
+*        |          |
+*       80          80
+*                  / \
+*                    120
+*/
+void test_add_a_node_at_right_of_root(void){
+ Node *rootPtr = &node80; 
+ Node *addNode = &node120;
+ rbtAdd(&rootPtr, addNode);
+ 
+  TEST_ASSERT_EQUAL_PTR(rootPtr, &node80);
+  TEST_ASSERT_EQUAL_NODE(80, NULL, &node120, BLACK, &node80);
+  TEST_ASSERT_EQUAL_NODE(120, NULL, NULL, RED, &node120);   
+}
+/*
+*     50        50 
+*    / \       / \
+*      80  -->   80
+*                 \
+*                 120
+*/
+void test_add_a_node_at_right_of_right_of_root(void){
+  Node *rootPtr = &node50;
+  initNode(&node50, 50, NULL, &node80, BLACK); 
+  Node *addNode = &node120;
+  rbtAdd(&rootPtr, addNode);
+ 
+  TEST_ASSERT_EQUAL_PTR(rootPtr, &node50);
+  TEST_ASSERT_EQUAL_NODE(80, NULL, &node120, BLACK, &node80);
+  TEST_ASSERT_EQUAL_NODE(120, NULL, NULL, RED, &node120);   
+}
+
+/*  case 1 Recolor
+*
+*   60 (B)     ADD  60 (B)                 60 (b)        
+*    / \       80    / \                   / \
+*     100(B)   -->    100(B)      Recolor     100(R)      
+*      / \             / \         ---->     /  \
+*   70(R) 120(R)     70(R) 120(R)          70(B)  120(B)
+*                      \                      \
+*                      80(R)                 80(R)
+*
+*/
+void test_add_a_node_and_recolour(void){
+  Node *rootPtr = &node60;
+  Node *addNode = &node80;
+  
+  initNode(&node60, 60, NULL, &node100, BLACK);  
+  initNode(&node100, 100, &node70, &node120, BLACK);
+  initNode(&node70, 70, NULL, NULL, RED);
+  initNode(&node120, 120, NULL, NULL, RED);
+  
+  rbtAdd(&rootPtr, addNode);
+  TEST_ASSERT_EQUAL_PTR(rootPtr, &node60);
+  TEST_ASSERT_EQUAL_NODE(60, NULL, &node100, BLACK, &node60);
+  TEST_ASSERT_EQUAL_NODE(100, &node70, &node120, RED, &node100);  
+  TEST_ASSERT_EQUAL_NODE(120, NULL, NULL, BLACK, &node120);
+  TEST_ASSERT_EQUAL_NODE(70, NULL, &node80, BLACK, &node70); 
+  TEST_ASSERT_EQUAL_NODE(80, NULL, NULL, RED, &node80);  
+}
+
+/*
+*
+*     case 1 Recolor & case 2 rotate left  
+*
+*     60 (B)               60(B)                  60 (B)                          
+*    / \          ADD      / \                     / \           
+*     100(R)       90        100(R)   RECOLOR        100(R)    rotate left
+*     / \         ---->     /  \        --->         /  \       -------->
+* 70(B)   120(B)          70(B)  120(B)           70(R)  120(B)           
+*  / \        \            / \      \             /  \      \               
+*65(R) 80(R)  250(R)   65(R) 80(R)   250(R)   65(B) 80(B)    250(R)         
+*                             / \                    \                  
+*                               90(R)               90(R)                
+*
+*/
+void test_add_a_node_and_recolour_five_level(void){
+  Node *rootPtr = &node60;
+  Node *addNode = &node90;
+  
+  initNode(&node60, 60, NULL, &node100, BLACK);  
+  initNode(&node100, 100, &node70, &node120, RED);
+  initNode(&node70, 70, &node65, &node80, BLACK);
+  initNode(&node120, 120, NULL, &node250, BLACK);
+  initNode(&node80, 80, NULL, NULL, RED);
+  initNode(&node250, 250, NULL, NULL, RED);
+  initNode(&node65, 65, NULL, NULL, RED);  
+  initNode(&node90, 90, &node90, &node90, BLACK);  
+  
+  rbtAdd(&rootPtr, addNode);
+  TEST_ASSERT_EQUAL_PTR(rootPtr, &node60);
+  TEST_ASSERT_EQUAL_NODE(60, NULL, &node100, BLACK, &node60);  
+  TEST_ASSERT_EQUAL_NODE(100, &node70, &node120, RED, &node100);  
+  TEST_ASSERT_EQUAL_NODE(120, NULL, &node250, BLACK, &node120);
+  TEST_ASSERT_EQUAL_NODE(90, NULL, NULL, RED, &node90);  
+  TEST_ASSERT_EQUAL_NODE(70, &node65, &node80, RED, &node70);  
+  TEST_ASSERT_EQUAL_NODE(80, NULL, &node90, BLACK, &node80);    
+  TEST_ASSERT_EQUAL_NODE(250, NULL, NULL, RED, &node250);  
+}
+  

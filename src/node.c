@@ -42,6 +42,31 @@ void insert(Node *root, Node *child){
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // // This function fixes violations caused by BST insertion
 // void RBTree::fixViolation(Node *&root, Node *&pt)
 // {
