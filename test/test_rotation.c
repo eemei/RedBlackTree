@@ -296,3 +296,33 @@ void test_right_left_rotation_with_node_100(void){
   TEST_ASSERT_EQUAL_NODE(110, NULL, NULL, BLACK, &node110);  
   TEST_ASSERT_EQUAL_NODE(170, NULL, NULL, BLACK, &node170);
 }
+
+/*
+*   @func
+*   if uncle is black
+*     1)change colour of P and U as Black
+*     2)colour of Grandparent as Red
+*     3)change current node = current node's grandparent 
+*
+*
+*              100(B)<-Grandparent                    100(R)<- current node
+*             /   \                                    /  \
+* Parent-> 80(R)  120(R)<-Uncle         ------>     80(B) 120(B)
+*           /      /(R)                              / \  /(B)
+*       70(R)<-current node                       70(R)
+*
+*/
+void test_case_one_recolor_the_grandparent(void){
+  Node *root = &node100;
+  initNode(&node100, 100, &node80, &node120, BLACK);
+  initNode(&node80, 80, &node70, NULL, RED);
+  initNode(&node120, 120, NULL, NULL, RED);
+  initNode(&node70, 70, NULL, NULL, RED);
+
+  case1Recolour(&root);
+  // TEST_ASSERT_EQUAL_PTR(root, &node100);
+  // TEST_ASSERT_EQUAL_NODE(100, &node80, &node120, RED, &node100);
+  // TEST_ASSERT_EQUAL_NODE(80, &node70, NULL, BLACK, &node80);
+  // TEST_ASSERT_EQUAL_NODE(120, NULL, NULL, BLACK, &node120); 
+  // TEST_ASSERT_EQUAL_NODE(70, NULL, NULL, RED, &node70);
+} 

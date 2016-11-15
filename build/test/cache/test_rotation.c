@@ -367,3 +367,31 @@ void test_right_left_rotation_with_node_100(void){
   testAssertNode(170, ((void *)0), ((void *)0), BLACK, &node170, 297);;
 
 }
+
+void test_case_one_recolor_the_grandparent(void){
+
+  Node *root = &node100;
+
+  initNode(&node100, 100, &node80, &node120, BLACK);
+
+  initNode(&node80, 80, &node70, ((void *)0), RED);
+
+  initNode(&node120, 120, ((void *)0), ((void *)0), RED);
+
+  initNode(&node70, 70, ((void *)0), ((void *)0), RED);
+
+
+
+  case1Recolour(&root);
+
+
+
+
+
+
+
+
+
+
+
+}

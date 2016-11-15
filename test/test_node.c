@@ -42,3 +42,4 @@ void test_insert_a_child_into_the_tree_left_side(void){
   TEST_ASSERT_EQUAL_PTR(newNode->left, child);
   TEST_ASSERT_EQUAL_PTR(newNode->right, NULL);
 }
+

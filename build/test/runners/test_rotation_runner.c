@@ -42,6 +42,7 @@ extern void test_left_right_rotation_with_node_100_and_child_80(void);
 extern void test_left_right_rotation_with_node_150_and_child_20(void);
 extern void test_right_left_rotation_simple_with_node_100(void);
 extern void test_right_left_rotation_with_node_100(void);
+extern void test_case_one_recolor_the_grandparent(void);
 
 
 //=======Test Reset Option=====
@@ -69,6 +70,7 @@ int main(void)
   RUN_TEST(test_left_right_rotation_with_node_150_and_child_20, 230);
   RUN_TEST(test_right_left_rotation_simple_with_node_100, 257);
   RUN_TEST(test_right_left_rotation_with_node_100, 280);
+  RUN_TEST(test_case_one_recolor_the_grandparent, 315);
 
   return (UnityEnd());
 }
