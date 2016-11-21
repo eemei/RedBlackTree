@@ -42,9 +42,13 @@ extern void test_left_right_rotation_with_node_100_and_child_80(void);
 extern void test_left_right_rotation_with_node_150_and_child_20(void);
 extern void test_right_left_rotation_simple_with_node_100(void);
 extern void test_right_left_rotation_with_node_100(void);
-extern void test_case_one_recolor_the_grandparent_one_righe_side(void);
-extern void test_case_one_recolor_on_right_Side_of_addnode_parent(void);
-extern void test_case_two_recolor_the_grandparent_one_righe_side(void);
+extern void test_parent_of_addNode_is_left_child_of_Grandparent_of_addNode_and_addNode_is_left_child_of_parent(void);
+extern void test_parent_of_addNode_is_left_child_of_Grandparent_of_addNode_and_addNode_is_right_child_of_parent(void);
+extern void test_case_two_uncle_is_black_and_addNode_at_left_right_of_root(void);
+extern void test_case_three_uncle_is_black_and_addNode_at_left_left_of_root(void);
+extern void test_parent_of_addNode_is_right_child_of_Grandparent_of_addNode(void);
+extern void test_case_two_uncle_is_black_and_addNode_at_right_left_of_root(void);
+extern void test_case_three_uncle_is_black_and_addNode_at_right_right_of_root(void);
 
 
 //=======Test Reset Option=====
@@ -60,21 +64,25 @@ void resetTest(void)
 int main(void)
 {
   UnityBegin("test_rotation.c");
-  RUN_TEST(test_left_rotation_with_node80_and_one_child, 45);
-  RUN_TEST(test_left_rotation_with_node150, 63);
-  RUN_TEST(test_left_rotation_with_node_60_and_two_children, 80);
-  RUN_TEST(test_left_rotation_with_node_100_and_left_channel, 101);
-  RUN_TEST(test_right_rotation_with_node5, 124);
-  RUN_TEST(test_right_rotation_with_node10, 141);
-  RUN_TEST(test_right_rotation_with_node_60_and_two_children, 160);
-  RUN_TEST(test_right_rotation_with_node_120_and_two_children, 182);
-  RUN_TEST(test_left_right_rotation_with_node_100_and_child_80, 207);
-  RUN_TEST(test_left_right_rotation_with_node_150_and_child_20, 230);
-  RUN_TEST(test_right_left_rotation_simple_with_node_100, 257);
-  RUN_TEST(test_right_left_rotation_with_node_100, 280);
-  RUN_TEST(test_case_one_recolor_the_grandparent_one_righe_side, 308);
-  RUN_TEST(test_case_one_recolor_on_right_Side_of_addnode_parent, 330);
-  RUN_TEST(test_case_two_recolor_the_grandparent_one_righe_side, 355);
+  RUN_TEST(test_left_rotation_with_node80_and_one_child, 46);
+  RUN_TEST(test_left_rotation_with_node150, 64);
+  RUN_TEST(test_left_rotation_with_node_60_and_two_children, 81);
+  RUN_TEST(test_left_rotation_with_node_100_and_left_channel, 102);
+  RUN_TEST(test_right_rotation_with_node5, 125);
+  RUN_TEST(test_right_rotation_with_node10, 142);
+  RUN_TEST(test_right_rotation_with_node_60_and_two_children, 161);
+  RUN_TEST(test_right_rotation_with_node_120_and_two_children, 183);
+  RUN_TEST(test_left_right_rotation_with_node_100_and_child_80, 208);
+  RUN_TEST(test_left_right_rotation_with_node_150_and_child_20, 231);
+  RUN_TEST(test_right_left_rotation_simple_with_node_100, 258);
+  RUN_TEST(test_right_left_rotation_with_node_100, 281);
+  RUN_TEST(test_parent_of_addNode_is_left_child_of_Grandparent_of_addNode_and_addNode_is_left_child_of_parent, 309);
+  RUN_TEST(test_parent_of_addNode_is_left_child_of_Grandparent_of_addNode_and_addNode_is_right_child_of_parent, 332);
+  RUN_TEST(test_case_two_uncle_is_black_and_addNode_at_left_right_of_root, 358);
+  RUN_TEST(test_case_three_uncle_is_black_and_addNode_at_left_left_of_root, 381);
+  RUN_TEST(test_parent_of_addNode_is_right_child_of_Grandparent_of_addNode, 405);
+  RUN_TEST(test_case_two_uncle_is_black_and_addNode_at_right_left_of_root, 431);
+  RUN_TEST(test_case_three_uncle_is_black_and_addNode_at_right_right_of_root, 455);
 
   return (UnityEnd());
 }

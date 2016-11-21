@@ -6,6 +6,10 @@ void rotateRight(Node **nodePtr);
 void rotateLeftRight(Node **nodePtr);
 void rotateRightLeft(Node **nodePtr);
 void violationCaseOneRight(Node **nodePtr, Node *addNode);
+void violationCaseOneLeft(Node **nodePtr, Node *addNode);
 void violationCaseTwoRight(Node **nodePtr, Node *addNode);
+void violationCaseTwoLeft(Node **nodePtr, Node *addNode);
+void violationCaseThreeRight(Node **nodePtr, Node *addNode);
+void violationCaseThreeLeft(Node **nodePtr, Node *addNode);
 #endif // rotation_H
  

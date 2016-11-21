@@ -4,56 +4,68 @@
   :file: test_rotation.c
 :successes:
 - :test: test_left_rotation_with_node80_and_one_child
-  :line: 45
+  :line: 46
   :message: ''
 - :test: test_left_rotation_with_node150
-  :line: 63
+  :line: 64
   :message: ''
 - :test: test_left_rotation_with_node_60_and_two_children
-  :line: 80
+  :line: 81
   :message: ''
 - :test: test_left_rotation_with_node_100_and_left_channel
-  :line: 101
+  :line: 102
   :message: ''
 - :test: test_right_rotation_with_node5
-  :line: 124
+  :line: 125
   :message: ''
 - :test: test_right_rotation_with_node10
-  :line: 141
+  :line: 142
   :message: ''
 - :test: test_right_rotation_with_node_60_and_two_children
-  :line: 160
+  :line: 161
   :message: ''
 - :test: test_right_rotation_with_node_120_and_two_children
-  :line: 182
+  :line: 183
   :message: ''
 - :test: test_left_right_rotation_with_node_100_and_child_80
-  :line: 207
+  :line: 208
   :message: ''
 - :test: test_left_right_rotation_with_node_150_and_child_20
-  :line: 230
+  :line: 231
   :message: ''
 - :test: test_right_left_rotation_simple_with_node_100
-  :line: 257
+  :line: 258
   :message: ''
 - :test: test_right_left_rotation_with_node_100
-  :line: 280
+  :line: 281
   :message: ''
-- :test: test_case_one_recolor_the_grandparent_one_righe_side
-  :line: 308
+- :test: test_parent_of_addNode_is_left_child_of_Grandparent_of_addNode_and_addNode_is_left_child_of_parent
+  :line: 309
   :message: ''
-- :test: test_case_one_recolor_on_right_Side_of_addnode_parent
-  :line: 330
+- :test: test_parent_of_addNode_is_left_child_of_Grandparent_of_addNode_and_addNode_is_right_child_of_parent
+  :line: 332
   :message: ''
-:failures:
-- :test: test_case_two_recolor_the_grandparent_one_righe_side
-  :line: 364
-  :message: Expect node 120 is red colour, but it is Black
+- :test: test_case_two_uncle_is_black_and_addNode_at_left_right_of_root
+  :line: 358
+  :message: ''
+- :test: test_case_three_uncle_is_black_and_addNode_at_left_left_of_root
+  :line: 381
+  :message: ''
+- :test: test_parent_of_addNode_is_right_child_of_Grandparent_of_addNode
+  :line: 405
+  :message: ''
+- :test: test_case_two_uncle_is_black_and_addNode_at_right_left_of_root
+  :line: 431
+  :message: ''
+- :test: test_case_three_uncle_is_black_and_addNode_at_right_right_of_root
+  :line: 455
+  :message: ''
+:failures: []
 :ignores: []
 :counts:
-  :total: 15
-  :passed: 14
-  :failed: 1
+  :total: 19
+  :passed: 19
+  :failed: 0
   :ignored: 0
 :stdout:
 - ''
