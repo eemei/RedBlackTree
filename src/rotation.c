@@ -89,14 +89,15 @@ void violationCaseOneLeft(Node **nodePtr, Node *addNode){
   parent = grandParent->left;
   //insert((Node *)nodePtr, addNode);
 
-  if( uncle != NULL){
-    if ( uncle->colour == RED && parent->colour == RED){
+
+    if (uncle->colour == RED && parent->colour == RED){
+      if(parent->left == RED || parent->right == RED)
       grandParent->colour = RED;
       parent->colour = BLACK;
       uncle->colour = BLACK;
       addNode->colour = RED;
     }
-  }
+ // }
 }
 /*  
 *       120 (B)                              120(B)                          100(B)
@@ -116,8 +117,8 @@ void violationCaseTwoLeft(Node **nodePtr, Node *addNode){
   uncle = grandParent->right;
   parent = grandParent->left;
   // insert((Node *)nodePtr, addNode);
-  if (uncle == NULL || uncle->colour == BLACK){
-    if (parent->colour == RED){
+  if((uncle == NULL || uncle->colour == BLACK) && parent->colour == RED){
+    if (parent->left == RED || parent->right == RED){
       rotateLeft(&((*nodePtr)->left));
       addNode->colour = RED;
       violationCaseThreeLeft(&((*nodePtr)), addNode);
@@ -143,13 +144,13 @@ void violationCaseThreeLeft(Node **nodePtr, Node *addNode){
   uncle = grandParent->right;
   parent = grandParent->left;
 
-  if (uncle == NULL || uncle->colour == BLACK){
-    if (parent->colour == RED){
+  if ((uncle == NULL || uncle->colour == BLACK) && parent->colour == RED){
+    if (parent->left == RED || parent->right == RED){
       rotateRight(&(*nodePtr));
       (*nodePtr)->colour = BLACK;
       (*nodePtr)->left->colour = RED;
       (*nodePtr)->right->colour = RED;      
-      (*nodePtr)->right->right->colour = BLACK;
+    //  (*nodePtr)->right->right->colour = BLACK;
     }
   }
 }
@@ -161,8 +162,9 @@ void violationCaseOneRight(Node **nodePtr, Node *addNode){
   uncle = grandParent->left;
   parent = grandParent->right;
 
-  if( uncle != NULL){
-    if ( uncle->colour == RED && parent->colour == RED){
+
+  if (uncle->colour == RED && parent->colour == RED){
+    if (parent->left == RED || parent->right == RED){
       grandParent->colour = RED;
       parent->colour = BLACK;
       uncle->colour = BLACK;
@@ -188,8 +190,8 @@ void violationCaseTwoRight(Node **nodePtr, Node *addNode){
   uncle = grandParent->left;
   parent = grandParent->right;
 
-  if (uncle == NULL || uncle->colour == BLACK){
-    if (parent->colour == RED){
+  if ((uncle == NULL || uncle->colour == BLACK) && parent->colour == RED){
+    if (parent->left == RED || parent->right == RED){
       rotateRight(&((*nodePtr)->right));
       addNode->colour = RED;
       violationCaseThreeRight(&((*nodePtr)), addNode);
@@ -215,38 +217,38 @@ void violationCaseThreeRight(Node **nodePtr, Node *addNode){
   uncle = grandParent->left;
   parent = grandParent->right;
 
-  if (uncle == NULL || uncle->colour == BLACK){
-    if (parent->colour == RED){
+  if ((uncle == NULL || uncle->colour == BLACK) && parent->colour == RED){
+    if (parent->left == RED || parent->right == RED){
       rotateLeft(&(*nodePtr));
       (*nodePtr)->colour = BLACK;
       (*nodePtr)->left->colour = RED;
       (*nodePtr)->right->colour = RED;      
-      (*nodePtr)->left->left->colour = BLACK;
+     // (*nodePtr)->left->left->colour = BLACK;
     }
   }
 }
 
 
 
-
-
-
-void rbtAdd(Node **nodePtr, Node *addNode){
+void InternalAdd(Node **nodePtr, Node *addNode){
   if(*nodePtr == NULL){
     *nodePtr = addNode;
+    addNode->left = NULL;
+    addNode->right = NULL;    
 		(*nodePtr)->colour = BLACK;
 		return;
   }
- 
-
   
-  printf("0nodePtr = value = %d\n", (*nodePtr)->value);  
+ if((*nodePtr)->left != NULL && (*nodePtr)->right != NULL){
+   violationCaseOneRight(&(*nodePtr), addNode); 
+   violationCaseOneLeft(&(*nodePtr), addNode);
+ }  
+
   if((*nodePtr)->value < addNode->value){ 
     rbtAdd(&((*nodePtr)->right), addNode);
     addNode->colour = RED;
     addNode->left = NULL;
     addNode->right = NULL;
-    printf("1nodePtr = value = %d\n", (*nodePtr)->value);
   }
         
   else if ((*nodePtr)->value > addNode->value){
@@ -256,16 +258,30 @@ void rbtAdd(Node **nodePtr, Node *addNode){
     addNode->right = NULL;
   }
   
-  if((*nodePtr)->left != NULL && (*nodePtr)->right != NULL){
-    violationCaseOneRight(&(*nodePtr), addNode); 
-    violationCaseOneLeft(&(*nodePtr), addNode);
-    //violationCaseTwoRight(&(*nodePtr), addNode); 
-    //violationCaseTwoLeft(&(*nodePtr), addNode);     
+  if((*nodePtr)->left != NULL && (*nodePtr)->left->left != NULL){   //right rotate 
+   violationCaseThreeLeft(&(*nodePtr), addNode);  
+  }
+  else if((*nodePtr)->left != NULL && (*nodePtr)->left->right != NULL){  // left right rotate 
+    violationCaseTwoLeft(&(*nodePtr), addNode);
+  }
+  else if((*nodePtr)->right != NULL && (*nodePtr)->right->right != NULL){  //left rotate
+    violationCaseThreeRight(&(*nodePtr), addNode);
+  }
+  else if((*nodePtr)->right != NULL && (*nodePtr)->right->left != NULL){   // right left
+    violationCaseTwoRight(&(*nodePtr), addNode);
+  }
+if((*nodePtr)->right != NULL && (*nodePtr)->right->left != NULL){
+    if((*nodePtr)->right->colour == RED && (*nodePtr)->right->left->colour == RED){
+      (*nodePtr)->right->left->colour = BLACK;
+      (*nodePtr)->right->right->colour = BLACK;
+    }
   }
   
-  //violationCaseTwoRight(&(*nodePtr), addNode); 
- //violationCaseOneRight(&(*nodePtr), addNode); 
-  printf("2nodePtr = value = %d\n", (*nodePtr)->value);
+
+}
+
+void rbtAdd(Node **nodePtr, Node *addNode){
+  InternalAdd(nodePtr, addNode);
   //(*nodePtr)->colour = BLACK;
 }
 
@@ -275,36 +291,3 @@ void rbtAdd(Node **nodePtr, Node *addNode){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//http://quiz.geeksforgeeks.org/c-program-red-black-tree-insertion/
-
-//http://cs.lmu.edu/~ray/notes/redblacktrees/
-//http://web.eecs.umich.edu/~sugih/courses/eecs281/f11/lectures/11-Redblack.pdf
-//http://btechsmartclass.com/DS/U5_T4.html

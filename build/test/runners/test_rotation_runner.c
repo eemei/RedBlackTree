@@ -51,9 +51,9 @@ extern void test_case_two_uncle_is_black_and_addNode_at_right_left_of_root(void)
 extern void test_case_three_uncle_is_black_and_addNode_at_right_right_of_root(void);
 extern void test_pointer_attract_to_a_node_fifty_and_return_null(void);
 extern void test_add_a_node_at_right_of_root(void);
-extern void test_add_a_node_at_right_of_right_of_root(void);
+extern void test_add_a_node_at_right_of_right_of_root_and_case_three(void);
 extern void test_add_a_node_and_recolour(void);
-extern void test_add_a_node_and_recolour_five_level(void);
+extern void test_add_a_node_and_recolour_at_rightChild_of_rightNode_and_recolour(void);
 
 
 //=======Test Reset Option=====
@@ -89,10 +89,10 @@ int main(void)
   RUN_TEST(test_case_two_uncle_is_black_and_addNode_at_right_left_of_root, 435);
   RUN_TEST(test_case_three_uncle_is_black_and_addNode_at_right_right_of_root, 459);
   RUN_TEST(test_pointer_attract_to_a_node_fifty_and_return_null, 482);
-  RUN_TEST(test_add_a_node_at_right_of_root, 497);
-  RUN_TEST(test_add_a_node_at_right_of_right_of_root, 513);
-  RUN_TEST(test_add_a_node_and_recolour, 535);
-  RUN_TEST(test_add_a_node_and_recolour_five_level, 568);
+  RUN_TEST(test_add_a_node_at_right_of_root, 498);
+  RUN_TEST(test_add_a_node_at_right_of_right_of_root_and_case_three, 517);
+  RUN_TEST(test_add_a_node_and_recolour, 542);
+  RUN_TEST(test_add_a_node_and_recolour_at_rightChild_of_rightNode_and_recolour, 571);
 
   return (UnityEnd());
 }

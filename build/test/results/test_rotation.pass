@@ -64,16 +64,16 @@
   :line: 482
   :message: ''
 - :test: test_add_a_node_at_right_of_root
-  :line: 497
+  :line: 498
   :message: ''
-- :test: test_add_a_node_at_right_of_right_of_root
-  :line: 513
+- :test: test_add_a_node_at_right_of_right_of_root_and_case_three
+  :line: 517
   :message: ''
 - :test: test_add_a_node_and_recolour
-  :line: 535
+  :line: 542
   :message: ''
-- :test: test_add_a_node_and_recolour_five_level
-  :line: 568
+- :test: test_add_a_node_and_recolour_at_rightChild_of_rightNode_and_recolour
+  :line: 571
   :message: ''
 :failures: []
 :ignores: []
@@ -83,32 +83,4 @@
   :failed: 0
   :ignored: 0
 :stdout:
-- 0nodePtr = value = 80
-- 1nodePtr = value = 80
-- 2nodePtr = value = 80
-- 0nodePtr = value = 50
-- 0nodePtr = value = 80
-- 1nodePtr = value = 80
-- 2nodePtr = value = 80
-- 1nodePtr = value = 50
-- 2nodePtr = value = 50
-- 0nodePtr = value = 60
-- 0nodePtr = value = 100
-- 0nodePtr = value = 70
-- 1nodePtr = value = 70
-- 2nodePtr = value = 70
-- 2nodePtr = value = 100
-- 1nodePtr = value = 60
-- 2nodePtr = value = 60
-- 0nodePtr = value = 60
-- 0nodePtr = value = 100
-- 0nodePtr = value = 70
-- 0nodePtr = value = 80
-- 1nodePtr = value = 80
-- 2nodePtr = value = 80
-- 1nodePtr = value = 70
-- 2nodePtr = value = 70
-- 2nodePtr = value = 100
-- 1nodePtr = value = 60
-- 2nodePtr = value = 60
 - ''
