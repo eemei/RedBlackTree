@@ -17,16 +17,14 @@ void rotateLeft(Node **nodePtr){
   root = *nodePtr;
   child = root->right;
   if(child != NULL){
-  grandChild = root->right->left;
- 
-  *nodePtr = child;   
-  (*nodePtr)->left = root;
-  (*nodePtr)->left->right = grandChild;  
+    grandChild = root->right->left;
+    *nodePtr = child;   
+    (*nodePtr)->left = root;
+    (*nodePtr)->left->right = grandChild;  
   }
   else 
       *nodePtr = root; 
 }
-
 
 /*
 *   >       X                         Y
@@ -43,14 +41,13 @@ void rotateRight(Node **nodePtr){
   child = root->left;
   
   if(child != NULL){
-  grandChild = root->left->right;
- 
-  *nodePtr = child;   
-  (*nodePtr)->right = root;
-  (*nodePtr)->right->left = grandChild;  
-  }
+    grandChild = root->left->right;
+    *nodePtr = child;   
+    (*nodePtr)->right = root;
+    (*nodePtr)->right->left = grandChild;  
+    }
   else 
-      *nodePtr = root; 
+    *nodePtr = root; 
 }
 
 
@@ -88,16 +85,12 @@ void violationCaseOneLeft(Node **nodePtr, Node *addNode){
   uncle = grandParent->right;
   parent = grandParent->left;
 
-    if (uncle->colour == RED && parent->colour == RED){
-     // if(parent->left != NULL || parent->right != NULL){
-        //if(parent->left == RED || parent->right == RED){
-          grandParent->colour = RED;
-          parent->colour = BLACK;
-          uncle->colour = BLACK;
-          addNode->colour = RED;
-    //    }
-    //  }
-    }
+  if (uncle->colour == RED && parent->colour == RED){
+    grandParent->colour = RED;
+    parent->colour = BLACK;
+    uncle->colour = BLACK;
+    addNode->colour = RED;
+  }
 }    
 /*  
 *       120 (B)                              120(B)                          100(B)
@@ -164,15 +157,11 @@ void violationCaseOneRight(Node **nodePtr, Node *addNode){
 
 
   if (uncle->colour == RED && parent->colour == RED){
-      //if(parent->left != NULL || parent->right != NULL){
-        //if(parent->left == RED || parent->right == RED){
-          grandParent->colour = RED;
-          parent->colour = BLACK;
-          uncle->colour = BLACK;
-          addNode->colour = RED;
-      //}   
-  //}
-}
+    grandParent->colour = RED;
+    parent->colour = BLACK;
+    uncle->colour = BLACK;
+    addNode->colour = RED;
+  }
 }
 /*  
 *       120 (B)                              120(B)                            150(B)
@@ -280,7 +269,7 @@ void rbtAdd(Node **nodePtr, Node *addNode){
   (*nodePtr)->colour = BLACK;
 }
 
-
+void deleteNode(Node **nodePtr, Node *deleteNode){}
 
 
 
