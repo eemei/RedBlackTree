@@ -4,82 +4,97 @@
   :file: test_rotation.c
 :successes:
 - :test: test_left_rotation_with_node80_and_one_child
-  :line: 50
+  :line: 63
   :message: ''
 - :test: test_left_rotation_with_node_one_five_zero
-  :line: 68
+  :line: 81
   :message: ''
 - :test: test_left_rotation_with_node_sixty_and_two_children
-  :line: 85
+  :line: 98
   :message: ''
 - :test: test_left_rotation_with_node_hundred_and_left_channel
-  :line: 106
+  :line: 119
   :message: ''
 - :test: test_right_rotation_with_nodeFive
-  :line: 129
+  :line: 142
   :message: ''
 - :test: test_right_rotation_with_nodeTen
-  :line: 146
+  :line: 159
   :message: ''
 - :test: test_right_rotation_with_node_sixty_and_two_children
-  :line: 165
+  :line: 178
   :message: ''
 - :test: test_right_rotation_with_node_one_hundred_and_twenty_and_two_children
-  :line: 187
+  :line: 200
   :message: ''
 - :test: test_left_right_rotation_with_node_hundred_and_child_eighty
-  :line: 212
+  :line: 225
   :message: ''
 - :test: test_left_right_rotation_with_node_one_hundred_and_fifty_and_child_twenty
-  :line: 235
+  :line: 248
   :message: ''
 - :test: test_right_left_rotation_simple_with_node_hundred
-  :line: 262
+  :line: 275
   :message: ''
 - :test: test_right_left_rotation_with_node_hundred
-  :line: 285
+  :line: 298
   :message: ''
 - :test: test_parent_of_addNode_is_left_child_of_Grandparent_of_addNode_and_addNode_is_left_child_of_parent
-  :line: 313
+  :line: 326
   :message: ''
 - :test: test_parent_of_addNode_is_left_child_of_Grandparent_of_addNode_and_addNode_is_right_child_of_parent
-  :line: 336
+  :line: 349
   :message: ''
 - :test: test_case_two_uncle_is_black_and_addNode_at_left_right_of_root
-  :line: 362
+  :line: 375
   :message: ''
 - :test: test_case_three_uncle_is_black_and_addNode_at_left_left_of_root
-  :line: 385
+  :line: 398
   :message: ''
 - :test: test_parent_of_addNode_is_right_child_of_Grandparent_of_addNode
-  :line: 409
+  :line: 422
   :message: ''
 - :test: test_case_two_uncle_is_black_and_addNode_at_right_left_of_root
-  :line: 435
+  :line: 448
   :message: ''
 - :test: test_case_three_uncle_is_black_and_addNode_at_right_right_of_root
-  :line: 459
+  :line: 472
   :message: ''
 - :test: test_pointer_attract_to_a_node_fifty_and_return_null
-  :line: 482
+  :line: 495
   :message: ''
 - :test: test_add_a_node_at_right_of_root
-  :line: 498
+  :line: 511
   :message: ''
 - :test: test_add_a_node_at_right_of_right_of_root_and_case_three
-  :line: 517
+  :line: 530
   :message: ''
 - :test: test_add_a_node_and_recolour
-  :line: 542
+  :line: 555
   :message: ''
 - :test: test_add_a_node_and_recolour_at_rightChild_of_rightNode_and_recolour
-  :line: 571
+  :line: 584
+  :message: ''
+- :test: test_rbtAdd_case_two_left_right_rotation
+  :line: 613
+  :message: ''
+- :test: test_rbtAdd_with_case_two_and_case_three
+  :line: 643
+  :message: ''
+- :test: test_rbtAdd_with_case_three_at_right_side
+  :line: 674
+  :message: ''
+- :test: test_rbtAdd_with_case_one_at_left_side
+  :line: 705
+  :message: ''
+- :test: test_rbtAdd_with_case_one_and_case_2_with_Add_node_seven
+  :line: 739
   :message: ''
 :failures: []
 :ignores: []
 :counts:
-  :total: 24
-  :passed: 24
+  :total: 29
+  :passed: 29
   :failed: 0
   :ignored: 0
 :stdout:
