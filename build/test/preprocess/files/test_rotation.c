@@ -8,13 +8,13 @@
 
 
 
-void initNode(Node *root ,int value, Node *left, Node *right, Color color){
+void initNode(Node *root ,int value, Node *left, Node *right, Colour colour){
 
   root->left = left;
 
   root->right = right;
 
-  root->colour = color;
+  root->colour = colour;
 
   root->value = value;
 

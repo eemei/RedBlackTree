@@ -5,10 +5,10 @@
 
 
 
-void initNode(Node *root ,int value, Node *left, Node *right, Color color){
+void initNode(Node *root ,int value, Node *left, Node *right, Colour colour){
   root->left = left;
   root->right = right;
-  root->colour = color;
+  root->colour = colour;
   root->value = value;
 }
 Node node1, node2, node3, node4, node5, node6, node7, node8, node10, node11, node12, node14, node15, \

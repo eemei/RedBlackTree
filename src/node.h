@@ -5,7 +5,7 @@ typedef enum{
   RED, 
   BLACK,
   DOUBLE_BLACK
-}Color;
+}Colour;
 
 typedef struct Node Node;
 struct Node{

@@ -3,11 +3,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-Node *createNode (int color, int data){
+Node *createNode (int colour, int data){
   Node *newNode = malloc(sizeof(Node));
   newNode->left = NULL;
   newNode->right = NULL;
-  newNode->colour = color;
+  newNode->colour = colour;
   newNode->value = data;
   
   return newNode;

@@ -7,11 +7,11 @@
 *   -verify the node present or not
     -verify left node or right node
 *   -verify the data in true node
-*   -verify the color in true node
+*   -verify the colour in true node
 */
 
-char *colourName(Color color){
-  switch(color){
+char *colourName(Colour colour){
+  switch(colour){
     case BLACK:
       return "Black";
       break;
@@ -22,12 +22,12 @@ char *colourName(Color color){
       return "double black";
       break;
     default:
-      return "undefined color";
+      return "undefined colour";
       break;   
   }
 }
 
-void testAssertNode(int value, Node *left, Node *right, Color color, Node *node, int lineNo){
+void testAssertNode(int value, Node *left, Node *right, Colour colour, Node *node, int lineNo){
   char buffer[256];
   
   if (node == NULL){
@@ -79,9 +79,9 @@ void testAssertNode(int value, Node *left, Node *right, Color color, Node *node,
               node->value, value, node->value);
     UNITY_TEST_FAIL(lineNo, buffer);
   }
-  if(node->colour != color){
+  if(node->colour != colour){
     sprintf(buffer, "Expect node %d is %s colour, but it is %s",    \
-    node->value, colourName(color), colourName(node->colour));
+    node->value, colourName(colour), colourName(node->colour));
     UNITY_TEST_FAIL(lineNo, buffer);
   }
   
