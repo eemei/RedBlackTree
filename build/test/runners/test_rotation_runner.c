@@ -59,6 +59,16 @@ extern void test_rbtAdd_with_case_two_and_case_three(void);
 extern void test_rbtAdd_with_case_three_at_right_side(void);
 extern void test_rbtAdd_with_case_one_at_left_side(void);
 extern void test_rbtAdd_with_case_one_and_case_2_with_Add_node_seven(void);
+extern void test_fuction_caseOneParentRedBlack_when_parent_red(void);
+extern void test_fuction_caseOneParentRedBlack_when_parent_Black(void);
+extern void test_fuction_caseOneParentRedBlack_the_sibling_of_child_at_left_when_parent_red(void);
+extern void test_fuction_caseOneParentRedBlack_the_sibling_at_left_and_parent_is_black_colour(void);
+extern void test_fuction_caseTwo_the_parent_is_black_colour_and_both_grandchildren_are_black(void);
+extern void test_fuction_caseTwo_the_parent_is_black_colour_and_both_grandchildren_are_NULL(void);
+extern void test_fuction_caseTwo_the_parent_is_red_colour_and_both_grandchildren_are_black(void);
+extern void test_fuction_caseTwo_the_parent_is_red_colour_and_both_grandchildren_are_NULL(void);
+extern void test_fuction_caseThree_the_sibling_is_red_and_left_child_of_parent(void);
+extern void test_fuction_caseOne_thesibling_at_left_child_of_parent_and_parent_is_red(void);
 
 
 //=======Test Reset Option=====
@@ -103,6 +113,16 @@ int main(void)
   RUN_TEST(test_rbtAdd_with_case_three_at_right_side, 674);
   RUN_TEST(test_rbtAdd_with_case_one_at_left_side, 705);
   RUN_TEST(test_rbtAdd_with_case_one_and_case_2_with_Add_node_seven, 739);
+  RUN_TEST(test_fuction_caseOneParentRedBlack_when_parent_red, 810);
+  RUN_TEST(test_fuction_caseOneParentRedBlack_when_parent_Black, 837);
+  RUN_TEST(test_fuction_caseOneParentRedBlack_the_sibling_of_child_at_left_when_parent_red, 865);
+  RUN_TEST(test_fuction_caseOneParentRedBlack_the_sibling_at_left_and_parent_is_black_colour, 892);
+  RUN_TEST(test_fuction_caseTwo_the_parent_is_black_colour_and_both_grandchildren_are_black, 919);
+  RUN_TEST(test_fuction_caseTwo_the_parent_is_black_colour_and_both_grandchildren_are_NULL, 946);
+  RUN_TEST(test_fuction_caseTwo_the_parent_is_red_colour_and_both_grandchildren_are_black, 971);
+  RUN_TEST(test_fuction_caseTwo_the_parent_is_red_colour_and_both_grandchildren_are_NULL, 998);
+  RUN_TEST(test_fuction_caseThree_the_sibling_is_red_and_left_child_of_parent, 1023);
+  RUN_TEST(test_fuction_caseOne_thesibling_at_left_child_of_parent_and_parent_is_red, 1054);
 
   return (UnityEnd());
 }

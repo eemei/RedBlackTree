@@ -15,6 +15,12 @@ struct Node{
   int value;
 };
 
+typedef struct ReturnedObject ReturnedObject;
+struct ReturnedObject{
+  Node *removedNode;
+  Colour returnedColour;
+};
+
 Node *createNode (int color, int data);
 void insert(Node *root, Node *addNode);
 

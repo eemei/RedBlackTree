@@ -27,7 +27,7 @@ void rotateLeft(Node **nodePtr){
 }
 
 /*
-*   >       X                         Y
+*   >      X                          Y
 *  /      / \      right rotate      / \
 *  \    [Y] c      ---------->      a  X  
 *       / \                           / \  
@@ -147,7 +147,7 @@ void violationCaseThreeLeft(Node **nodePtr, Node *addNode){
     }
   }
 }
-/*####################### reflection #################################*/
+/*========== reflection =(right)=========================*/
 
 void violationCaseOneRight(Node **nodePtr, Node *addNode){
   Node *grandParent, *parent, *uncle; 
@@ -219,9 +219,8 @@ void violationCaseThreeRight(Node **nodePtr, Node *addNode){
   }
 }
 
-
-
 void InternalAdd(Node **nodePtr, Node *addNode){
+  //when nodePtr reached the NULL then add a node into there and RETURN
   if(*nodePtr == NULL){
     *nodePtr = addNode;
     addNode->left = NULL;
@@ -229,37 +228,42 @@ void InternalAdd(Node **nodePtr, Node *addNode){
 		(*nodePtr)->colour = RED;
 		return;
   }
-  
-
+  // violation -> 1) Recolouring 
   if((*nodePtr)->left != NULL && (*nodePtr)->right != NULL){
      violationCaseOneRight(&(*nodePtr), addNode);
      violationCaseOneLeft(&(*nodePtr), addNode);
   } 
-
+  // x < add's Node
   if((*nodePtr)->value < addNode->value){ 
     InternalAdd(&((*nodePtr)->right), addNode);
     addNode->colour = RED;
     // addNode->left = NULL;
     // addNode->right = NULL;
   }
-        
+  // x > add's Node      
   else if ((*nodePtr)->value > addNode->value){
     InternalAdd(&((*nodePtr)->left), addNode);
     addNode->colour = RED;
-    // addNode->left = NULL;
-    // addNode->right = NULL;
   }
-  
-  if((*nodePtr)->left != NULL && (*nodePtr)->left->right!= NULL){  // left right rotate 
+  // x = add's Node
+  else {
+    printf(" cannot be add because existing the same node !\n");
+  }
+  // violation ->:
+  // 2) left right rotate 
+  if((*nodePtr)->left != NULL && (*nodePtr)->left->right!= NULL){  
     violationCaseTwoLeft(&(*nodePtr), addNode);
   }
-  else if((*nodePtr)->left != NULL && (*nodePtr)->left->left!= NULL){   //right rotate 
+  // 3) right rotation 
+  else if((*nodePtr)->left != NULL && (*nodePtr)->left->left!= NULL){   
    violationCaseThreeLeft(&(*nodePtr), addNode);  
   }
-  else if((*nodePtr)->right != NULL && (*nodePtr)->right->left != NULL){   // right left
+  //  4) right left rotation 
+  else if((*nodePtr)->right != NULL && (*nodePtr)->right->left != NULL){   
     violationCaseTwoRight(&(*nodePtr), addNode);
   }
-  else if((*nodePtr)->right != NULL && (*nodePtr)->right->right!= NULL){  //left rotate
+  // 5) left rotation 
+  else if((*nodePtr)->right != NULL && (*nodePtr)->right->right!= NULL){  
     violationCaseThreeRight(&(*nodePtr), addNode);
   }
 }
@@ -268,8 +272,391 @@ void rbtAdd(Node **nodePtr, Node *addNode){
   InternalAdd(nodePtr, addNode);
   (*nodePtr)->colour = BLACK;
 }
+/*
+* @function:
+* remember the node that will delete from reb black tree
+* return whole structure that is ReturnedObject structure
+*/
+ReturnedObject rbtRemoveInt(Node *deleteNode){
+  ReturnedObject ro;
+  
+  ro.removedNode = deleteNode;
+  ro.returnedColour = DOUBLE_BLACK;
+  return ro;
+}
 
-void deleteNode(Node **nodePtr, Node *deleteNode){}
+/*
+*==============
+    CASE 1(a)
+*==============
+* left double black  
+* sibling = cut off node's sibling
+* parent = sibling's parent 
+* child = sibling's child
+*
+*     /                               /
+*   2(R)                             3(R)
+*  // \                              /  \
+*  . 3(B)     Rotate left         2(B)  5(B)
+*     / \     ---------->         / \   / \
+*    .  5(R)                     .  .  .  .
+*       / \
+*      .   .
+*
+* if sibling is black
+* right child is red (with the parent being RED) 
+*==================================================
+*
+*     /                               /
+*   2(B)                             3(B)
+*  // \                              /  \
+*  . 3(B)     Rotate left         2(B)  5(B)
+*     / \     ---------->         / \   / \
+*    .  5(R)                     .  .  .  .
+*       / \
+*      .   .
+*
+* if sibling is black
+* right child is red (with the parent being BLACK) 
+*/
+void caseOneALeft(Node **nodePtr, Node *deleteNode){
+  Node *parent, *sibling, *child;
+  parent = *nodePtr;
+  sibling = parent->right;
+  child = sibling->right;
+  if (parent->colour == RED && sibling->colour == BLACK){
+    if (child != NULL && child->colour == RED){
+      (*nodePtr)->colour = BLACK;
+      (*nodePtr)->right->colour = RED;
+      (*nodePtr)->right->right->colour =  BLACK;
+      (*nodePtr)->left = NULL;
+      rotateLeft(&(*nodePtr));
+    }
+  }
+  else if (parent->colour == BLACK && sibling->colour == BLACK){
+    if (child != NULL && child->colour == RED){
+      //deleteNode->colour = BLACK;
+      (*nodePtr)->right->right->colour = BLACK;  
+      (*nodePtr)->left = NULL;      
+      //deleteNode = NULL;
+      rotateLeft(&(*nodePtr));
+    }
+  }
+}
+
+/*
+*==============
+    CASE 1(b)
+*==============
+* left double black  
+* sibling = cut off node's sibling
+* parent = sibling's parent 
+* child = sibling's child
+*     /                               /
+*   2(R)                             3(R)
+*  // \                              /  \
+*  . 5(B)     Rotate right         2(B)  5(B)
+*     / \         left              / \   / \
+*  3(R)  .    ---------->          .  .  .  .
+*       / \
+*      .   .
+*
+* if sibling is black
+* left child is red (with the parent being RED) 
+*==================================================
+*
+*     /                               /
+*   2(B)                             3(B)
+*  // \                              /  \
+*  . 5(B)     Rotate right         2(B)  5(B)
+*     / \         left              / \   / \
+*  3(R)  .    ---------->          .  .  .  .
+*   / \
+*  .   .
+*
+* if sibling is black
+* left child is red (with the parent being BLACK) 
+*/
+void caseOneBLeft(Node **nodePtr, Node *deleteNode){
+  Node *parent, *sibling, *child;
+  parent = *nodePtr;
+  sibling = parent->right;
+  child = sibling->left;
+  if (parent->colour == RED && sibling->colour == BLACK){
+    if (child != NULL && child->colour == RED){
+      (*nodePtr)->colour = BLACK;
+      (*nodePtr)->left = NULL;      
+      //deleteNode = NULL;      
+      //deleteNode->colour = BLACK;
+      rotateRightLeft(&(*nodePtr));
+    }
+  }
+  else if (parent->colour == BLACK && sibling->colour == BLACK){
+    if (child != NULL && child->colour == RED){
+      //deleteNode->colour = BLACK;
+      //deleteNode = NULL;
+      (*nodePtr)->left = NULL;   
+      (*nodePtr)->right->left->colour = BLACK;        
+      rotateRightLeft(&(*nodePtr));
+    }
+  }
+}
+/*
+*==============
+    CASE 2(a)
+*==============
+* left double black
+*
+*     /                               //
+*   2(B)                             2(D.B)
+*  // \                              /  \
+*  . 5(B)         flip              .   5(R)
+*     / \         colour                 / \   
+*  3(B)  7(B)    ------->             3(B) 7(B)
+*  /  \  /  \                         / \   / \
+* .   .  .  .                        .   .  .  .
+*
+* if sibling is black
+* BOTH sibling's children are BLACK (with the parent being BLACK) 
+*=================================================================
+*     /                               //
+*   2(B)                             2(D.B)
+*  // \                              /  \
+*  . 5(B)         flip              .   5(R)
+*     / \         colour                 / \   
+*     .  .       ------->               .  .
+* if sibling is black
+* BOTH sibling's children are NULL (with the parent being BLACK) 
+*/
+void caseTwoALeft(Node **nodePtr, Node *deleteNode){
+  Node *parent, *sibling, *childLeft, *childRight;
+  parent = *nodePtr;
+  sibling = parent->right;
+  childLeft = sibling->left;
+  childRight = sibling->right;
+  if (parent->colour == BLACK && sibling->colour == BLACK){
+    if (childLeft == NULL && childRight == NULL){
+      (*nodePtr)->colour = DOUBLE_BLACK;
+      (*nodePtr)->left = NULL;   
+      //deleteNode->colour = BLACK;
+      //deleteNode = NULL;      
+      (*nodePtr)->right->colour = RED;
+    }
+    else if (childLeft->colour == BLACK && childRight->colour == BLACK){
+      (*nodePtr)->colour = DOUBLE_BLACK;
+      (*nodePtr)->left = NULL;   
+      //deleteNode->colour = BLACK;
+      //deleteNode = NULL;      
+      (*nodePtr)->right->colour = RED;  
+    }
+  }
+}
+/*
+*==============
+    CASE 2(b)
+*==============
+* left double black
+*
+*     /                                /
+*   2(R)                             2(B)
+*  // \                              /  \
+*  . 5(B)         flip              .   5(R)
+*     / \         colour                 / \   
+*  3(B)  7(B)    ------->             3(B) 7(B)
+*  /  \  /  \                         / \   / \
+* .   .  .  .                        .   .  .  .
+*
+* if sibling is black
+* BOTH sibling's children are BLACK (with the parent being RED) 
+*=================================================================
+*     /                               /
+*   2(R)                             2(B)
+*  // \                              /  \
+*  . 5(B)         flip              .   5(R)
+*     / \         colour                 / \   
+*     .  .       ------->               .  .
+* if sibling is black
+* BOTH sibling's children are NULL (with the parent being RED) 
+*/
+void caseTwoBLeft(Node **nodePtr, Node *deleteNode){
+  Node *parent, *sibling, *childLeft, *childRight;
+  parent = *nodePtr;
+  sibling = parent->right;
+  childLeft = sibling->left;
+  childRight = sibling->right;
+  if (parent->colour == RED && sibling->colour == BLACK){
+    if (childLeft == NULL && childRight == NULL){
+      (*nodePtr)->colour = BLACK;
+      (*nodePtr)->left = NULL;   
+      //deleteNode = NULL;      
+      //deleteNode->colour = BLACK;
+      (*nodePtr)->right->colour = RED;
+    }
+    else if (childLeft->colour == BLACK && childRight->colour == BLACK){
+      (*nodePtr)->colour = BLACK;
+      //deleteNode->colour = BLACK;
+      //deleteNode = NULL; 
+      (*nodePtr)->left = NULL;         
+      (*nodePtr)->right->colour = RED;  
+    }
+  }
+}
+
+/*
+* ==========
+*  CASE 3 left 
+* ==========
+*         /                   /                      /
+*       2(B)      rotate     5(B)       use         5(B)
+*      //  \      left       /  \       case 2      / \
+*      .  5(R)    ----->   2(R) 7(B)    ----->   2(B) 7(B)
+*         /  \            // \   / \             / \   / \
+*       3(B) 7(B)        .  3(B) .  .           . 3(R) . .
+*                           / \                    / \
+*                           . .                    . .
+*
+* the sibling is red 
+*
+*/
+void caseThreeLeft(Node **nodePtr, Node *deleteNode){
+  Node *parent, *sibling, *childLeft, *childRight;
+  parent = *nodePtr;
+  sibling = parent->right;  
+  if(sibling->colour == RED){
+    sibling->colour = (*nodePtr)->colour;
+    (*nodePtr)->colour = RED;
+    //deleteNode->colour = BLACK;
+    //deleteNode = NULL;
+    (*nodePtr)->left = NULL;       
+    rotateLeft(&(*nodePtr));
+    if((*nodePtr)->left->colour == RED && (*nodePtr)->left->right->colour == BLACK){
+      caseTwoBLeft(&((*nodePtr)->left), deleteNode);
+    }
+    else if((*nodePtr)->left->colour == BLACK && (*nodePtr)->left->right->colour == BLACK){
+      caseTwoALeft(&((*nodePtr)->left), deleteNode);
+    }
+  }
+}
+/*================= Reflection ==(Right)===========================*/
+/*
+*==============
+    CASE 1(a)
+*==============
+* Right double black  
+* sibling = cut off node's sibling
+* parent = sibling's parent 
+* child = sibling's child
+*
+*     /                               /
+*   5(R)                            3(R)
+*   / \\                           /  \
+* 3(B) .   Rotate Right         2(B)  5(B)
+* /  \     ---------->         / \   / \
+*2(R)                        .  .  .  .
+* / \
+*.  . 
+*
+* if sibling is black
+* left child of sibling is red (with the parent being RED) 
+*==================================================
+*
+*       /                               /
+*     5(B)                            3(B)
+*     / \\                           /  \
+*  3(B)  .   Rotate Right         2(B)  5(B)
+*   / \     ---------->           / \   / \
+* 2(R)                            .  .  .  .
+* / \
+* . .
+*
+* if sibling is black
+* left child is red (with the parent being BLACK) 
+*/
+void caseOneARight(Node **nodePtr, Node *deleteNode){
+  Node *parent, *sibling, *child;
+  parent = *nodePtr;
+  sibling = parent->left;
+  child = sibling->left;
+  if (parent->colour == RED && sibling->colour == BLACK){
+    if (child != NULL && child->colour == RED){
+      (*nodePtr)->colour = BLACK;
+      (*nodePtr)->right = NULL;
+      (*nodePtr)->left->colour = RED;
+      (*nodePtr)->left->left->colour =  BLACK;
+      rotateRight(&(*nodePtr));
+    }
+  }
+  else if (parent->colour == BLACK && sibling->colour == BLACK){
+    if (child != NULL && child->colour == RED){
+      (*nodePtr)->right = NULL;
+      (*nodePtr)->left->left->colour = BLACK;  
+      rotateRight(&(*nodePtr));
+    }
+  }
+}
+/*
+*==============
+    CASE 1(b)
+*==============
+* Right double black  
+* sibling = cut off node's sibling
+* parent = sibling's parent 
+* child = sibling's child
+*     /                               /
+*   3(R)                             3(R)
+*  /  \                              /  \
+* 2(B) .     Rotate right         2(B)  5(B)
+* / \         left              / \   / \
+*. 5(R)      ---------->          .  .  .  .
+*  / \
+*  .  .
+*
+* if sibling is black
+* left child is red (with the parent being RED) 
+*==================================================
+*
+*     /                               /
+*   2(B)                             3(B)
+*  // \                              /  \
+*  . 5(B)     Rotate right         2(B)  5(B)
+*     / \         left              / \   / \
+*  3(R)  .    ---------->          .  .  .  .
+*   / \
+*  .   .
+*
+* if sibling is black
+* left child is red (with the parent being BLACK) 
+*/
+void caseOneBLeft(Node **nodePtr, Node *deleteNode){
+  Node *parent, *sibling, *child;
+  parent = *nodePtr;
+  sibling = parent->right;
+  child = sibling->left;
+  if (parent->colour == RED && sibling->colour == BLACK){
+    if (child != NULL && child->colour == RED){
+      (*nodePtr)->colour = BLACK;
+      (*nodePtr)->left = NULL;      
+      //deleteNode = NULL;      
+      //deleteNode->colour = BLACK;
+      rotateRightLeft(&(*nodePtr));
+    }
+  }
+  else if (parent->colour == BLACK && sibling->colour == BLACK){
+    if (child != NULL && child->colour == RED){
+      //deleteNode->colour = BLACK;
+      //deleteNode = NULL;
+      (*nodePtr)->left = NULL;   
+      (*nodePtr)->right->left->colour = BLACK;        
+      rotateRightLeft(&(*nodePtr));
+    }
+  }
+}
+
+// void deleteNode(Node **nodePtr, Node *deleteNode){
+    // if(*nodePtr == deleteNode){
+		// return;
+  // }
+// }
 
 
 

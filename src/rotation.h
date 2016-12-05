@@ -13,6 +13,14 @@ void violationCaseThreeRight(Node **nodePtr, Node *addNode);
 void violationCaseThreeLeft(Node **nodePtr, Node *addNode);
 void rbtInternalAdd(Node **nodePtr, Node *child);
 void rbtAdd(Node **nodePtr, Node *child);
+void caseOneALeft(Node **nodePtr, Node *deleteNode);
+void caseOneBLeft(Node **nodePtr, Node *deleteNode);
+void caseTwoALeft(Node **nodePtr, Node *deleteNode);
+void caseTwoBLeft(Node **nodePtr, Node *deleteNode);
+void caseThreeLeft(Node **nodePtr, Node *deleteNode);
+void caseThreeRight(Node **nodePtr, Node *deleteNode);
+void caseOneARight(Node **nodePtr, Node *deleteNode);
+ReturnedObject rbtRemoveInt(Node *deleteNode);
 void deleteNode(Node **nodePtr, Node *deleteNode);
 #endif // rotation_H
  
