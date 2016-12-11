@@ -1284,6 +1284,15 @@ void test_fuction_caseThree_the_sibling_is_red_and_left_child_of_parent(void){
   TEST_ASSERT_EQUAL_NODE(60, &node40, NULL, BLACK, &node60);
   TEST_ASSERT_EQUAL_NODE(40, NULL, NULL, RED, &node40);
 }
+
+void test_rbtRemoveInt_function_given_a_delete_node_then_return_node_and_colour(void){
+  Node *deleteNode = &node5;
+  ReturnedObject ro;
+  ro = rbtRemoveInt(deleteNode);
+
+  TEST_ASSERT_EQUAL(ro.removedNode, deleteNode);
+  TEST_ASSERT_EQUAL(ro.returnedColour, DOUBLE_BLACK);
+}
 /*
 *    100(R)   ------>   NULL
 *     / \     DELETE

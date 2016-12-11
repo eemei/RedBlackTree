@@ -77,6 +77,7 @@ extern void test_fuction_caseTwo_the_parent_is_black_colour_and_both_grandchildr
 extern void test_fuction_caseTwo_the_parent_is_red_colour_and_both_grandchildren_are_black_the_sibling_at_left_side(void);
 extern void test_fuction_caseTwo_the_parent_is_red_colour_and_both_grandchildren_are_NULL_the_sibling_at_left_side(void);
 extern void test_fuction_caseThree_the_sibling_is_red_and_left_child_of_parent(void);
+extern void test_rbtRemoveInt_function_given_a_delete_node_then_return_node_and_colour(void);
 
 
 //=======Test Reset Option=====
@@ -139,6 +140,7 @@ int main(void)
   RUN_TEST(test_fuction_caseTwo_the_parent_is_red_colour_and_both_grandchildren_are_black_the_sibling_at_left_side, 1219);
   RUN_TEST(test_fuction_caseTwo_the_parent_is_red_colour_and_both_grandchildren_are_NULL_the_sibling_at_left_side, 1246);
   RUN_TEST(test_fuction_caseThree_the_sibling_is_red_and_left_child_of_parent, 1271);
+  RUN_TEST(test_rbtRemoveInt_function_given_a_delete_node_then_return_node_and_colour, 1288);
 
   return (UnityEnd());
 }

@@ -3770,6 +3770,32 @@ void test_fuction_caseThree_the_sibling_is_red_and_left_child_of_parent(void){
 
 
 
+void test_rbtRemoveInt_function_given_a_delete_node_then_return_node_and_colour(void){
+
+  Node *deleteNode = &node5;
+
+  ReturnedObject ro;
+
+  ro = rbtRemoveInt(deleteNode);
+
+
+
+  UnityAssertEqualNumber((_U_SINT)((ro.removedNode)), (_U_SINT)((deleteNode)), (
+
+ ((void *)0)
+
+ ), (_U_UINT)1293, UNITY_DISPLAY_STYLE_INT);
+
+  UnityAssertEqualNumber((_U_SINT)((ro.returnedColour)), (_U_SINT)((DOUBLE_BLACK)), (
+
+ ((void *)0)
+
+ ), (_U_UINT)1294, UNITY_DISPLAY_STYLE_INT);
+
+}
+
+
+
 
 
 
@@ -3808,7 +3834,7 @@ void xtest_delete_one_node_and_that_is_the_root(void){
 
  ((void *)0)
 
- ), (_U_UINT)1299, UNITY_DISPLAY_STYLE_HEX32);
+ ), (_U_UINT)1308, UNITY_DISPLAY_STYLE_HEX32);
 
   testAssertNode(0, 
 
@@ -3822,6 +3848,6 @@ void xtest_delete_one_node_and_that_is_the_root(void){
 
  ((void *)0)
 
- , 1300);;
+ , 1309);;
 
 }
