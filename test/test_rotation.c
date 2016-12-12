@@ -825,7 +825,7 @@ void test_fuction_caseOneParentRedBlack_when_parent_red(void){
 /* 
 * case 1(a)
 *
-*    /                                /
+*    /                                 /
 *   20(B)                             40(B)
 *  // \                              /  \
 *  . 40(B)     Rotate left         20(B)  60(B)
@@ -1292,7 +1292,10 @@ void test_rbtRemoveInt_function_given_a_delete_node_then_return_node_and_colour(
 
   TEST_ASSERT_EQUAL(ro.removedNode, deleteNode);
   TEST_ASSERT_EQUAL(ro.returnedColour, DOUBLE_BLACK);
+  TEST_ASSERT_EQUAL(ro.removedNode->colour, DOUBLE_BLACK);
 }
+
+
 /*
 *    100(R)   ------>   NULL
 *     / \     DELETE

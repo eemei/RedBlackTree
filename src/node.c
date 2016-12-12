@@ -20,7 +20,7 @@ Node *createNode (int colour, int data){
 *
 */
 void insert(Node *root, Node *child){
-// root == 0
+
   if(root->value < child->value){  
     if (root->right == 0){
       root->right = child;
