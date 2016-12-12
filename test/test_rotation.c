@@ -1302,12 +1302,11 @@ void test_rbtRemoveInt_function_given_a_delete_node_then_return_node_and_colour(
 *   NULL NULL   10
 *
 */
-void xtest_delete_one_node_and_that_is_the_root(void){
+void test_delete_one_node_and_that_is_the_root(void){
   Node *rootPtr = &node100;
   Node *delete = &node100;    
   initNode(&node100, 100, NULL, NULL, RED);
 
-  //deleteNode(&rootPtr, delete);
+  deleteRBTNode(&rootPtr, delete);
   TEST_ASSERT_EQUAL_PTR(rootPtr, NULL); 
-  TEST_ASSERT_EQUAL_NODE(0, NULL, NULL, BLACK, NULL);
 }

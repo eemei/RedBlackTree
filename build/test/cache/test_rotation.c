@@ -1004,7 +1004,7 @@ void test_fuction_caseOneParentRedBlack_when_parent_red(void){
 
   Node *deleteNode = &node10;
 
-  initNode(&node20, 20, ((void *)0), &node40, RED);
+  initNode(&node20, 20, &node10, &node40, RED);
 
   initNode(&node40, 40, ((void *)0), &node60, BLACK);
 
@@ -1560,7 +1560,7 @@ void test_rbtRemoveInt_function_given_a_delete_node_then_return_node_and_colour(
 
 }
 
-void xtest_delete_one_node_and_that_is_the_root(void){
+void test_delete_one_node_and_that_is_the_root(void){
 
   Node *rootPtr = &node100;
 
@@ -1570,10 +1570,10 @@ void xtest_delete_one_node_and_that_is_the_root(void){
 
 
 
-
+  deleteRBTNode(&rootPtr, delete);
 
   UnityAssertEqualNumber((_U_SINT)(_UP)((rootPtr)), (_U_SINT)(_UP)((((void *)0))), (((void *)0)), (_U_UINT)1311, UNITY_DISPLAY_STYLE_HEX32);
 
-  testAssertNode(0, ((void *)0), ((void *)0), BLACK, ((void *)0), 1312);;
+
 
 }

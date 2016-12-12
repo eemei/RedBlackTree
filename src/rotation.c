@@ -797,15 +797,25 @@ void deleteRBTNode(Node **nodePtr, Node *deleteNode){
   
   if((*nodePtr) == NULL){
     printf("cannot be delete because nothing inside the tree\n");
+    return;
   } 
   
   else if((*nodePtr)->value == deleteNode->value){
     rbtRemoveInt(deleteNode);
-		return;
+   // printf("colour %d\n", deleteNode->colour);
+    
+    
+    deleteNode = NULL;
+   // printf("delete node = %p", deleteNode);
+    (*nodePtr) = deleteNode;
+    return;
   }
   
   else if((*nodePtr)->left != NULL && (*nodePtr)->right != NULL){
-    
+    if ((*nodePtr)->value > deleteNode->value){
+      deleteRBTNode((*nodePtr)->left, deleteNode);
+    }
+    else if ((*nodePtr)->value < deleteNode->value)
   }
   
   
