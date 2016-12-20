@@ -1528,15 +1528,25 @@ void test_fuction_caseThree_the_sibling_is_red_and_left_child_of_parent(void){
 
   caseThreeRight(&rootPtr, deleteNode);
 
-  UnityAssertEqualNumber((_U_SINT)(_UP)((rootPtr)), (_U_SINT)(_UP)((&node25)), (((void *)0)), (_U_UINT)1281, UNITY_DISPLAY_STYLE_HEX32);
 
-  testAssertNode(25, &node20, &node60, BLACK, &node25, 1282);;
 
-  testAssertNode(20, ((void *)0), ((void *)0), BLACK, &node20, 1283);;
 
-  testAssertNode(60, &node40, ((void *)0), BLACK, &node60, 1284);;
 
-  testAssertNode(40, ((void *)0), ((void *)0), RED, &node40, 1285);;
+
+
+
+
+
+
+  UnityAssertEqualNumber((_U_SINT)(_UP)((rootPtr)), (_U_SINT)(_UP)((&node25)), (((void *)0)), (_U_UINT)1286, UNITY_DISPLAY_STYLE_HEX32);
+
+  testAssertNode(25, &node20, &node60, BLACK, &node25, 1287);;
+
+  testAssertNode(20, ((void *)0), ((void *)0), BLACK, &node20, 1288);;
+
+  testAssertNode(60, &node40, ((void *)0), BLACK, &node60, 1289);;
+
+  testAssertNode(40, ((void *)0), ((void *)0), RED, &node40, 1290);;
 
 }
 
@@ -1552,28 +1562,10 @@ void test_rbtRemoveInt_function_given_a_delete_node_then_return_node_and_colour(
 
 
 
-  UnityAssertEqualNumber((_U_SINT)((ro.removedNode)), (_U_SINT)((deleteNode)), (((void *)0)), (_U_UINT)1293, UNITY_DISPLAY_STYLE_INT);
+  UnityAssertEqualNumber((_U_SINT)((ro.removedNode)), (_U_SINT)((deleteNode)), (((void *)0)), (_U_UINT)1298, UNITY_DISPLAY_STYLE_INT);
 
-  UnityAssertEqualNumber((_U_SINT)((ro.returnedColour)), (_U_SINT)((DOUBLE_BLACK)), (((void *)0)), (_U_UINT)1294, UNITY_DISPLAY_STYLE_INT);
+  UnityAssertEqualNumber((_U_SINT)((ro.returnedColour)), (_U_SINT)((DOUBLE_BLACK)), (((void *)0)), (_U_UINT)1299, UNITY_DISPLAY_STYLE_INT);
 
-  UnityAssertEqualNumber((_U_SINT)((ro.removedNode->colour)), (_U_SINT)((DOUBLE_BLACK)), (((void *)0)), (_U_UINT)1295, UNITY_DISPLAY_STYLE_INT);
-
-}
-
-void test_delete_one_node_and_that_is_the_root(void){
-
-  Node *rootPtr = &node100;
-
-  Node *delete = &node100;
-
-  initNode(&node100, 100, ((void *)0), ((void *)0), RED);
-
-
-
-  deleteRBTNode(&rootPtr, delete);
-
-  UnityAssertEqualNumber((_U_SINT)(_UP)((rootPtr)), (_U_SINT)(_UP)((((void *)0))), (((void *)0)), (_U_UINT)1311, UNITY_DISPLAY_STYLE_HEX32);
-
-
+  UnityAssertEqualNumber((_U_SINT)((ro.removedNode->colour)), (_U_SINT)((DOUBLE_BLACK)), (((void *)0)), (_U_UINT)1300, UNITY_DISPLAY_STYLE_INT);
 
 }

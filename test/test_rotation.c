@@ -1262,7 +1262,7 @@ void test_fuction_caseTwo_the_parent_is_red_colour_and_both_grandchildren_are_NU
 *         /                   /                      /
 *       60(B)      rotate    25(B)       use        25(B)
 *      /  \\      right       /  \     case 2      /   \
-*     25(R) .     ----->  20(R) 60(B)    ----->  20(B) 60(B)
+*     25(R) .     ----->  20(B) 60(R)    ----->  20(B) 60(B)
 *    /  \                 / \  /  \\             / \  /  \
 * 20(B) 40(B)             . .40(B) .           .  . 40(R) . 
 *                              / \                  / \
@@ -1278,6 +1278,7 @@ void test_fuction_caseThree_the_sibling_is_red_and_left_child_of_parent(void){
   initNode(&node70, 70, NULL, NULL, DOUBLE_BLACK);
 
   caseThreeRight(&rootPtr, deleteNode);
+
   TEST_ASSERT_EQUAL_PTR(rootPtr, &node25); 
   TEST_ASSERT_EQUAL_NODE(25, &node20, &node60, BLACK, &node25);
   TEST_ASSERT_EQUAL_NODE(20, NULL, NULL, BLACK, &node20);
@@ -1302,11 +1303,11 @@ void test_rbtRemoveInt_function_given_a_delete_node_then_return_node_and_colour(
 *   NULL NULL   10
 *
 */
-void test_delete_one_node_and_that_is_the_root(void){
-  Node *rootPtr = &node100;
-  Node *delete = &node100;    
-  initNode(&node100, 100, NULL, NULL, RED);
+// void test_delete_one_node_and_that_is_the_root(void){
+  // Node *rootPtr = &node100;
+  // Node *delete = &node100;    
+  // initNode(&node100, 100, NULL, NULL, RED);
 
-  deleteRBTNode(&rootPtr, delete);
-  TEST_ASSERT_EQUAL_PTR(rootPtr, NULL); 
-}
+  // deleteRBTNode(&rootPtr, delete);
+  // TEST_ASSERT_EQUAL_PTR(rootPtr, NULL); 
+// }
