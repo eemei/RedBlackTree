@@ -730,7 +730,7 @@ void test_rbtAdd_with_case_one_at_left_side(void){
 *  ADD     1(B) 5(R)               Rotate node      1(B) 5(R)      Rotate node      1(B) 5(R) 
 *   7           / \                    10               / \           10                 / \ 
 *            4(B) 10(B)          ------->           4(B) 10(R)     ------>           4(B) 7(B)
-*             /     /                               /     /                          /    / \
+*             /     /                               /     /                          /    /   \
 *           3(R)   6(R)                            3(R)  7(B)                       3(R) 6(R) 10(R) 
 *                   \                                     /
 *                   7(R)                                6(R)
@@ -1303,11 +1303,125 @@ void test_rbtRemoveInt_function_given_a_delete_node_then_return_node_and_colour(
 *   NULL NULL   10
 *
 */
-// void test_delete_one_node_and_that_is_the_root(void){
-  // Node *rootPtr = &node100;
-  // Node *delete = &node100;    
-  // initNode(&node100, 100, NULL, NULL, RED);
+void xtest_delete_one_node_and_that_is_the_root(void){
+  Node *rootPtr = &node100;
+  Node *delete = &node100;    
+  initNode(&node100, 100, NULL, NULL, RED);
 
-  // deleteRBTNode(&rootPtr, delete);
-  // TEST_ASSERT_EQUAL_PTR(rootPtr, NULL); 
-// }
+  deleteRBTNode(&rootPtr, delete);
+  TEST_ASSERT_EQUAL_PTR(rootPtr, NULL); 
+}
+
+/*
+*               25(R)                    60(R)
+*              / \                       / \
+* remove   (B)20  60(B)     ------> 25(B) 70(B)
+*   20      / \  / \        case 1  / \    / \
+*          .  .  . 70(R)            . .    . .
+*                 / \
+*                 . .
+*/
+void test_delete_one_node_and_that_is_the_twenty_node_at_left_most_and_performed_rotation_left(void){
+  Node *rootPtr = &node25;
+  Node *delete = &node20;    
+  initNode(&node25, 25, &node20, &node60, RED);
+  initNode(&node20, 20, NULL, NULL, BLACK);
+  initNode(&node60, 60, NULL, &node70, BLACK);
+  initNode(&node70, 70, NULL, NULL, RED);
+  
+
+  deleteRBTNode(&rootPtr, delete);
+  TEST_ASSERT_EQUAL_PTR(rootPtr, &node60); 
+  TEST_ASSERT_EQUAL_NODE(60, &node25, &node70, RED, &node60);
+  TEST_ASSERT_EQUAL_NODE(25, NULL, NULL, BLACK, &node25);
+}
+
+/*
+*               25(B)                    60(B)
+*              / \                       / \
+* remove   (B)20  60(B)     ------> 25(B) 70(B)
+*   20      / \  / \        case 1  / \    / \
+*          .  .  . 70(R)            . .    . .
+*                 / \
+*                 . .
+*/
+void test_delete_node_twenty_and_performed_left_rotation_the_headNode_is_red(void){
+  Node *rootPtr = &node25;
+  Node *delete = &node20;    
+  initNode(&node25, 25, &node20, &node60, RED);
+  initNode(&node20, 20, NULL, NULL, BLACK);
+  initNode(&node60, 60, NULL, &node70, BLACK);
+  initNode(&node70, 70, NULL, NULL, RED);
+  
+
+  deleteRBTNode(&rootPtr, delete);
+  TEST_ASSERT_EQUAL_PTR(rootPtr, &node60); 
+  TEST_ASSERT_EQUAL_NODE(60, &node25, &node70, RED, &node60);
+  TEST_ASSERT_EQUAL_NODE(25, NULL, NULL, BLACK, &node25);
+}
+/*
+*     
+*                 2(B)                                           2(B)
+* REMOVE  -->     /  \      rotate left and flip colour         /  \
+*  4           1(B) 5(B)      ---------------------->         1(B) 7(B)
+*                    / \       CASE 3 ( PERFORMED                  / \  
+*                4(B) 7(R)            CASE 2 )                  5(B) 10(B)
+*                      /  \                                   / \     / \
+*                   6(B) 10(B)                               . 6(R)   . .
+*                                                              / \   
+*                                                             .  .   
+*/
+void test_delete_node_six_and_performed_caseThree_and_involved_case_two(void){
+  Node *rootPtr = &node2;
+  Node *delete = &node4;    
+  initNode(&node2, 2, &node1, &node5, BLACK);
+  initNode(&node5, 5, &node4, &node7, BLACK);
+  initNode(&node1, 1, NULL, NULL, BLACK);
+  initNode(&node4, 4, NULL, NULL, BLACK);
+  initNode(&node6, 6, NULL, NULL, BLACK);
+  initNode(&node10, 10, NULL, NULL, BLACK);
+  initNode(&node7, 7, &node6, &node10, RED);
+  
+  deleteRBTNode(&rootPtr, delete);
+  TEST_ASSERT_EQUAL_PTR(rootPtr, &node2); 
+  TEST_ASSERT_EQUAL_NODE(2, &node1, &node7, BLACK, &node2);  
+  TEST_ASSERT_EQUAL_NODE(7, &node5, &node10, BLACK, &node7);  
+  TEST_ASSERT_EQUAL_NODE(5, NULL, &node6, BLACK, &node5);  
+  TEST_ASSERT_EQUAL_NODE(1, NULL, NULL, BLACK, &node1);  
+  TEST_ASSERT_EQUAL_NODE(10, NULL, NULL, BLACK, &node10);  
+  TEST_ASSERT_EQUAL_NODE(6, NULL, NULL, RED, &node6);  
+}
+
+/*
+*     
+*                 2(B)                                           2(B)
+* REMOVE  -->     /  \              flip colour                 /  \
+*  4           1(B) 5(R)      ---------------------->         1(B) 5(B)
+*                    / \             CASE  2B                      / \  
+*                4(B) 7(B)                                         . 7(R)
+*                      /  \                                           / \
+*                   6(B) 10(B)                                     6(B) 10(B)
+*                                                              
+*                                                                
+*/
+void test_delete_node_six_and_performed_caseBTwo(void){
+  Node *rootPtr = &node2;
+  Node *delete = &node4;    
+  initNode(&node2, 2, &node1, &node5, BLACK);
+  initNode(&node5, 5, &node4, &node7, RED);
+  initNode(&node1, 1, NULL, NULL, BLACK);
+  initNode(&node4, 4, NULL, NULL, BLACK);
+  initNode(&node6, 6, NULL, NULL, BLACK);
+  initNode(&node10, 10, NULL, NULL, BLACK);
+  initNode(&node7, 7, &node6, &node10, BLACK);
+  
+  deleteRBTNode(&rootPtr, delete);
+  TEST_ASSERT_EQUAL_PTR(rootPtr, &node2); 
+  TEST_ASSERT_EQUAL_NODE(2, &node1, &node5, BLACK, &node2);  
+  TEST_ASSERT_EQUAL_NODE(5, NULL, &node7, BLACK, &node5); 
+  TEST_ASSERT_EQUAL_NODE(7, &node6, &node10, RED, &node7); 
+  TEST_ASSERT_EQUAL_NODE(1, NULL, NULL, BLACK, &node1); 
+  TEST_ASSERT_EQUAL_NODE(6, NULL, NULL, BLACK, &node6); 
+  TEST_ASSERT_EQUAL_NODE(10, NULL, NULL, BLACK, &node10); 
+}
+

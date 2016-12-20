@@ -549,13 +549,12 @@ void caseThreeLeft(Node **nodePtr, Node *deleteNode){
       
       if(sibling->colour == RED){
         sibling->colour = (*nodePtr)->colour;
-        (*nodePtr)->colour = RED;
-        //(*nodePtr)->left = NULL;       
+        (*nodePtr)->colour = RED;      
         rotateLeft(&(*nodePtr));
         if((*nodePtr)->left->colour == RED && (*nodePtr)->left->right->colour == BLACK){
           caseTwoBLeft(&((*nodePtr)->left), deleteNode);
         }
-        else if((*nodePtr)->left->colour == BLACK && (*nodePtr)->left->right->colour == BLACK){
+       else if((*nodePtr)->left->colour == BLACK && (*nodePtr)->left->right->colour == BLACK){
           caseTwoALeft(&((*nodePtr)->left), deleteNode);
         }
       }
@@ -807,48 +806,71 @@ void caseThreeRight(Node **nodePtr, Node *deleteNode){
   parent = *nodePtr;
   sibling = parent->left;  
   child = sibling->left;
-  if(sibling->colour == RED){
-      rotateRight(&(*nodePtr));
-      (*nodePtr)->colour = BLACK;
-      (*nodePtr)->right->colour = RED;  
+  
+  if (parent->right != NULL){
+    if(parent->right->colour == DOUBLE_BLACK){
       
-        if(((*nodePtr)->right->colour == RED) && ((*nodePtr)->right->left->colour == BLACK)){
-          caseTwoBRight(&((*nodePtr)->right), deleteNode);
-        }
-        else if(((*nodePtr)->right->colour == BLACK) && ((*nodePtr)->right->left->colour == BLACK)){
-          caseTwoARight(&((*nodePtr)->right), deleteNode);
-        }
+      if(sibling->colour == RED){
+        rotateRight(&(*nodePtr));
+        (*nodePtr)->colour = BLACK;
+        (*nodePtr)->right->colour = RED;  
+      
+          if(((*nodePtr)->right->colour == RED) && ((*nodePtr)->right->left->colour == BLACK)){
+            caseTwoBRight(&((*nodePtr)->right), deleteNode);
+          }
+          else if(((*nodePtr)->right->colour == BLACK) && ((*nodePtr)->right->left->colour == BLACK)){
+            caseTwoARight(&((*nodePtr)->right), deleteNode);
+          }
+      }
+    }
   }  
 }
 
-// void deleteRBTNode(Node **nodePtr, Node *deleteNode){
-  // ReturnedObject ro;
+void deleteRBTNode(Node **nodePtr, Node *deleteNode){
+  ReturnedObject ro;
   
-  // if((*nodePtr) == NULL){
-    // printf("cannot be delete because nothing inside the tree\n");
-    // return;
-  // } 
+  if((*nodePtr) == NULL){
+    printf("cannot be delete because nothing inside the tree\n");
+    return;
+  } 
   
-  // else if((*nodePtr)->value == deleteNode->value){
-    // rbtRemoveInt(deleteNode);
-   // // printf("colour %d\n", deleteNode->colour);
-    
-    
-    // deleteNode = NULL;
-   // // printf("delete node = %p", deleteNode);
-    // (*nodePtr) = deleteNode;
-    // return;
-  // }
+  else if((*nodePtr)->value == deleteNode->value){
+    rbtRemoveInt(deleteNode);
+    return;
+  }
   
-  // else if((*nodePtr)->left != NULL && (*nodePtr)->right != NULL){
-    // if ((*nodePtr)->value > deleteNode->value){
-      // deleteRBTNode((*nodePtr)->left, deleteNode);
-    // }
-    // else if ((*nodePtr)->value < deleteNode->value)
-  // }
+  else if((*nodePtr)->left != NULL && (*nodePtr)->right != NULL){
+    if ((*nodePtr)->value > deleteNode->value){
+      deleteRBTNode(&(*nodePtr)->left, deleteNode);
+    } 
+    else{
+      deleteRBTNode(&(*nodePtr)->right, deleteNode);
+    }
+  }
   
+  printf("nodeptr value = %d\n", (*nodePtr)->value);
+  if ((*nodePtr)->left != NULL){
+    caseOneALeft(&((*nodePtr)), deleteNode);
+    caseOneBLeft(&((*nodePtr)), deleteNode);
+    caseTwoALeft(&((*nodePtr)), deleteNode);
+    caseTwoBLeft(&((*nodePtr)), deleteNode);
+    caseThreeLeft(&((*nodePtr)), deleteNode);
+  }
+  else if ((*nodePtr)->right != NULL){
+    caseThreeRight(&((*nodePtr)), deleteNode);
+    caseOneARight(&((*nodePtr)), deleteNode);
+    caseOneBRight(&((*nodePtr)), deleteNode);
+    caseTwoARight(&((*nodePtr)), deleteNode);
+    caseTwoBRight(&((*nodePtr)), deleteNode);
+    caseThreeRight(&((*nodePtr)), deleteNode);
+  }
   
-// }
+  else {
+   deleteNode = NULL;
+   (*nodePtr) = deleteNode;
+  }
+}
+
 
 
 

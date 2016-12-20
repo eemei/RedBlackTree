@@ -1530,23 +1530,15 @@ void test_fuction_caseThree_the_sibling_is_red_and_left_child_of_parent(void){
 
 
 
+  UnityAssertEqualNumber((_U_SINT)(_UP)((rootPtr)), (_U_SINT)(_UP)((&node25)), (((void *)0)), (_U_UINT)1282, UNITY_DISPLAY_STYLE_HEX32);
 
+  testAssertNode(25, &node20, &node60, BLACK, &node25, 1283);;
 
+  testAssertNode(20, ((void *)0), ((void *)0), BLACK, &node20, 1284);;
 
+  testAssertNode(60, &node40, ((void *)0), BLACK, &node60, 1285);;
 
-
-
-
-
-  UnityAssertEqualNumber((_U_SINT)(_UP)((rootPtr)), (_U_SINT)(_UP)((&node25)), (((void *)0)), (_U_UINT)1286, UNITY_DISPLAY_STYLE_HEX32);
-
-  testAssertNode(25, &node20, &node60, BLACK, &node25, 1287);;
-
-  testAssertNode(20, ((void *)0), ((void *)0), BLACK, &node20, 1288);;
-
-  testAssertNode(60, &node40, ((void *)0), BLACK, &node60, 1289);;
-
-  testAssertNode(40, ((void *)0), ((void *)0), RED, &node40, 1290);;
+  testAssertNode(40, ((void *)0), ((void *)0), RED, &node40, 1286);;
 
 }
 
@@ -1562,10 +1554,162 @@ void test_rbtRemoveInt_function_given_a_delete_node_then_return_node_and_colour(
 
 
 
-  UnityAssertEqualNumber((_U_SINT)((ro.removedNode)), (_U_SINT)((deleteNode)), (((void *)0)), (_U_UINT)1298, UNITY_DISPLAY_STYLE_INT);
+  UnityAssertEqualNumber((_U_SINT)((ro.removedNode)), (_U_SINT)((deleteNode)), (((void *)0)), (_U_UINT)1294, UNITY_DISPLAY_STYLE_INT);
 
-  UnityAssertEqualNumber((_U_SINT)((ro.returnedColour)), (_U_SINT)((DOUBLE_BLACK)), (((void *)0)), (_U_UINT)1299, UNITY_DISPLAY_STYLE_INT);
+  UnityAssertEqualNumber((_U_SINT)((ro.returnedColour)), (_U_SINT)((DOUBLE_BLACK)), (((void *)0)), (_U_UINT)1295, UNITY_DISPLAY_STYLE_INT);
 
-  UnityAssertEqualNumber((_U_SINT)((ro.removedNode->colour)), (_U_SINT)((DOUBLE_BLACK)), (((void *)0)), (_U_UINT)1300, UNITY_DISPLAY_STYLE_INT);
+  UnityAssertEqualNumber((_U_SINT)((ro.removedNode->colour)), (_U_SINT)((DOUBLE_BLACK)), (((void *)0)), (_U_UINT)1296, UNITY_DISPLAY_STYLE_INT);
+
+}
+
+void xtest_delete_one_node_and_that_is_the_root(void){
+
+  Node *rootPtr = &node100;
+
+  Node *delete = &node100;
+
+  initNode(&node100, 100, ((void *)0), ((void *)0), RED);
+
+
+
+  deleteRBTNode(&rootPtr, delete);
+
+  UnityAssertEqualNumber((_U_SINT)(_UP)((rootPtr)), (_U_SINT)(_UP)((((void *)0))), (((void *)0)), (_U_UINT)1312, UNITY_DISPLAY_STYLE_HEX32);
+
+}
+
+void test_delete_one_node_and_that_is_the_twenty_node_at_left_most_and_performed_rotation_left(void){
+
+  Node *rootPtr = &node25;
+
+  Node *delete = &node20;
+
+  initNode(&node25, 25, &node20, &node60, RED);
+
+  initNode(&node20, 20, ((void *)0), ((void *)0), BLACK);
+
+  initNode(&node60, 60, ((void *)0), &node70, BLACK);
+
+  initNode(&node70, 70, ((void *)0), ((void *)0), RED);
+
+
+
+
+
+  deleteRBTNode(&rootPtr, delete);
+
+  UnityAssertEqualNumber((_U_SINT)(_UP)((rootPtr)), (_U_SINT)(_UP)((&node60)), (((void *)0)), (_U_UINT)1334, UNITY_DISPLAY_STYLE_HEX32);
+
+  testAssertNode(60, &node25, &node70, RED, &node60, 1335);;
+
+  testAssertNode(25, ((void *)0), ((void *)0), BLACK, &node25, 1336);;
+
+}
+
+void test_delete_node_twenty_and_performed_left_rotation_the_headNode_is_red(void){
+
+  Node *rootPtr = &node25;
+
+  Node *delete = &node20;
+
+  initNode(&node25, 25, &node20, &node60, RED);
+
+  initNode(&node20, 20, ((void *)0), ((void *)0), BLACK);
+
+  initNode(&node60, 60, ((void *)0), &node70, BLACK);
+
+  initNode(&node70, 70, ((void *)0), ((void *)0), RED);
+
+
+
+
+
+  deleteRBTNode(&rootPtr, delete);
+
+  UnityAssertEqualNumber((_U_SINT)(_UP)((rootPtr)), (_U_SINT)(_UP)((&node60)), (((void *)0)), (_U_UINT)1358, UNITY_DISPLAY_STYLE_HEX32);
+
+  testAssertNode(60, &node25, &node70, RED, &node60, 1359);;
+
+  testAssertNode(25, ((void *)0), ((void *)0), BLACK, &node25, 1360);;
+
+}
+
+void test_delete_node_six_and_performed_caseThree_and_involved_case_two(void){
+
+  Node *rootPtr = &node2;
+
+  Node *delete = &node4;
+
+  initNode(&node2, 2, &node1, &node5, BLACK);
+
+  initNode(&node5, 5, &node4, &node7, BLACK);
+
+  initNode(&node1, 1, ((void *)0), ((void *)0), BLACK);
+
+  initNode(&node4, 4, ((void *)0), ((void *)0), BLACK);
+
+  initNode(&node6, 6, ((void *)0), ((void *)0), BLACK);
+
+  initNode(&node10, 10, ((void *)0), ((void *)0), BLACK);
+
+  initNode(&node7, 7, &node6, &node10, RED);
+
+
+
+  deleteRBTNode(&rootPtr, delete);
+
+  UnityAssertEqualNumber((_U_SINT)(_UP)((rootPtr)), (_U_SINT)(_UP)((&node2)), (((void *)0)), (_U_UINT)1386, UNITY_DISPLAY_STYLE_HEX32);
+
+  testAssertNode(2, &node1, &node7, BLACK, &node2, 1387);;
+
+  testAssertNode(7, &node5, &node10, BLACK, &node7, 1388);;
+
+  testAssertNode(5, ((void *)0), &node6, BLACK, &node5, 1389);;
+
+  testAssertNode(1, ((void *)0), ((void *)0), BLACK, &node1, 1390);;
+
+  testAssertNode(10, ((void *)0), ((void *)0), BLACK, &node10, 1391);;
+
+  testAssertNode(6, ((void *)0), ((void *)0), RED, &node6, 1392);;
+
+}
+
+void test_delete_node_six_and_performed_caseBTwo(void){
+
+  Node *rootPtr = &node2;
+
+  Node *delete = &node4;
+
+  initNode(&node2, 2, &node1, &node5, BLACK);
+
+  initNode(&node5, 5, &node4, &node7, RED);
+
+  initNode(&node1, 1, ((void *)0), ((void *)0), BLACK);
+
+  initNode(&node4, 4, ((void *)0), ((void *)0), BLACK);
+
+  initNode(&node6, 6, ((void *)0), ((void *)0), BLACK);
+
+  initNode(&node10, 10, ((void *)0), ((void *)0), BLACK);
+
+  initNode(&node7, 7, &node6, &node10, BLACK);
+
+
+
+  deleteRBTNode(&rootPtr, delete);
+
+  UnityAssertEqualNumber((_U_SINT)(_UP)((rootPtr)), (_U_SINT)(_UP)((&node2)), (((void *)0)), (_U_UINT)1419, UNITY_DISPLAY_STYLE_HEX32);
+
+  testAssertNode(2, &node1, &node5, BLACK, &node2, 1420);;
+
+  testAssertNode(5, ((void *)0), &node7, BLACK, &node5, 1421);;
+
+  testAssertNode(7, &node6, &node10, RED, &node7, 1422);;
+
+  testAssertNode(1, ((void *)0), ((void *)0), BLACK, &node1, 1423);;
+
+  testAssertNode(6, ((void *)0), ((void *)0), BLACK, &node6, 1424);;
+
+  testAssertNode(10, ((void *)0), ((void *)0), BLACK, &node10, 1425);;
 
 }
