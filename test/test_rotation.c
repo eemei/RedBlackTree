@@ -798,7 +798,7 @@ void recolour_twice(void){
 /*
 * case 1(a) 
 *
-*    /                               /
+*    /                                 /
 *   20(R)                             40(R)
 *  // \                              /  \
 *  . 40(B)     Rotate left         20(B)  60(B)
@@ -818,9 +818,9 @@ void test_fuction_caseOneParentRedBlack_when_parent_red(void){
   caseOneALeft(&rootPtr, deleteNode);
   TEST_ASSERT_EQUAL_PTR(rootPtr, &node40); 
   TEST_ASSERT_EQUAL_NODE(40, &node20, &node60, RED, &node40);
-  TEST_ASSERT_EQUAL_NODE(20, NULL, NULL, BLACK, &node20);
+  TEST_ASSERT_EQUAL_NODE(20, &node10, NULL, BLACK, &node20);
   TEST_ASSERT_EQUAL_NODE(60, NULL, NULL, BLACK, &node60);
- // TEST_ASSERT_EQUAL_NODE(10, NULL, NULL, BLACK, &node10);
+  TEST_ASSERT_EQUAL_NODE(10, NULL, NULL, BLACK, &node10);
 }
 /* 
 * case 1(a)
@@ -845,9 +845,9 @@ void test_fuction_caseOneParentRedBlack_when_parent_Black(void){
   caseOneALeft(&rootPtr, deleteNode);
   TEST_ASSERT_EQUAL_PTR(rootPtr, &node40); 
   TEST_ASSERT_EQUAL_NODE(40, &node20, &node60, BLACK, &node40);
-  TEST_ASSERT_EQUAL_NODE(20, NULL, NULL, BLACK, &node20);
+  TEST_ASSERT_EQUAL_NODE(20, &node10, NULL, BLACK, &node20);
   TEST_ASSERT_EQUAL_NODE(60, NULL, NULL, BLACK, &node60);
- // TEST_ASSERT_EQUAL_NODE(10, NULL, NULL, BLACK, &node10);
+  TEST_ASSERT_EQUAL_NODE(10, NULL, NULL, BLACK, &node10);
 }
 /*
 *
@@ -873,9 +873,9 @@ void test_fuction_caseOneParentRedBlack_the_sibling_of_child_at_left_when_parent
   caseOneBLeft(&rootPtr, deleteNode);
   TEST_ASSERT_EQUAL_PTR(rootPtr, &node40); 
   TEST_ASSERT_EQUAL_NODE(40, &node20, &node60, RED, &node40);
-  TEST_ASSERT_EQUAL_NODE(20, NULL, NULL, BLACK, &node20);
+  TEST_ASSERT_EQUAL_NODE(20, &node10, NULL, BLACK, &node20);
   TEST_ASSERT_EQUAL_NODE(60, NULL, NULL, BLACK, &node60);
-  //TEST_ASSERT_EQUAL_NODE(10, NULL, NULL, BLACK, &node10);
+  TEST_ASSERT_EQUAL_NODE(10, NULL, NULL, BLACK, &node10);
 }
 /*
 * case 1(b)
@@ -900,9 +900,9 @@ void test_fuction_caseOneParentRedBlack_the_sibling_at_left_and_parent_is_black_
   caseOneBLeft(&rootPtr, deleteNode);
   TEST_ASSERT_EQUAL_PTR(rootPtr, &node40); 
   TEST_ASSERT_EQUAL_NODE(40, &node20, &node60, BLACK, &node40);
-  TEST_ASSERT_EQUAL_NODE(20, NULL, NULL, BLACK, &node20);
+  TEST_ASSERT_EQUAL_NODE(20, &node10, NULL, BLACK, &node20);
   TEST_ASSERT_EQUAL_NODE(60, NULL, NULL, BLACK, &node60);
-  //TEST_ASSERT_EQUAL_NODE(10, NULL, NULL, BLACK, &node10);  
+  TEST_ASSERT_EQUAL_NODE(10, NULL, NULL, BLACK, &node10);  
 }
 /* 
 * case 2(a)
@@ -927,11 +927,11 @@ void test_fuction_caseTwo_the_parent_is_black_colour_and_both_grandchildren_are_
 
   caseTwoALeft(&rootPtr, deleteNode);
   TEST_ASSERT_EQUAL_PTR(rootPtr, &node20); 
-  TEST_ASSERT_EQUAL_NODE(20, NULL, &node40, DOUBLE_BLACK, &node20);
+  TEST_ASSERT_EQUAL_NODE(20, &node10, &node40, DOUBLE_BLACK, &node20);
   TEST_ASSERT_EQUAL_NODE(40, &node25, &node60, RED, &node40);
   TEST_ASSERT_EQUAL_NODE(25, NULL, NULL, BLACK, &node25);
   TEST_ASSERT_EQUAL_NODE(60, NULL, NULL, BLACK, &node60);
-  //TEST_ASSERT_EQUAL_NODE(10, NULL, NULL, BLACK, &node10); 
+  TEST_ASSERT_EQUAL_NODE(10, NULL, NULL, BLACK, &node10); 
 }
 /* 
 * case 2(a)
@@ -952,9 +952,9 @@ void test_fuction_caseTwo_the_parent_is_black_colour_and_both_grandchildren_are_
 
   caseTwoALeft(&rootPtr, deleteNode);
   TEST_ASSERT_EQUAL_PTR(rootPtr, &node20); 
-  TEST_ASSERT_EQUAL_NODE(20, NULL, &node40, DOUBLE_BLACK, &node20);
+  TEST_ASSERT_EQUAL_NODE(20, &node10, &node40, DOUBLE_BLACK, &node20);
   TEST_ASSERT_EQUAL_NODE(40, NULL, NULL, RED, &node40);
-  //TEST_ASSERT_EQUAL_NODE(10, NULL, NULL, BLACK, &node10); 
+  TEST_ASSERT_EQUAL_NODE(10, NULL, NULL, BLACK, &node10); 
 }
 /* 
 * case 2(b)
@@ -979,11 +979,11 @@ void test_fuction_caseTwo_the_parent_is_red_colour_and_both_grandchildren_are_bl
 
   caseTwoBLeft(&rootPtr, deleteNode);
   TEST_ASSERT_EQUAL_PTR(rootPtr, &node20); 
-  TEST_ASSERT_EQUAL_NODE(20, NULL, &node40, BLACK, &node20);
+  TEST_ASSERT_EQUAL_NODE(20, &node10, &node40, BLACK, &node20);
   TEST_ASSERT_EQUAL_NODE(40, &node25, &node60, RED, &node40);
   TEST_ASSERT_EQUAL_NODE(25, NULL, NULL, BLACK, &node25);
   TEST_ASSERT_EQUAL_NODE(60, NULL, NULL, BLACK, &node60);
-  //TEST_ASSERT_EQUAL_NODE(10, NULL, NULL, BLACK, &node10); 
+  TEST_ASSERT_EQUAL_NODE(10, NULL, NULL, BLACK, &node10); 
 }
 /* 
 * case 2(b)
@@ -1004,9 +1004,9 @@ void test_fuction_caseTwo_the_parent_is_red_colour_and_both_grandchildren_are_NU
 
   caseTwoBLeft(&rootPtr, deleteNode);
   TEST_ASSERT_EQUAL_PTR(rootPtr, &node20); 
-  TEST_ASSERT_EQUAL_NODE(20, NULL, &node40, BLACK, &node20);
+  TEST_ASSERT_EQUAL_NODE(20, &node10, &node40, BLACK, &node20);
   TEST_ASSERT_EQUAL_NODE(40, NULL, NULL, RED, &node40);
- // TEST_ASSERT_EQUAL_NODE(10, NULL, NULL, BLACK, &node10); 
+  TEST_ASSERT_EQUAL_NODE(10, NULL, NULL, BLACK, &node10); 
 }
 /* 
 * case 3 left 
@@ -1032,10 +1032,10 @@ void test_fuction_caseThree_the_sibling_is_red_and_right_child_of_parent(void){
   caseThreeLeft(&rootPtr, deleteNode);
   TEST_ASSERT_EQUAL_PTR(rootPtr, &node40); 
   TEST_ASSERT_EQUAL_NODE(40, &node20, &node60, BLACK, &node40);
-  TEST_ASSERT_EQUAL_NODE(20, NULL, &node25, BLACK, &node20);
+  TEST_ASSERT_EQUAL_NODE(20,  &node10, &node25, BLACK, &node20);
   TEST_ASSERT_EQUAL_NODE(25, NULL, NULL, RED, &node25);
   TEST_ASSERT_EQUAL_NODE(60, NULL, NULL, BLACK, &node60);
-  //TEST_ASSERT_EQUAL_NODE(10, NULL, NULL, BLACK, &node10); 
+  TEST_ASSERT_EQUAL_NODE(10, NULL, NULL, BLACK, &node10); 
 }
 /*---------------------- right ---------------------------------*/
 /*
@@ -1063,8 +1063,8 @@ void test_fuction_caseOne_thesibling_at_left_child_of_parent_and_parent_is_red(v
   TEST_ASSERT_EQUAL_PTR(rootPtr, &node40); 
   TEST_ASSERT_EQUAL_NODE(40, &node20, &node60, RED, &node40);
   TEST_ASSERT_EQUAL_NODE(20, NULL, NULL, BLACK, &node20);
-  TEST_ASSERT_EQUAL_NODE(60, NULL, NULL, BLACK, &node60);
-  //TEST_ASSERT_EQUAL_NODE(10, NULL, NULL, BLACK, &node10);
+  TEST_ASSERT_EQUAL_NODE(60, NULL, &node70, BLACK, &node60);
+  TEST_ASSERT_EQUAL_NODE(70, NULL, NULL, BLACK, &node70);
 }
 
 /*
@@ -1092,8 +1092,8 @@ void test_fuction_caseOne_the_sibling_at_left_child_of_parent_and_parent_is_Blac
   TEST_ASSERT_EQUAL_PTR(rootPtr, &node40); 
   TEST_ASSERT_EQUAL_NODE(40, &node20, &node60, BLACK, &node40);
   TEST_ASSERT_EQUAL_NODE(20, NULL, NULL, BLACK, &node20);
-  TEST_ASSERT_EQUAL_NODE(60, NULL, NULL, BLACK, &node60);
-  //TEST_ASSERT_EQUAL_NODE(10, NULL, NULL, BLACK, &node10);
+  TEST_ASSERT_EQUAL_NODE(60, NULL, &node70, BLACK, &node60);
+  TEST_ASSERT_EQUAL_NODE(70, NULL, NULL, BLACK, &node70);
 }
 /*
 *
@@ -1120,8 +1120,8 @@ void test_fuction_caseOne_the_sibling_at_left_child_of_parent_and_parent_is_red(
   TEST_ASSERT_EQUAL_PTR(rootPtr, &node40); 
   TEST_ASSERT_EQUAL_NODE(40, &node20, &node60, RED, &node40);
   TEST_ASSERT_EQUAL_NODE(20, NULL, NULL, BLACK, &node20);
-  TEST_ASSERT_EQUAL_NODE(60, NULL, NULL, BLACK, &node60);
-  //TEST_ASSERT_EQUAL_NODE(10, NULL, NULL, BLACK, &node10);
+  TEST_ASSERT_EQUAL_NODE(60, NULL, &node70, BLACK, &node60);
+  TEST_ASSERT_EQUAL_NODE(70, NULL, NULL, BLACK, &node70);
 }
 /*
 *
@@ -1148,8 +1148,8 @@ void test_fuction_caseOne_the_sibling_at_left_child_of_parent_and_parent_is_blac
   TEST_ASSERT_EQUAL_PTR(rootPtr, &node40); 
   TEST_ASSERT_EQUAL_NODE(40, &node20, &node60, BLACK, &node40);
   TEST_ASSERT_EQUAL_NODE(20, NULL, NULL, BLACK, &node20);
-  TEST_ASSERT_EQUAL_NODE(60, NULL, NULL, BLACK, &node60);
-  //TEST_ASSERT_EQUAL_NODE(10, NULL, NULL, BLACK, &node10);
+  TEST_ASSERT_EQUAL_NODE(60, NULL, &node70, BLACK, &node60);
+  TEST_ASSERT_EQUAL_NODE(70, NULL, NULL, BLACK, &node70);
 }
 /* 
 * case 2(a) -right
@@ -1175,11 +1175,11 @@ void test_fuction_caseTwo_the_parent_is_black_colour_and_both_grandchildren_are_
 
   caseTwoARight(&rootPtr, deleteNode);
   TEST_ASSERT_EQUAL_PTR(rootPtr, &node60); 
-  TEST_ASSERT_EQUAL_NODE(60, &node25, NULL, DOUBLE_BLACK, &node60);
+  TEST_ASSERT_EQUAL_NODE(60, &node25, &node70, DOUBLE_BLACK, &node60);
   TEST_ASSERT_EQUAL_NODE(25, &node20, &node40, RED, &node25);
   TEST_ASSERT_EQUAL_NODE(20, NULL, NULL, BLACK, &node20);
   TEST_ASSERT_EQUAL_NODE(40, NULL, NULL, BLACK, &node40);
-  //TEST_ASSERT_EQUAL_NODE(10, NULL, NULL, BLACK, &node10); 
+  TEST_ASSERT_EQUAL_NODE(70, NULL, NULL, BLACK, &node70); 
 }
 /* 
 * case 2(a) -right
@@ -1200,8 +1200,9 @@ void test_fuction_caseTwo_the_parent_is_black_colour_and_both_grandchildren_are_
 
   caseTwoARight(&rootPtr, deleteNode);
   TEST_ASSERT_EQUAL_PTR(rootPtr, &node60); 
-  TEST_ASSERT_EQUAL_NODE(60, &node25, NULL, DOUBLE_BLACK, &node60);
+  TEST_ASSERT_EQUAL_NODE(60, &node25, &node70, DOUBLE_BLACK, &node60);
   TEST_ASSERT_EQUAL_NODE(25, NULL, NULL, RED, &node25);
+  TEST_ASSERT_EQUAL_NODE(70, NULL, NULL, BLACK, &node70);
 }
 /* 
 * case 2(b) -right
@@ -1227,11 +1228,11 @@ void test_fuction_caseTwo_the_parent_is_red_colour_and_both_grandchildren_are_bl
 
   caseTwoBRight(&rootPtr, deleteNode);
   TEST_ASSERT_EQUAL_PTR(rootPtr, &node60); 
-  TEST_ASSERT_EQUAL_NODE(60, &node25, NULL, BLACK, &node60);
+  TEST_ASSERT_EQUAL_NODE(60, &node25, &node70, BLACK, &node60);
   TEST_ASSERT_EQUAL_NODE(25, &node20, &node40, RED, &node25);
   TEST_ASSERT_EQUAL_NODE(20, NULL, NULL, BLACK, &node20);
   TEST_ASSERT_EQUAL_NODE(40, NULL, NULL, BLACK, &node40);
-  //TEST_ASSERT_EQUAL_NODE(10, NULL, NULL, BLACK, &node10); 
+  TEST_ASSERT_EQUAL_NODE(70, NULL, NULL, BLACK, &node70); 
 }
 /* 
 * case 2(b) -right
@@ -1252,8 +1253,9 @@ void test_fuction_caseTwo_the_parent_is_red_colour_and_both_grandchildren_are_NU
 
   caseTwoBRight(&rootPtr, deleteNode);
   TEST_ASSERT_EQUAL_PTR(rootPtr, &node60); 
-  TEST_ASSERT_EQUAL_NODE(60, &node25, NULL, BLACK, &node60);
+  TEST_ASSERT_EQUAL_NODE(60, &node25, &node70, BLACK, &node60);
   TEST_ASSERT_EQUAL_NODE(25, NULL, NULL, RED, &node25);
+  TEST_ASSERT_EQUAL_NODE(70, NULL, NULL, BLACK, &node70); 
 }
 /* 
 * case 3 left 
@@ -1282,8 +1284,9 @@ void test_fuction_caseThree_the_sibling_is_red_and_left_child_of_parent(void){
   TEST_ASSERT_EQUAL_PTR(rootPtr, &node25); 
   TEST_ASSERT_EQUAL_NODE(25, &node20, &node60, BLACK, &node25);
   TEST_ASSERT_EQUAL_NODE(20, NULL, NULL, BLACK, &node20);
-  TEST_ASSERT_EQUAL_NODE(60, &node40, NULL, BLACK, &node60);
+  TEST_ASSERT_EQUAL_NODE(60, &node40, &node70, BLACK, &node60);
   TEST_ASSERT_EQUAL_NODE(40, NULL, NULL, RED, &node40);
+  TEST_ASSERT_EQUAL_NODE(70, NULL, NULL, BLACK, &node70);   
 }
 
 void test_rbtRemoveInt_function_given_a_delete_node_then_return_node_and_colour(void){
@@ -1425,3 +1428,35 @@ void test_delete_node_six_and_performed_caseBTwo(void){
   TEST_ASSERT_EQUAL_NODE(10, NULL, NULL, BLACK, &node10); 
 }
 
+/*
+*     
+*                 2(B)                                           2(B)
+* REMOVE  -->     /  \              flip colour                 /  \\
+*  4           1(B) 5(B)      ---------------------->         1(B) 5(B)
+*                    / \             CASE  2A                      / \  
+*                4(B) 7(B)                                        . 7(R)
+*                      /  \                                           / \
+*                   6(B) 10(B)                                     6(B) 10(B)
+*                                                              
+*                                                                
+*/
+void test_delete_a_node_and_performed_caseATwo(void){
+  Node *rootPtr = &node2;
+  Node *delete = &node4;    
+  initNode(&node2, 2, &node1, &node5, BLACK);
+  initNode(&node5, 5, &node4, &node7, BLACK);
+  initNode(&node1, 1, NULL, NULL, BLACK);
+  initNode(&node4, 4, NULL, NULL, BLACK);
+  initNode(&node6, 6, NULL, NULL, BLACK);
+  initNode(&node10, 10, NULL, NULL, BLACK);
+  initNode(&node7, 7, &node6, &node10, BLACK);
+  
+  deleteRBTNode(&rootPtr, delete);  
+  TEST_ASSERT_EQUAL_PTR(rootPtr, &node2); 
+  TEST_ASSERT_EQUAL_NODE(2, &node1, &node5, BLACK, &node2);  
+  TEST_ASSERT_EQUAL_NODE(5, NULL, &node7, DOUBLE_BLACK, &node5); 
+  TEST_ASSERT_EQUAL_NODE(7, &node6, &node10, RED, &node7); 
+  TEST_ASSERT_EQUAL_NODE(1, NULL, NULL, BLACK, &node1); 
+  TEST_ASSERT_EQUAL_NODE(6, NULL, NULL, BLACK, &node6); 
+  TEST_ASSERT_EQUAL_NODE(10, NULL, NULL, BLACK, &node10);   
+}

@@ -341,7 +341,7 @@ void caseOneALeft(Node **nodePtr, Node *deleteNode){
           (*nodePtr)->right->right->colour =  BLACK;
           // (*nodePtr)->left = NULL;
           rotateLeft(&(*nodePtr));
-          (*nodePtr)->left->left = NULL;
+          (*nodePtr)->left->left->colour = BLACK;
         }
       }
       else if (parent->colour == BLACK && sibling->colour == BLACK){
@@ -349,7 +349,7 @@ void caseOneALeft(Node **nodePtr, Node *deleteNode){
           (*nodePtr)->right->right->colour = BLACK;  
           //(*nodePtr)->left = NULL;      
           rotateLeft(&(*nodePtr));
-          (*nodePtr)->left->left = NULL;
+          (*nodePtr)->left->left->colour = BLACK;
         }
       }
     }
@@ -403,7 +403,7 @@ void caseOneBLeft(Node **nodePtr, Node *deleteNode){
           (*nodePtr)->colour = BLACK;
           //(*nodePtr)->left = NULL;      
           rotateRightLeft(&(*nodePtr));
-          (*nodePtr)->left->left = NULL;
+          (*nodePtr)->left->left->colour = BLACK;
         }
       }
       else if (parent->colour == BLACK && sibling->colour == BLACK){
@@ -411,7 +411,7 @@ void caseOneBLeft(Node **nodePtr, Node *deleteNode){
           //(*nodePtr)->left = NULL;   
           (*nodePtr)->right->left->colour = BLACK;        
           rotateRightLeft(&(*nodePtr));
-          (*nodePtr)->left->left = NULL;
+          (*nodePtr)->left->left->colour = BLACK;
         }
       }
     }
@@ -457,12 +457,12 @@ void caseTwoALeft(Node **nodePtr, Node *deleteNode){
       if (parent->colour == BLACK && sibling->colour == BLACK){
         if (childLeft == NULL && childRight == NULL){
           (*nodePtr)->colour = DOUBLE_BLACK;
-          (*nodePtr)->left = NULL;        
+          (*nodePtr)->left->colour = BLACK;        
           (*nodePtr)->right->colour = RED;
         }
         else if (childLeft->colour == BLACK && childRight->colour == BLACK){
           (*nodePtr)->colour = DOUBLE_BLACK;
-          (*nodePtr)->left = NULL;   
+          (*nodePtr)->left->colour = BLACK;   
           (*nodePtr)->right->colour = RED;  
         }
       }
@@ -510,12 +510,12 @@ void caseTwoBLeft(Node **nodePtr, Node *deleteNode){
       if (parent->colour == RED && sibling->colour == BLACK){
         if (childLeft == NULL && childRight == NULL){
           (*nodePtr)->colour = BLACK;
-          (*nodePtr)->left = NULL;   
+          (*nodePtr)->left->colour = BLACK;   
           (*nodePtr)->right->colour = RED;
         }
         else if (childLeft->colour == BLACK && childRight->colour == BLACK){
           (*nodePtr)->colour = BLACK;
-          (*nodePtr)->left = NULL;         
+          (*nodePtr)->left->colour = BLACK;         
           (*nodePtr)->right->colour = RED;  
         }
       }
@@ -608,7 +608,7 @@ void caseOneARight(Node **nodePtr, Node *deleteNode){
       if (parent->colour == RED && sibling->colour == BLACK){
         if (child != NULL && child->colour == RED){
           (*nodePtr)->colour = BLACK;
-          (*nodePtr)->right = NULL;
+          (*nodePtr)->right->colour = BLACK;
           (*nodePtr)->left->colour = RED;
           (*nodePtr)->left->left->colour =  BLACK;
           rotateRight(&(*nodePtr));
@@ -616,7 +616,7 @@ void caseOneARight(Node **nodePtr, Node *deleteNode){
       }
       else if (parent->colour == BLACK && sibling->colour == BLACK){
         if (child != NULL && child->colour == RED){
-          (*nodePtr)->right = NULL;
+          (*nodePtr)->right->colour = BLACK;
           (*nodePtr)->left->left->colour = BLACK;  
           rotateRight(&(*nodePtr));
         }
@@ -667,13 +667,13 @@ void caseOneBRight(Node **nodePtr, Node *deleteNode){
       if (parent->colour == RED && sibling->colour == BLACK){
         if (child != NULL && child->colour == RED){
           (*nodePtr)->colour = BLACK;
-          (*nodePtr)->right = NULL;
+          (*nodePtr)->right->colour = BLACK;
           rotateLeftRight(&(*nodePtr));
         }
       }
       else if (parent->colour == BLACK && sibling->colour == BLACK){
         if (child != NULL && child->colour == RED){
-          (*nodePtr)->right = NULL;   
+          (*nodePtr)->right->colour = BLACK;   
           (*nodePtr)->left->right->colour = BLACK;        
           rotateLeftRight(&(*nodePtr));
         }
@@ -721,12 +721,12 @@ void caseTwoARight(Node **nodePtr, Node *deleteNode){
       if (parent->colour == BLACK && sibling->colour == BLACK){
         if (childLeft == NULL && childRight == NULL){
           (*nodePtr)->colour = DOUBLE_BLACK;
-          (*nodePtr)->right = NULL;   
+          (*nodePtr)->right->colour = BLACK;   
           (*nodePtr)->left->colour = RED;
         }
         else if (childLeft->colour == BLACK && childRight->colour == BLACK){
           (*nodePtr)->colour = DOUBLE_BLACK;
-          (*nodePtr)->right = NULL;   
+          (*nodePtr)->right->colour = BLACK;   
           (*nodePtr)->left->colour = RED;  
         }
       }
@@ -773,12 +773,12 @@ void caseTwoBRight(Node **nodePtr, Node *deleteNode){
       if (parent->colour == RED && sibling->colour == BLACK){
         if (childLeft == NULL && childRight == NULL){
           (*nodePtr)->colour = BLACK;
-          (*nodePtr)->right = NULL;   
+          (*nodePtr)->right->colour = BLACK;   
           (*nodePtr)->left->colour = RED;
         }
         else if (childLeft->colour == BLACK && childRight->colour == BLACK){
           (*nodePtr)->colour = BLACK;
-          (*nodePtr)->right = NULL;   
+          (*nodePtr)->right->colour = BLACK;   
           (*nodePtr)->left->colour = RED;  
         }
       }
@@ -827,6 +827,12 @@ void caseThreeRight(Node **nodePtr, Node *deleteNode){
 }
 
 void deleteRBTNode(Node **nodePtr, Node *deleteNode){
+  deleteRBTNodeInt(nodePtr, deleteNode);
+  deleteNode = NULL;
+  
+}
+
+void deleteRBTNodeInt(Node **nodePtr, Node *deleteNode){
   ReturnedObject ro;
   
   if((*nodePtr) == NULL){
@@ -836,6 +842,8 @@ void deleteRBTNode(Node **nodePtr, Node *deleteNode){
   
   else if((*nodePtr)->value == deleteNode->value){
     rbtRemoveInt(deleteNode);
+    // deleteNode = NULL;
+    // (*nodePtr) = deleteNode;
     return;
   }
   

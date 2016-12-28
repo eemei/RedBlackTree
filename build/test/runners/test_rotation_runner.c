@@ -82,6 +82,7 @@ extern void test_delete_one_node_and_that_is_the_twenty_node_at_left_most_and_pe
 extern void test_delete_node_twenty_and_performed_left_rotation_the_headNode_is_red(void);
 extern void test_delete_node_six_and_performed_caseThree_and_involved_case_two(void);
 extern void test_delete_node_six_and_performed_caseBTwo(void);
+extern void test_delete_a_node_and_performed_caseATwo(void);
 
 
 //=======Test Reset Option=====
@@ -141,14 +142,15 @@ int main(void)
   RUN_TEST(test_fuction_caseOne_the_sibling_at_left_child_of_parent_and_parent_is_black, 1139);
   RUN_TEST(test_fuction_caseTwo_the_parent_is_black_colour_and_both_grandchildren_are_black_the_sibling_at_left_side, 1167);
   RUN_TEST(test_fuction_caseTwo_the_parent_is_black_colour_and_both_grandchildren_are_NULL_the_sibling_at_left_side, 1194);
-  RUN_TEST(test_fuction_caseTwo_the_parent_is_red_colour_and_both_grandchildren_are_black_the_sibling_at_left_side, 1219);
-  RUN_TEST(test_fuction_caseTwo_the_parent_is_red_colour_and_both_grandchildren_are_NULL_the_sibling_at_left_side, 1246);
-  RUN_TEST(test_fuction_caseThree_the_sibling_is_red_and_left_child_of_parent, 1271);
-  RUN_TEST(test_rbtRemoveInt_function_given_a_delete_node_then_return_node_and_colour, 1289);
-  RUN_TEST(test_delete_one_node_and_that_is_the_twenty_node_at_left_most_and_performed_rotation_left, 1324);
-  RUN_TEST(test_delete_node_twenty_and_performed_left_rotation_the_headNode_is_red, 1348);
-  RUN_TEST(test_delete_node_six_and_performed_caseThree_and_involved_case_two, 1374);
-  RUN_TEST(test_delete_node_six_and_performed_caseBTwo, 1407);
+  RUN_TEST(test_fuction_caseTwo_the_parent_is_red_colour_and_both_grandchildren_are_black_the_sibling_at_left_side, 1220);
+  RUN_TEST(test_fuction_caseTwo_the_parent_is_red_colour_and_both_grandchildren_are_NULL_the_sibling_at_left_side, 1247);
+  RUN_TEST(test_fuction_caseThree_the_sibling_is_red_and_left_child_of_parent, 1273);
+  RUN_TEST(test_rbtRemoveInt_function_given_a_delete_node_then_return_node_and_colour, 1292);
+  RUN_TEST(test_delete_one_node_and_that_is_the_twenty_node_at_left_most_and_performed_rotation_left, 1327);
+  RUN_TEST(test_delete_node_twenty_and_performed_left_rotation_the_headNode_is_red, 1351);
+  RUN_TEST(test_delete_node_six_and_performed_caseThree_and_involved_case_two, 1377);
+  RUN_TEST(test_delete_node_six_and_performed_caseBTwo, 1410);
+  RUN_TEST(test_delete_a_node_and_performed_caseATwo, 1443);
 
   return (UnityEnd());
 }
