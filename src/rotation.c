@@ -583,12 +583,16 @@ void caseThreeLeft(Node **nodePtr, Node *deleteNode){
         sibling->colour = (*nodePtr)->colour;
         (*nodePtr)->colour = RED;      
         rotateLeft(&(*nodePtr));
+        caseOneALeft(&((*nodePtr)->left), deleteNode);
+        caseOneBLeft(&((*nodePtr)->left), deleteNode);
+        caseThreeLeft(&((*nodePtr)->left), deleteNode);
         if((*nodePtr)->left->colour == RED && (*nodePtr)->left->right->colour == BLACK){
           caseTwoBLeft(&((*nodePtr)->left), deleteNode);
         }
        else if((*nodePtr)->left->colour == BLACK && (*nodePtr)->left->right->colour == BLACK){
           caseTwoALeft(&((*nodePtr)->left), deleteNode);
         }
+        
       }
     }
   }
@@ -869,8 +873,11 @@ void caseThreeRight(Node **nodePtr, Node *deleteNode){
       if(sibling->colour == RED){
         rotateRight(&(*nodePtr));
         (*nodePtr)->colour = BLACK;
-        (*nodePtr)->right->colour = RED;  
-      
+        (*nodePtr)->right->colour = RED; 
+
+          caseOneARight(&((*nodePtr)->right), deleteNode);
+          caseOneBRight(&((*nodePtr)->right), deleteNode);
+          caseThreeRight(&((*nodePtr)->right), deleteNode);
           if(((*nodePtr)->right->colour == RED) && ((*nodePtr)->right->left->colour == BLACK)){
             caseTwoBRight(&((*nodePtr)->right), deleteNode);
           }
@@ -928,6 +935,7 @@ void deleteRBTNodeInt(Node **nodePtr, Node *deleteNode){
 
 void Replacement(Node **nodePtr, Node *deleteNode){
   Node *parent, *tempNode, *tempNodeLeft, *leftMost;
+  Node *tempSwapNode, *deleteNodeLeft, *deleteNodeRight;
 
   if (deleteNode->value == (*nodePtr)->value){  
     // CASE 1: If current has no right child, then current's left child becomes
@@ -935,6 +943,7 @@ void Replacement(Node **nodePtr, Node *deleteNode){
     if ((*nodePtr)->right == NULL){
       tempNode = *nodePtr;
       (*nodePtr) = (*nodePtr)->left;
+      (*nodePtr)->colour = deleteNode->colour;
       (*nodePtr)->left = tempNode;
       tempNode->left = NULL;
       tempNode->right = NULL;
@@ -947,6 +956,7 @@ void Replacement(Node **nodePtr, Node *deleteNode){
       tempNode = *nodePtr;
       tempNodeLeft = (*nodePtr)->left;      
       (*nodePtr) = (*nodePtr)->right;
+      (*nodePtr)->colour = deleteNode->colour;
       (*nodePtr)->right = tempNode;
       (*nodePtr)->left = tempNodeLeft;
       tempNode->left = NULL;
@@ -964,11 +974,25 @@ void Replacement(Node **nodePtr, Node *deleteNode){
         parent = leftMost;
         leftMost = leftMost->left;
       }
-      tempNode = *nodePtr;
-      tempNodeLeft = leftMost;
-      (*nodePtr) = leftMost;
-      parent->left = leftMost->right;
-      //return;
+      if (leftMost->right != NULL){
+        tempNode = (*nodePtr);
+        deleteNodeLeft = (*nodePtr)->left;
+        tempSwapNode = leftMost->right;
+        deleteNodeRight = (*nodePtr)->right;
+        (*nodePtr) = leftMost;
+        (*nodePtr)->colour = deleteNode->colour;
+        (*nodePtr)->right = deleteNodeRight;
+        (*nodePtr)->left = deleteNodeLeft;
+        // internalSwap(&leftMost, leftMost->right);
+        leftMost = tempSwapNode;
+        // leftMost->right = deleteNode;
+      }
+      else {
+        tempNode = (*nodePtr);
+        (*nodePtr) = leftMost;
+        (*nodePtr)->colour = deleteNode->colour;
+        //parent->left = deleteNode;
+      }
     }
   }
     
@@ -982,5 +1006,18 @@ void Replacement(Node **nodePtr, Node *deleteNode){
     }
 }
 
-
-
+void internalSwap(Node **nodePtr, Node *ptr){
+  Node *tempPtrA, *tempPtrB;
+  tempPtrA = ptr;
+  tempPtrA->value = ptr->value;
+  tempPtrB = (*nodePtr);
+  tempPtrB->value = (*nodePtr)->value;  
+  ptr = tempPtrB;
+  ptr->value = tempPtrB->value;
+  
+  (*nodePtr) = tempPtrA;
+  (*nodePtr)->right = ptr;
+  ptr->left = NULL;
+  ptr->right = NULL;
+  
+}

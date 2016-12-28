@@ -31,5 +31,7 @@ void deleteRBTNode(Node **nodePtr, Node *deleteNode);
 void deleteRBTNodeInt(Node **nodePtr, Node *deleteNode);
 
 void Replacement(Node **nodePtr, Node *deleteNode);
+void removeNextLargerSuccessor(Node **nodePtr, Node *deleteNode);
+void internalSwap(Node **nodePtr, Node *ptr);
 #endif // rotation_H
  

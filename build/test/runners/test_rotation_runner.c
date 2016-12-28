@@ -91,6 +91,7 @@ extern void test_function_findReplacer_caseTwo(void);
 extern void test_function_findReplacer_caseone(void);
 extern void test_function_findReplacer_caseThree(void);
 extern void test_function_findReplacer_caseThree_more_longer(void);
+extern void test_swap_two_pointer(void);
 
 
 //=======Test Reset Option=====
@@ -166,7 +167,8 @@ int main(void)
   RUN_TEST(test_function_findReplacer_caseTwo, 1576);
   RUN_TEST(test_function_findReplacer_caseone, 1607);
   RUN_TEST(test_function_findReplacer_caseThree, 1638);
-  RUN_TEST(test_function_findReplacer_caseThree_more_longer, 1674);
+  RUN_TEST(test_function_findReplacer_caseThree_more_longer, 1675);
+  RUN_TEST(test_swap_two_pointer, 1706);
 
   return (UnityEnd());
 }
