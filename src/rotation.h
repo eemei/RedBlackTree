@@ -29,5 +29,7 @@ void caseThreeRight(Node **nodePtr, Node *deleteNode);
 ReturnedObject rbtRemoveInt(Node *deleteNode);
 void deleteRBTNode(Node **nodePtr, Node *deleteNode);
 void deleteRBTNodeInt(Node **nodePtr, Node *deleteNode);
+
+void findReplacer(Node **nodePtr, Node *deleteNode);
 #endif // rotation_H
  
