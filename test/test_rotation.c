@@ -11,7 +11,7 @@ void initNode(Node *root ,int value, Node *left, Node *right, Colour colour){
   root->colour = colour;
   root->value = value;
 }
-Node node1, node2, node3, node4, node5, node6, node7, node8, node10, node11, node12, node14, node15, \
+Node node1, node2, node3, node4, node5, node6, node7, node8, node9, node10, node11, node12, node14, node15, \
     node20, node25, node30, node40, node45, node50, node55, node60, \
     node65, node70, node75, node80, node90, node100, node110,\
     node120, node130, node150, node170, node250;
@@ -25,6 +25,7 @@ void setUp(void){
   initNode(&node6, 6, NULL, NULL, BLACK);
   initNode(&node7, 7, NULL, NULL, BLACK);
   initNode(&node8, 8, NULL, NULL, BLACK);  
+  initNode(&node9, 9, NULL, NULL, BLACK);  
   initNode(&node10, 10, NULL, NULL, BLACK);
   initNode(&node11, 11, NULL, NULL, BLACK);  
   initNode(&node12, 12, NULL, NULL, BLACK);  
@@ -1559,23 +1560,21 @@ void test_delete_a_node_and_performed_caseThreeRight(void){
   TEST_ASSERT_EQUAL_NODE(120, NULL, NULL, BLACK, &node120);    
   TEST_ASSERT_EQUAL_NODE(55, NULL, NULL, RED, &node55);    
 }
-/*
-* case 1b 
-**/
+
 /**
 *     
-*       2(B)
-*      /  \
-*    1(B) 5(B)
-*        / \  
-*       . 7(R)
-*         / \
-*      6(B) 10(B)
+*       2(B)                  2(B)
+*      /  \                   /  \
+*    1(B) 5(B)              1(B) 5(B)
+*        / \    ------>          / \
+*       . 7(R)                  . 10(B)
+*         / \                     /  \
+*      6(B) 10(B)               6(B) 7(R)
 *                                                              
 *                                                                
 */
-void test_function_findReplacer(void){
-  Node *rootPtr = &node7;
+void test_function_findReplacer_caseTwo(void){
+  Node *rootPtr = &node2;
   Node *delete = &node7;  
   initNode(&node2, 2, &node1, &node5, BLACK);  
   initNode(&node5, 5, NULL, &node7, RED);  
@@ -1584,6 +1583,115 @@ void test_function_findReplacer(void){
   initNode(&node6, 6, NULL, NULL, BLACK);     
   initNode(&node10, 10, NULL, NULL, BLACK);    
   
-  findReplacer(&rootPtr, delete);
-  
+  Replacement(&rootPtr, delete);
+  TEST_ASSERT_EQUAL_PTR(rootPtr, &node2);    
+  TEST_ASSERT_EQUAL_NODE(2, &node1, &node5, BLACK, &node2); 
+  TEST_ASSERT_EQUAL_NODE(5, NULL, &node10, RED, &node5); 
+  TEST_ASSERT_EQUAL_NODE(10, &node6, &node7, BLACK, &node10); 
+  TEST_ASSERT_EQUAL_NODE(7, NULL, NULL, RED, &node7); 
+  TEST_ASSERT_EQUAL_NODE(6, NULL, NULL, BLACK, &node6); 
 }
+
+/**
+*     
+*       2(B)                  2(B)
+*      /  \                   /  \
+*    1(B) 5(B)              1(B) 5(B)
+*        / \    ------>          / \
+*       . 7(R)                  . 6(R)
+*         / \                     /  \
+*      6(B) .                    7(B) .
+*                                                              
+*                                                                
+*/
+void test_function_findReplacer_caseone(void){
+  Node *rootPtr = &node2;
+  Node *delete = &node7;  
+  initNode(&node2, 2, &node1, &node5, BLACK);  
+  initNode(&node5, 5, NULL, &node7, BLACK);  
+  initNode(&node7, 7, &node6, NULL, RED);  
+  initNode(&node1, 1, NULL, NULL, BLACK);    
+  initNode(&node6, 6, NULL, NULL, BLACK);     
+  
+  Replacement(&rootPtr, delete);
+  TEST_ASSERT_EQUAL_PTR(rootPtr, &node2);    
+  TEST_ASSERT_EQUAL_NODE(2, &node1, &node5, BLACK, &node2); 
+  TEST_ASSERT_EQUAL_NODE(5, NULL, &node6, BLACK, &node5); 
+  TEST_ASSERT_EQUAL_NODE(6, &node7, NULL, BLACK, &node6); 
+  TEST_ASSERT_EQUAL_NODE(7, NULL, NULL, RED, &node7); 
+}
+
+/**
+*     
+*       2(B)                  2(B)
+*      /  \                   /  \
+*    1(B) 5(B)              1(B) 5(B)
+*        / \    ------>          / \
+*       . 7(R)                  . 8(B)
+*         / \                     /  \
+*      6(B)  10(B)             6(B)  10(B)
+*             / \                     / \                                  
+*          8(B)  12(B)            9(B)  12(B)
+*            \                      
+*            9(B)                                    
+*/
+void test_function_findReplacer_caseThree(void){
+  Node *rootPtr = &node2;
+  Node *delete = &node7;  
+  initNode(&node2, 2, &node1, &node5, BLACK);  
+  initNode(&node5, 5, NULL, &node7, BLACK);  
+  initNode(&node7, 7, &node6, &node10, RED);  
+  initNode(&node1, 1, NULL, NULL, BLACK);    
+  initNode(&node6, 6, NULL, NULL, BLACK);     
+  initNode(&node10, 10, &node8, &node12, BLACK); 
+  initNode(&node8, 8, NULL, &node9, BLACK);     
+  initNode(&node9, 9, NULL, NULL, BLACK);     
+  initNode(&node12, 12, NULL, NULL, BLACK);     
+
+  Replacement(&rootPtr, delete);  
+  TEST_ASSERT_EQUAL_PTR(rootPtr, &node2);    
+  TEST_ASSERT_EQUAL_NODE(2, &node1, &node5, BLACK, &node2);
+  TEST_ASSERT_EQUAL_NODE(5, NULL, &node8, BLACK, &node5);  
+  TEST_ASSERT_EQUAL_NODE(6, NULL, NULL, BLACK, &node6); 
+  TEST_ASSERT_EQUAL_NODE(10, &node9, &node12, BLACK, &node10); 
+  }
+
+  
+/**
+*     
+*       2(B)                  2(B)
+*      /  \                   /  \
+*    1(B) 5(B)              1(B) 5(B)
+*        / \    ------>          / \
+*       . 7(R)                  . 4(B)
+*         / \                     /  \
+*      6(B)  10(B)             6(B)  10(B)
+*             / \                     / \                                  
+*          8(B)  12(B)            8(B)  12(B)
+*           / \                   / \ 
+*       4(b)  9(B)               .  9(B)                    
+*/
+void test_function_findReplacer_caseThree_more_longer(void){
+  Node *rootPtr = &node2;
+  Node *delete = &node7;  
+  initNode(&node2, 2, &node1, &node5, BLACK);  
+  initNode(&node5, 5, NULL, &node7, BLACK);  
+  initNode(&node7, 7, &node6, &node10, RED);  
+  initNode(&node1, 1, NULL, NULL, BLACK);    
+  initNode(&node6, 6, NULL, NULL, BLACK);     
+  initNode(&node10, 10, &node8, &node12, BLACK); 
+  initNode(&node8, 8, &node4, &node9, BLACK);     
+  initNode(&node9, 9, NULL, NULL, BLACK);     
+  initNode(&node12, 12, NULL, NULL, BLACK);     
+  initNode(&node4, 4, NULL, NULL, BLACK);     
+
+  Replacement(&rootPtr, delete);  
+  TEST_ASSERT_EQUAL_PTR(rootPtr, &node2);    
+  TEST_ASSERT_EQUAL_NODE(2, &node1, &node5, BLACK, &node2);
+  TEST_ASSERT_EQUAL_NODE(5, NULL, &node4, BLACK, &node5);  
+  TEST_ASSERT_EQUAL_NODE(6, NULL, NULL, BLACK, &node6); 
+  TEST_ASSERT_EQUAL_NODE(10, &node8, &node12, BLACK, &node10); 
+  TEST_ASSERT_EQUAL_NODE(8, NULL, &node9, BLACK, &node8); 
+  TEST_ASSERT_EQUAL_NODE(12, NULL, NULL, BLACK, &node12); 
+  TEST_ASSERT_EQUAL_NODE(9, NULL, NULL, BLACK, &node9); 
+  }

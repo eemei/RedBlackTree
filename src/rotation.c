@@ -910,7 +910,7 @@ void deleteRBTNodeInt(Node **nodePtr, Node *deleteNode){
       caseTwoBLeft(&((*nodePtr)), deleteNode);
       caseThreeLeft(&((*nodePtr)), deleteNode);      
     } 
-    else{
+    else if ((*nodePtr)->value < deleteNode->value){
       deleteRBTNodeInt(&(*nodePtr)->right, deleteNode);
       caseThreeRight(&((*nodePtr)), deleteNode);
       caseOneARight(&((*nodePtr)), deleteNode);
@@ -923,43 +923,65 @@ void deleteRBTNodeInt(Node **nodePtr, Node *deleteNode){
 }
 
 void Replacement(Node **nodePtr, Node *deleteNode){
-  Node *parent, *tempNode;
+  Node *parent, *tempNode, *tempNodeLeft, *leftMost;
  // parent = *nodePtr;
   //int i = 0;
-  
-  if ((*nodePtr)->value == deleteNode->value){
-    if ((*nodePtr)->right == NULL && (*nodePtr)->left != NULL){
+
+  if (deleteNode->value == (*nodePtr)->value){  
+    // CASE 1: If current has no right child, then current's left child becomes
+    //         the node pointed to by the parent
+    if ((*nodePtr)->right == NULL){
+      tempNode = *nodePtr;
       (*nodePtr) = (*nodePtr)->left;
+      (*nodePtr)->left = tempNode;
+      tempNode->left = NULL;
+      tempNode->right = NULL;
+      return;
     }
-    // if ((*nodePtr)->right != NULL && (*nodePtr)->left != NULL){
-      // if ((*nodePtr)->right->left == NULL){
-        // (*nodePtr) = (*nodePtr)->right;
-      // }
-      // else {
-        // if ((*nodePtr)->left == NULL){
-          // tempNode = deleteNode;
-          // deleteNode = (*nodePtr);
-        // }
-        // else 
-        // Replacement(&((*nodePtr)->left), deleteNode);
-        
-      // }
-      // return;
+    
+    // CASE 2: If current's right child has no left child, then current's right child
+    //         replaces current in the tree
+    else if ((*nodePtr)->right->left == NULL){
+      tempNode = *nodePtr;
+      tempNodeLeft = (*nodePtr)->left;      
+      (*nodePtr) = (*nodePtr)->right;
+      (*nodePtr)->right = tempNode;
+      (*nodePtr)->left = tempNodeLeft;
+      tempNode->left = NULL;
+      tempNode->right = NULL;      
+      return;
+    }
+    
+    // CASE 3: If current's right child has a left child, replace current with current's
+    //          right child's left-most descendent    
+    else if ((*nodePtr)->right->left != NULL){
+      leftMost = (*nodePtr)->right->left;
+      parent = (*nodePtr)->right;
+      // We first need to find the right node's left-most child 
+      while (leftMost->left != NULL){
+        parent = leftMost;
+        leftMost = leftMost->left;
+      }
+      tempNode = *nodePtr;
+      tempNodeLeft = leftMost;
+      (*nodePtr) = leftMost;
+      parent->left = leftMost->right;
+      return;
     }
   }
-  // else if((*nodePtr)->left != NULL && (*nodePtr)->right != NULL){
-    // if ((*nodePtr)->value > deleteNode->value){
-      // Replacement(&((*nodePtr)->left), deleteNode);
-    // }
-    // else{
-      // Replacement(&((*nodePtr)->left), deleteNode);
-    // }
-  // }
+    
+    else {
+      if ((*nodePtr)->value > deleteNode->value){
+        Replacement(&(*nodePtr)->left, deleteNode);
+      }
+      else if ((*nodePtr)->value < deleteNode->value){
+        Replacement(&(*nodePtr)->right, deleteNode);
+      }
+    }
 
-  // printf("deletenode = %d\n", deleteNode->value);
-//}
-
-
+  //}
+  
+}
 
 
 
