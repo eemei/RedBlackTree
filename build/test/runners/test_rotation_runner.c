@@ -163,10 +163,10 @@ int main(void)
   RUN_TEST(test_delete_a_node_and_performed_caseATwo, 1476);
   RUN_TEST(test_delete_a_node_and_performed_rotate_right_is_caseOneA, 1506);
   RUN_TEST(test_delete_a_node_and_performed_caseThreeRight, 1539);
-  RUN_TEST(test_function_findReplacer_caseTwo, 1578);
-  RUN_TEST(test_function_findReplacer_caseone, 1609);
-  RUN_TEST(test_function_findReplacer_caseThree, 1640);
-  RUN_TEST(test_function_findReplacer_caseThree_more_longer, 1676);
+  RUN_TEST(test_function_findReplacer_caseTwo, 1576);
+  RUN_TEST(test_function_findReplacer_caseone, 1607);
+  RUN_TEST(test_function_findReplacer_caseThree, 1638);
+  RUN_TEST(test_function_findReplacer_caseThree_more_longer, 1674);
 
   return (UnityEnd());
 }

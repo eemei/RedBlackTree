@@ -162,7 +162,7 @@ void violationCaseOneRight(Node **nodePtr, Node *addNode){
     addNode->colour = RED;
   }
 }
-/*  
+/**  
 *       120 (B)                              120(B)                            150(B)
 *       / \        right rotate(parent)       / \        apply case three      /  \
 *  (B)80  170(R)   ----------------->    80(R) 150(B)         right         120(R) 170(R)
@@ -189,7 +189,7 @@ void violationCaseTwoRight(Node **nodePtr, Node *addNode){
   }
 }
 
-/*  
+/**  
 *       120 (B)                                   170(B)
 *       / \        left rotate(grandparent)       / \   
 *  (B)80  170(R)   ----------------->           120(R) 250(R)
@@ -271,7 +271,7 @@ void rbtAdd(Node **nodePtr, Node *addNode){
 }
 
 
-/*
+/**
 * @function:
 * remember the node that will delete from red black tree
 * return whole structure that is ReturnedObject structure
@@ -279,11 +279,17 @@ void rbtAdd(Node **nodePtr, Node *addNode){
 ReturnedObject rbtRemoveInt(Node *deleteNode){
   ReturnedObject ro;
   
-  ro.removedNode = deleteNode;
-  ro.returnedColour = DOUBLE_BLACK;
-  ro.removedNode->colour = DOUBLE_BLACK;
-  
-  return ro;
+  if (deleteNode != NULL){
+    ro.removedNode = deleteNode;
+    ro.returnedColour = DOUBLE_BLACK;
+    ro.removedNode->colour = DOUBLE_BLACK;
+    ro.removedNode->value = deleteNode->value;
+    return ro;
+  }
+  else{
+    ro.returnedColour = DOUBLE_BLACK;
+    return ro;
+  }
 }
 
 /** 
@@ -321,13 +327,11 @@ ReturnedObject rbtRemoveInt(Node *deleteNode){
 * right child is red (with the parent being BLACK) 
 */
 void caseOneALeft(Node **nodePtr, Node *deleteNode){
-  //ReturnedObject ro;
   Node *parent, *sibling, *child;
   parent = *nodePtr;
   sibling = parent->right;
   child = sibling->right;
   
-  // ro = rbtRemoveInt(deleteNode);
   if (parent->left != NULL){
     if(parent->left->colour == DOUBLE_BLACK){
     //(*nodePtr)->left = NULL;
@@ -924,8 +928,6 @@ void deleteRBTNodeInt(Node **nodePtr, Node *deleteNode){
 
 void Replacement(Node **nodePtr, Node *deleteNode){
   Node *parent, *tempNode, *tempNodeLeft, *leftMost;
- // parent = *nodePtr;
-  //int i = 0;
 
   if (deleteNode->value == (*nodePtr)->value){  
     // CASE 1: If current has no right child, then current's left child becomes
@@ -949,7 +951,7 @@ void Replacement(Node **nodePtr, Node *deleteNode){
       (*nodePtr)->left = tempNodeLeft;
       tempNode->left = NULL;
       tempNode->right = NULL;      
-      return;
+      //return;
     }
     
     // CASE 3: If current's right child has a left child, replace current with current's
@@ -966,7 +968,7 @@ void Replacement(Node **nodePtr, Node *deleteNode){
       tempNodeLeft = leftMost;
       (*nodePtr) = leftMost;
       parent->left = leftMost->right;
-      return;
+      //return;
     }
   }
     
@@ -978,9 +980,6 @@ void Replacement(Node **nodePtr, Node *deleteNode){
         Replacement(&(*nodePtr)->right, deleteNode);
       }
     }
-
-  //}
-  
 }
 
 

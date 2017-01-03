@@ -4716,17 +4716,17 @@ void test_function_findReplacer_caseTwo(void){
 
  ((void *)0)
 
- ), (_U_UINT)1589, UNITY_DISPLAY_STYLE_HEX32);
+ ), (_U_UINT)1587, UNITY_DISPLAY_STYLE_HEX32);
 
-  testAssertNode(2, &node1, &node5, BLACK, &node2, 1590);;
+  testAssertNode(2, &node1, &node5, BLACK, &node2, 1588);;
 
   testAssertNode(5, 
 
  ((void *)0)
 
- , &node10, RED, &node5, 1591);;
+ , &node10, RED, &node5, 1589);;
 
-  testAssertNode(10, &node6, &node7, BLACK, &node10, 1592);;
+  testAssertNode(10, &node6, &node7, BLACK, &node10, 1590);;
 
   testAssertNode(7, 
 
@@ -4736,7 +4736,7 @@ void test_function_findReplacer_caseTwo(void){
 
  ((void *)0)
 
- , RED, &node7, 1593);;
+ , RED, &node7, 1591);;
 
   testAssertNode(6, 
 
@@ -4746,7 +4746,7 @@ void test_function_findReplacer_caseTwo(void){
 
  ((void *)0)
 
- , BLACK, &node6, 1594);;
+ , BLACK, &node6, 1592);;
 
 }
 
@@ -4798,21 +4798,21 @@ void test_function_findReplacer_caseone(void){
 
  ((void *)0)
 
- ), (_U_UINT)1619, UNITY_DISPLAY_STYLE_HEX32);
+ ), (_U_UINT)1617, UNITY_DISPLAY_STYLE_HEX32);
 
-  testAssertNode(2, &node1, &node5, BLACK, &node2, 1620);;
+  testAssertNode(2, &node1, &node5, BLACK, &node2, 1618);;
 
   testAssertNode(5, 
 
  ((void *)0)
 
- , &node6, BLACK, &node5, 1621);;
+ , &node6, BLACK, &node5, 1619);;
 
   testAssertNode(6, &node7, 
 
  ((void *)0)
 
- , BLACK, &node6, 1622);;
+ , BLACK, &node6, 1620);;
 
   testAssertNode(7, 
 
@@ -4822,7 +4822,7 @@ void test_function_findReplacer_caseone(void){
 
  ((void *)0)
 
- , RED, &node7, 1623);;
+ , RED, &node7, 1621);;
 
 }
 
@@ -4898,15 +4898,15 @@ void test_function_findReplacer_caseThree(void){
 
  ((void *)0)
 
- ), (_U_UINT)1654, UNITY_DISPLAY_STYLE_HEX32);
+ ), (_U_UINT)1652, UNITY_DISPLAY_STYLE_HEX32);
 
-  testAssertNode(2, &node1, &node5, BLACK, &node2, 1655);;
+  testAssertNode(2, &node1, &node5, BLACK, &node2, 1653);;
 
   testAssertNode(5, 
 
  ((void *)0)
 
- , &node8, BLACK, &node5, 1656);;
+ , &node8, BLACK, &node5, 1654);;
 
   testAssertNode(6, 
 
@@ -4916,9 +4916,9 @@ void test_function_findReplacer_caseThree(void){
 
  ((void *)0)
 
- , BLACK, &node6, 1657);;
+ , BLACK, &node6, 1655);;
 
-  testAssertNode(10, &node9, &node12, BLACK, &node10, 1658);;
+  testAssertNode(10, &node9, &node12, BLACK, &node10, 1656);;
 
   }
 
@@ -5000,15 +5000,15 @@ void test_function_findReplacer_caseThree_more_longer(void){
 
  ((void *)0)
 
- ), (_U_UINT)1691, UNITY_DISPLAY_STYLE_HEX32);
+ ), (_U_UINT)1689, UNITY_DISPLAY_STYLE_HEX32);
 
-  testAssertNode(2, &node1, &node5, BLACK, &node2, 1692);;
+  testAssertNode(2, &node1, &node5, BLACK, &node2, 1690);;
 
   testAssertNode(5, 
 
  ((void *)0)
 
- , &node4, BLACK, &node5, 1693);;
+ , &node4, BLACK, &node5, 1691);;
 
   testAssertNode(6, 
 
@@ -5018,15 +5018,15 @@ void test_function_findReplacer_caseThree_more_longer(void){
 
  ((void *)0)
 
- , BLACK, &node6, 1694);;
+ , BLACK, &node6, 1692);;
 
-  testAssertNode(10, &node8, &node12, BLACK, &node10, 1695);;
+  testAssertNode(10, &node8, &node12, BLACK, &node10, 1693);;
 
   testAssertNode(8, 
 
  ((void *)0)
 
- , &node9, BLACK, &node8, 1696);;
+ , &node9, BLACK, &node8, 1694);;
 
   testAssertNode(12, 
 
@@ -5036,7 +5036,7 @@ void test_function_findReplacer_caseThree_more_longer(void){
 
  ((void *)0)
 
- , BLACK, &node12, 1697);;
+ , BLACK, &node12, 1695);;
 
   testAssertNode(9, 
 
@@ -5046,6 +5046,6 @@ void test_function_findReplacer_caseThree_more_longer(void){
 
  ((void *)0)
 
- , BLACK, &node9, 1698);;
+ , BLACK, &node9, 1696);;
 
   }
