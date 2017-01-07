@@ -18,6 +18,7 @@ struct Node{
 typedef struct ReturnedObject ReturnedObject;
 struct ReturnedObject{
   Node *removedNode;
+  Node *replacedNode;
   Colour returnedColour;
 };
 
