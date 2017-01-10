@@ -12,7 +12,7 @@ void initNode(Node *root ,int value, Node *left, Node *right, Colour colour){
   root->value = value;
 }
 Node node1, node2, node3, node4, node5, node6, node7, node8, node9, node10, node11, node12, node14, node15, \
-    node20, node25, node30, node40, node45, node50, node55, node60, \
+    node20, node25, node30, node35, node40, node45, node50, node55, node60, \
     node65, node70, node75, node80, node90, node100, node110,\
     node120, node130, node150, node170, node250;
 
@@ -33,7 +33,8 @@ void setUp(void){
   initNode(&node15, 15, NULL, NULL, BLACK);  
   initNode(&node20, 20, NULL, NULL, BLACK);
   initNode(&node25, 25, NULL, NULL, BLACK);   
-  initNode(&node30, 30, NULL, NULL, BLACK);   
+  initNode(&node30, 30, NULL, NULL, BLACK);
+  initNode(&node35, 35, NULL, NULL, BLACK);
   initNode(&node40, 40, NULL, NULL, BLACK);   
   initNode(&node45, 45, NULL, NULL, BLACK);   
   initNode(&node50, 50, NULL, NULL, BLACK);
@@ -1341,10 +1342,11 @@ void test_rbtRemoveInt_function_given_a_delete_node_then_return_node_and_colour(
 */
 void test_delete_one_node_and_that_is_the_root(void){
   Node *rootPtr = &node100;
-  Node *deletePtr = &node100;    
+  Node *deletePtr = &node100;  
+  ReturnedObject ro;  
   initNode(&node100, 100, NULL, NULL, RED);
 
-  deleteRBTNode(&rootPtr, deletePtr);
+  deleteRBTNode(&rootPtr, deletePtr, ro);
   TEST_ASSERT_EQUAL_PTR(rootPtr, NULL); 
 }
 
@@ -1359,14 +1361,15 @@ void test_delete_one_node_and_that_is_the_root(void){
 */
 void test_delete_one_node_and_that_is_the_twenty_node_at_left_most_and_performed_rotation_left(void){
   Node *rootPtr = &node25;
-  Node *deletePtr = &node20;    
+  Node *deletePtr = &node20; 
+  ReturnedObject ro;  
   initNode(&node25, 25, &node20, &node60, RED);
   initNode(&node20, 20, NULL, NULL, BLACK);
   initNode(&node60, 60, NULL, &node70, BLACK);
   initNode(&node70, 70, NULL, NULL, RED);
   
 
-  deleteRBTNode(&rootPtr, deletePtr);
+  deleteRBTNode(&rootPtr, deletePtr, ro);
   TEST_ASSERT_EQUAL_PTR(rootPtr, &node60); 
   TEST_ASSERT_EQUAL_NODE(60, &node25, &node70, BLACK, &node60);
   TEST_ASSERT_EQUAL_NODE(25, NULL, NULL, BLACK, &node25);
@@ -1383,14 +1386,15 @@ void test_delete_one_node_and_that_is_the_twenty_node_at_left_most_and_performed
 */
 void test_delete_node_twenty_and_performed_left_rotation_the_headNode_is_red(void){
   Node *rootPtr = &node25;
-  Node *deletePtr = &node20;    
+  Node *deletePtr = &node20; 
+  ReturnedObject ro;  
   initNode(&node25, 25, &node20, &node60, RED);
   initNode(&node20, 20, NULL, NULL, BLACK);
   initNode(&node60, 60, NULL, &node70, BLACK);
   initNode(&node70, 70, NULL, NULL, RED);
   
 
-  deleteRBTNode(&rootPtr, deletePtr);
+  deleteRBTNode(&rootPtr, deletePtr, ro);
   TEST_ASSERT_EQUAL_PTR(rootPtr, &node60); 
   TEST_ASSERT_EQUAL_NODE(60, &node25, &node70, BLACK, &node60);
   TEST_ASSERT_EQUAL_NODE(25, NULL, NULL, BLACK, &node25);
@@ -1409,7 +1413,8 @@ void test_delete_node_twenty_and_performed_left_rotation_the_headNode_is_red(voi
 */
 void test_delete_node_six_and_performed_caseThree_and_involved_case_two(void){
   Node *rootPtr = &node2;
-  Node *deletePtr = &node4;    
+  Node *deletePtr = &node4;
+  ReturnedObject ro;  
   initNode(&node2, 2, &node1, &node5, BLACK);
   initNode(&node5, 5, &node4, &node7, BLACK);
   initNode(&node1, 1, NULL, NULL, BLACK);
@@ -1418,7 +1423,7 @@ void test_delete_node_six_and_performed_caseThree_and_involved_case_two(void){
   initNode(&node10, 10, NULL, NULL, BLACK);
   initNode(&node7, 7, &node6, &node10, RED);
   
-  deleteRBTNode(&rootPtr, deletePtr);
+  deleteRBTNode(&rootPtr, deletePtr, ro);
   TEST_ASSERT_EQUAL_PTR(rootPtr, &node2); 
   TEST_ASSERT_EQUAL_NODE(2, &node1, &node7, BLACK, &node2);  
   TEST_ASSERT_EQUAL_NODE(7, &node5, &node10, BLACK, &node7);  
@@ -1442,7 +1447,8 @@ void test_delete_node_six_and_performed_caseThree_and_involved_case_two(void){
 */
 void test_delete_node_six_and_performed_caseBTwo(void){
   Node *rootPtr = &node2;
-  Node *deletePtr = &node4;    
+  Node *deletePtr = &node4;
+  ReturnedObject ro;  
   initNode(&node2, 2, &node1, &node5, BLACK);
   initNode(&node5, 5, &node4, &node7, RED);
   initNode(&node1, 1, NULL, NULL, BLACK);
@@ -1451,7 +1457,7 @@ void test_delete_node_six_and_performed_caseBTwo(void){
   initNode(&node10, 10, NULL, NULL, BLACK);
   initNode(&node7, 7, &node6, &node10, BLACK);
   
-  deleteRBTNode(&rootPtr, deletePtr);
+  deleteRBTNode(&rootPtr, deletePtr, ro);
   TEST_ASSERT_EQUAL_PTR(rootPtr, &node2); 
   TEST_ASSERT_EQUAL_NODE(2, &node1, &node5, BLACK, &node2);  
   TEST_ASSERT_EQUAL_NODE(5, NULL, &node7, BLACK, &node5); 
@@ -1475,7 +1481,8 @@ void test_delete_node_six_and_performed_caseBTwo(void){
 */
 void test_delete_a_node_and_performed_caseATwo(void){
   Node *rootPtr = &node2;
-  Node *deletePtr = &node4;    
+  Node *deletePtr = &node4; 
+  ReturnedObject ro;  
   initNode(&node2, 2, &node1, &node5, BLACK);
   initNode(&node5, 5, &node4, &node7, BLACK);
   initNode(&node1, 1, NULL, NULL, BLACK);
@@ -1484,7 +1491,7 @@ void test_delete_a_node_and_performed_caseATwo(void){
   initNode(&node10, 10, NULL, NULL, BLACK);
   initNode(&node7, 7, &node6, &node10, BLACK);
   
-  deleteRBTNode(&rootPtr, deletePtr);  
+  deleteRBTNode(&rootPtr, deletePtr, ro);  
   TEST_ASSERT_EQUAL_PTR(rootPtr, &node2); 
   TEST_ASSERT_EQUAL_NODE(2, &node1, &node5, BLACK, &node2);  
   TEST_ASSERT_EQUAL_NODE(5, NULL, &node7, BLACK, &node5); 
@@ -1506,6 +1513,7 @@ void test_delete_a_node_and_performed_caseATwo(void){
 void test_delete_a_node_and_performed_rotate_right_is_caseOneA(void){
   Node *rootPtr = &node90;
   Node *deletePtr = &node70;  
+  ReturnedObject ro;
   initNode(&node90, 90, &node60, &node100, BLACK);  
   initNode(&node60, 60, &node50, &node70, RED);  
   initNode(&node100, 100, &node80, &node120, RED);  
@@ -1515,7 +1523,7 @@ void test_delete_a_node_and_performed_rotate_right_is_caseOneA(void){
   initNode(&node80, 80, NULL, NULL, BLACK);  
   initNode(&node120, 120, NULL, NULL, BLACK);  
   
-  deleteRBTNode(&rootPtr, deletePtr);  
+  deleteRBTNode(&rootPtr, deletePtr, ro);  
   TEST_ASSERT_EQUAL_PTR(rootPtr, &node90);    
   TEST_ASSERT_EQUAL_NODE(90, &node50, &node100, BLACK, &node90);    
   TEST_ASSERT_EQUAL_NODE(50, &node40, &node60, RED, &node50);    
@@ -1524,6 +1532,40 @@ void test_delete_a_node_and_performed_rotate_right_is_caseOneA(void){
   TEST_ASSERT_EQUAL_NODE(60, NULL, NULL, BLACK, &node60);    
   TEST_ASSERT_EQUAL_NODE(80, NULL, NULL, BLACK, &node80);    
   TEST_ASSERT_EQUAL_NODE(120, NULL, NULL, BLACK, &node120);     
+}
+
+/**  
+*                   50(B)                              50(B)                              
+*  remove 55       /   \              case 1b          /   \
+*               40(R)    60(R)       ---------->    40(R)   65(R)
+*               / \       / \                       / \       / \
+*           30(B) 45(B) 55(R) 70(B)           30(B) 45(B) 60(B) 70(B)
+*                               /                                 
+*                           65(R)                              
+*
+*/
+void test_delete_a_node_and_performed_rotate_rightLeft_is_caseOneB_and_the_deleteNode_has_been_delete_in_the_pass(void){
+  Node *rootPtr = &node50;
+  Node *deletePtr = &node55; 
+  ReturnedObject ro;  
+  initNode(&node50, 50, &node40, &node60, RED);  
+  initNode(&node40, 40, &node30, &node45, RED);  
+  initNode(&node60, 60, &node55, &node70, RED);  
+  initNode(&node70, 70, &node65, NULL, BLACK);  
+  initNode(&node65, 65, NULL, NULL, RED);  
+  initNode(&node30, 30, NULL, NULL, BLACK);  
+  initNode(&node45, 45, NULL, NULL, BLACK);  
+
+  
+  deleteRBTNode(&rootPtr, deletePtr,ro);  
+  TEST_ASSERT_EQUAL_PTR(rootPtr, &node50);    
+  TEST_ASSERT_EQUAL_NODE(50, &node40, &node65, BLACK, &node50);
+  TEST_ASSERT_EQUAL_NODE(40, &node30, &node45, RED, &node40);
+  TEST_ASSERT_EQUAL_NODE(65, &node60, &node70, RED, &node65);
+  TEST_ASSERT_EQUAL_NODE(30, NULL, NULL, BLACK, &node30);
+  TEST_ASSERT_EQUAL_NODE(45, NULL, NULL, BLACK, &node45);
+  TEST_ASSERT_EQUAL_NODE(60, NULL, NULL, BLACK, &node60);
+  TEST_ASSERT_EQUAL_NODE(70, NULL, NULL, BLACK, &node70);
 }
 
 /**
@@ -1539,6 +1581,7 @@ void test_delete_a_node_and_performed_rotate_right_is_caseOneA(void){
 void test_delete_a_node_and_performed_caseThreeRight(void){
   Node *rootPtr = &node90;
   Node *deletePtr = &node70;  
+  ReturnedObject ro;    
   initNode(&node90, 90, &node60, &node100, BLACK);  
   initNode(&node60, 60, &node50, &node70, BLACK);  
   initNode(&node100, 100, &node80, &node120, RED);  
@@ -1549,7 +1592,7 @@ void test_delete_a_node_and_performed_caseThreeRight(void){
   initNode(&node120, 120, NULL, NULL, BLACK);    
   initNode(&node55, 55, NULL, NULL, BLACK);    
   
-  deleteRBTNode(&rootPtr, deletePtr);  
+  deleteRBTNode(&rootPtr, deletePtr, ro);  
   TEST_ASSERT_EQUAL_PTR(rootPtr, &node90);    
   TEST_ASSERT_EQUAL_NODE(90, &node50, &node100, BLACK, &node90);    
   TEST_ASSERT_EQUAL_NODE(50, &node40, &node60, BLACK, &node50);    
@@ -1575,7 +1618,7 @@ void test_delete_a_node_and_performed_caseThreeRight(void){
 */
 void test_function_findReplacer_caseTwo(void){
   ReturnedObject ro;
-  Node *rootPtr = &node2;
+  Node *rootPtr = &node2;    
   Node *deletePtr = &node7;  
   initNode(&node2, 2, &node1, &node5, BLACK);  
   initNode(&node5, 5, NULL, &node7, RED);  
@@ -1584,7 +1627,7 @@ void test_function_findReplacer_caseTwo(void){
   initNode(&node6, 6, NULL, NULL, BLACK);     
   initNode(&node10, 10, NULL, NULL, BLACK);    
   
-  deleteRBTNode(&rootPtr, deletePtr);
+  deleteRBTNode(&rootPtr, deletePtr, ro);
 
   TEST_ASSERT_EQUAL_PTR(rootPtr, &node2);    
   TEST_ASSERT_EQUAL_NODE(2, &node1, &node5, BLACK, &node2); 

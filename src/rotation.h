@@ -27,8 +27,8 @@ void caseTwoARight(Node **nodePtr, Node *deleteNode);
 void caseTwoBRight(Node **nodePtr, Node *deleteNode);
 void caseThreeRight(Node **nodePtr, Node *deleteNode);
 ReturnedObject rbtRemoveInt(Node *deleteNode);
-void deleteRBTNode(Node **nodePtr, Node *deleteNode);
-void deleteRBTNodeInt(Node **nodePtr, Node *deleteNode);
+void deleteRBTNode(Node **nodePtr, Node *deleteNode, ReturnedObject ro);
+void deleteRBTNodeInt(Node **nodePtr, Node *deleteNode, ReturnedObject ro);
 
 void Replacement(Node **nodePtr, Node *deleteNode);
 void internalSwap(Node **nodePtr, Node *ptr);

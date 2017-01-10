@@ -279,17 +279,11 @@ void rbtAdd(Node **nodePtr, Node *addNode){
 ReturnedObject rbtRemoveInt(Node *deleteNode){
   ReturnedObject ro;
   
-  if (deleteNode != NULL){
     ro.removedNode = deleteNode;
     ro.returnedColour = DOUBLE_BLACK;
     ro.removedNode->colour = DOUBLE_BLACK;
     ro.removedNode->value = deleteNode->value;
     return ro;
-  }
-  else{
-    ro.returnedColour = DOUBLE_BLACK;
-    return ro;
-  }
 }
 
 /** 
@@ -889,8 +883,8 @@ void caseThreeRight(Node **nodePtr, Node *deleteNode){
   }  
 }
 
-void deleteRBTNode(Node **nodePtr, Node *deleteNode){
-  deleteRBTNodeInt(nodePtr, deleteNode);
+void deleteRBTNode(Node **nodePtr, Node *deleteNode, ReturnedObject ro){
+  deleteRBTNodeInt(nodePtr, deleteNode, ro);
   (*nodePtr)->colour = BLACK;
   
   if((*nodePtr)->value == deleteNode->value){
@@ -899,12 +893,17 @@ void deleteRBTNode(Node **nodePtr, Node *deleteNode){
   }
 }
 
-void deleteRBTNodeInt(Node **nodePtr, Node *deleteNode){
-  ReturnedObject ro;
+void deleteRBTNodeInt(Node **nodePtr, Node *deleteNode, ReturnedObject ro){
+ // ReturnedObject ro;
   int i=0;
   if((*nodePtr) == NULL){
-    printf("cannot be delete because nothing inside the tree\n");
-    return;
+    if (ro.removedNode->value == deleteNode->value){
+      return;
+    }
+    else {
+      printf("cannot be delete because nothing match inside the tree\n");
+      return;
+    }
   } 
   
   else if((*nodePtr)->value == deleteNode->value){
@@ -917,7 +916,7 @@ void deleteRBTNodeInt(Node **nodePtr, Node *deleteNode){
   
   else if((*nodePtr)->left != NULL && (*nodePtr)->right != NULL){
     if ((*nodePtr)->value > deleteNode->value){
-      deleteRBTNodeInt(&(*nodePtr)->left, deleteNode);
+      deleteRBTNodeInt(&(*nodePtr)->left, deleteNode, ro);
       caseOneALeft(&((*nodePtr)), deleteNode);
       caseOneBLeft(&((*nodePtr)), deleteNode);
       caseTwoALeft(&((*nodePtr)), deleteNode);
@@ -925,7 +924,7 @@ void deleteRBTNodeInt(Node **nodePtr, Node *deleteNode){
       caseThreeLeft(&((*nodePtr)), deleteNode);      
     } 
     else if ((*nodePtr)->value < deleteNode->value){
-      deleteRBTNodeInt(&(*nodePtr)->right, deleteNode);
+      deleteRBTNodeInt(&(*nodePtr)->right, deleteNode, ro);
       caseThreeRight(&((*nodePtr)), deleteNode);
       caseOneARight(&((*nodePtr)), deleteNode);
       caseOneBRight(&((*nodePtr)), deleteNode);
@@ -934,10 +933,7 @@ void deleteRBTNodeInt(Node **nodePtr, Node *deleteNode){
       caseThreeRight(&((*nodePtr)), deleteNode);
     }  
   }
-  printf("nodePtr value i= %d %d\n ",i+1, (*nodePtr)->value);
-  // if (deleteNode->value == (*nodePtr)->value){
-    // (*nodePtr) = Replacement(*)
-  // }
+  printf("nodePtr value %d\n ", (*nodePtr)->value);
 }
 
 // void Replacement(Node **nodePtr, Node *deleteNode){
@@ -1084,4 +1080,4 @@ ReturnedObject getReplacingNode(Node *replacingNode){
     // ro.replacedNode->colour = replacingNode->colour;
     // ro.replacedNode->value = replacingNode->value;
     return ro;
-  }
+}
