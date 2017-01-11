@@ -908,21 +908,14 @@ void deleteRBTNodeInt(Node **nodePtr, Node *deleteNode, ReturnedObject ro){
   } 
   
   else if((*nodePtr)->value == deleteNode->value){
-    rbtRemoveInt(deleteNode);
     printf("<+> nodePtr value %d\n ", (*nodePtr)->value);
-    if((*nodePtr)->left != NULL || (*nodePtr)->right != NULL){
-      printf("<> nodePtr value %d\n ", (*nodePtr)->value);
-       printf ("return replaced node = %d\n", returnReplacedNode->value);
-     if ((*nodePtr)->right != NULL){
+    if((*nodePtr)->right != NULL){
       returnReplacedNode = Replacement((*nodePtr)->right);
-      (*nodePtr) = returnReplacedNode;
-     }
-     else {
-      returnReplacedNode = Replacement((*nodePtr)->left); 
-     }
+    printf("<1+> returnReplacedNode value %d\n ", (returnReplacedNode)->value);
     }
+    rbtRemoveInt(deleteNode);
+    
    
-    //(*nodePtr) = returnReplacedNode;
     return;
   }
   

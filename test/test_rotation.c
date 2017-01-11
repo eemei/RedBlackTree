@@ -1360,7 +1360,7 @@ void test_delete_one_node_and_that_is_the_root(void){
 *                 / \
 *                 . .
 */
-void xtest_delete_one_node_and_that_is_the_twenty_node_at_left_most_and_performed_rotation_left(void){
+void test_delete_one_node_and_that_is_the_twenty_node_at_left_most_and_performed_rotation_left(void){
   Node *rootPtr = &node25;
   Node *deletePtr = &node20; 
   ReturnedObject ro;  
@@ -1385,7 +1385,7 @@ void xtest_delete_one_node_and_that_is_the_twenty_node_at_left_most_and_performe
 *                 / \
 *                 . .
 */
-void xtest_delete_node_twenty_and_performed_left_rotation_the_headNode_is_red(void){
+void test_delete_node_twenty_and_performed_left_rotation_the_headNode_is_red(void){
   Node *rootPtr = &node25;
   Node *deletePtr = &node20; 
   ReturnedObject ro;  
@@ -1412,7 +1412,7 @@ void xtest_delete_node_twenty_and_performed_left_rotation_the_headNode_is_red(vo
 *                                                              / \   
 *                                                             .  .   
 */
-void xtest_delete_node_six_and_performed_caseThree_and_involved_case_two(void){
+void test_delete_node_six_and_performed_caseThree_and_involved_case_two(void){
   Node *rootPtr = &node2;
   Node *deletePtr = &node4;
   ReturnedObject ro;  
@@ -1446,7 +1446,7 @@ void xtest_delete_node_six_and_performed_caseThree_and_involved_case_two(void){
 *                                                              
 *                                                                
 */
-void xtest_delete_node_six_and_performed_caseBTwo(void){
+void test_delete_node_six_and_performed_caseBTwo(void){
   Node *rootPtr = &node2;
   Node *deletePtr = &node4;
   ReturnedObject ro;  
@@ -1480,7 +1480,7 @@ void xtest_delete_node_six_and_performed_caseBTwo(void){
 *                                                              
 *                                                                
 */
-void xtest_delete_a_node_and_performed_caseATwo(void){
+void test_delete_a_node_and_performed_caseATwo(void){
   Node *rootPtr = &node2;
   Node *deletePtr = &node4; 
   ReturnedObject ro;  
@@ -1511,7 +1511,7 @@ void xtest_delete_a_node_and_performed_caseATwo(void){
 *          40(R) .    . .  . .    . .
 *
 */
-void xtest_delete_a_node_and_performed_rotate_right_is_caseOneA(void){
+void test_delete_a_node_and_performed_rotate_right_is_caseOneA(void){
   Node *rootPtr = &node90;
   Node *deletePtr = &node70;  
   ReturnedObject ro;
@@ -1545,7 +1545,7 @@ void xtest_delete_a_node_and_performed_rotate_right_is_caseOneA(void){
 *                           65(R)                              
 *
 */
-void xtest_delete_a_node_and_performed_rotate_rightLeft_is_caseOneB_and_the_deleteNode_has_been_delete_in_the_pass(void){
+void test_delete_a_node_and_performed_rotate_rightLeft_is_caseOneB_and_the_deleteNode_has_been_delete_in_the_pass(void){
   Node *rootPtr = &node50;
   Node *deletePtr = &node55; 
   ReturnedObject ro;  
@@ -1579,7 +1579,7 @@ void xtest_delete_a_node_and_performed_rotate_rightLeft_is_caseOneB_and_the_dele
 *         40(B) 55(B). .  . .    . .                      55(B) .   . .    .  .            55(R) .  . .    .  .
 *
 */
-void xtest_delete_a_node_and_performed_caseThreeRight(void){
+void test_delete_a_node_and_performed_caseThreeRight(void){
   Node *rootPtr = &node90;
   Node *deletePtr = &node70;  
   ReturnedObject ro;    
@@ -1649,7 +1649,7 @@ void test_the_function_able_to_find_A_repalcement_node_and_it_should_return_eigh
 *    .  .
 *
 */
-void xtest_the_function_able_to_find_a_repalcement_node_and_it_should_return_hundred(void){
+void test_the_function_able_to_find_a_repalcement_node_and_it_should_return_hundred(void){
   Node *nodeReplace = &node200;
   Node *nodel;
   initNode(&node200, 200, &node100, NULL, BLACK);        
@@ -1671,7 +1671,7 @@ void xtest_the_function_able_to_find_a_repalcement_node_and_it_should_return_hun
 *   80  .
 *
 */
-void xtest_the_function_able_to_find_A_repalcement_node_and_it_should_return_most_left(void){
+void test_the_function_able_to_find_A_repalcement_node_and_it_should_return_most_left(void){
   Node *nodeReplace = &node200;
   Node *nodel;
 
@@ -1708,42 +1708,28 @@ void test_the_function_able_to_find_A_repalcement_node_and_it_should_return_most
   returnedPointer = Replacement(nodeReplace);
   TEST_ASSERT_EQUAL(returnedPointer, &node80);
   TEST_ASSERT_EQUAL_NODE(200, &node100, NULL, BLACK, &node200);    
-  TEST_ASSERT_EQUAL_NODE(100, &node120, NULL, BLACK, &node100);       
+  TEST_ASSERT_EQUAL_NODE(100, &node120, NULL, BLACK, &node100);    
+  TEST_ASSERT_EQUAL_NODE(80, NULL, NULL, BLACK, &node80);    
 }
 
 
-/**
-*     
-*       2(B)                  2(B)
-*      /  \                   /  \
-*    1(B) 5(B)              1(B) 5(B)
-*        / \    ------>          / \
-*       . 7(R)                  . 10(R)
-*         / \                     /  \
-*      6(B) 10(B)               6(B) 7(R)
-*                                                              
-*                                                                
-*/
-void test_function_findReplacer(void){
-  ReturnedObject ro;
-  Node *rootPtr = &node2;    
-  Node *deletePtr = &node7;  
-  initNode(&node2, 2, &node1, &node5, BLACK);  
-  initNode(&node5, 5, NULL, &node7, RED);  
-  initNode(&node7, 7, &node6, &node10, RED);  
-  initNode(&node1, 1, NULL, NULL, BLACK);    
-  initNode(&node6, 6, NULL, NULL, BLACK);     
-  initNode(&node10, 10, NULL, NULL, BLACK);    
-  
-  deleteRBTNode(&rootPtr, deletePtr, ro);
 
-  TEST_ASSERT_EQUAL_PTR(rootPtr, &node2);    
-  TEST_ASSERT_EQUAL_NODE(2, &node1, &node5, BLACK, &node2); 
-  TEST_ASSERT_EQUAL_NODE(5, NULL, &node10, RED, &node5); 
-  // TEST_ASSERT_EQUAL_NODE(10, &node6, &node7, RED, &node10); 
-  // TEST_ASSERT_EQUAL_NODE(7, NULL, NULL, RED, &node7); 
-  // TEST_ASSERT_EQUAL_NODE(6, NULL, NULL, BLACK, &node6); 
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // /**
 // *     
@@ -1857,9 +1843,10 @@ void test_function_findReplacer(void){
 *           / \                   / \ 
 *       4(b)  9(B)               7  9(B)                    
 */
-void xtest_function_findReplacer_caseThree_more_longer(void){
+void test_function_findReplacer_caseThree_more_longer(void){
   Node *rootPtr = &node2;
   Node *deletePtr = &node7;  
+  ReturnedObject ro;    
   initNode(&node2, 2, &node1, &node5, BLACK);  
   initNode(&node5, 5, NULL, &node7, BLACK);  
   initNode(&node7, 7, &node6, &node10, RED);  
@@ -1871,7 +1858,7 @@ void xtest_function_findReplacer_caseThree_more_longer(void){
   initNode(&node12, 12, NULL, NULL, BLACK);     
   initNode(&node4, 4, NULL, NULL, BLACK);     
 
-  //Replacement(&rootPtr, deletePtr);  
+  deleteRBTNode(&rootPtr, deletePtr, ro); 
   TEST_ASSERT_EQUAL_PTR(rootPtr, &node2);    
   TEST_ASSERT_EQUAL_NODE(2, &node1, &node5, BLACK, &node2);
   TEST_ASSERT_EQUAL_NODE(5, NULL, &node4, BLACK, &node5);  
