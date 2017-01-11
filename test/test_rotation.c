@@ -1828,6 +1828,41 @@ void test_the_function_able_to_find_A_repalcement_node_and_it_should_return_most
   // }
 
   
+  
+/**
+*                       90(B)                                   90(B)
+*                      /    \             Rotate right         /    \
+*  remove           60(R)   100(R)        ---------->       50(R)   100(R)
+*   70    -->       / \      /   \        CASE 1            /  \     /  \
+*  node        50(B) 70(R) 80(B) 120(B)                40(B) 60(B) 80(B) 120(B)
+*              / \    /\    /\    /\
+*          40(R) .    . .  . .    . .
+*
+*/
+void test_delete_a_node_and_performed_rotate_right_is_caseOneA_with_replacement(void){
+  Node *rootPtr = &node90;
+  Node *deletePtr = &node60;  
+  ReturnedObject ro;
+  initNode(&node90, 90, &node60, &node100, BLACK);  
+  initNode(&node60, 60, &node50, &node70, RED);  
+  initNode(&node100, 100, &node80, &node120, RED);  
+  initNode(&node50, 50, &node40, NULL, BLACK);  
+  initNode(&node40, 40, NULL, NULL, RED);  
+  initNode(&node70, 70, NULL, NULL, RED);  
+  initNode(&node80, 80, NULL, NULL, BLACK);  
+  initNode(&node120, 120, NULL, NULL, BLACK);  
+  
+  deleteRBTNode(&rootPtr, deletePtr, ro);  
+  TEST_ASSERT_EQUAL_PTR(rootPtr, &node90);    
+  TEST_ASSERT_EQUAL_NODE(90, &node50, &node100, BLACK, &node90);    
+  // TEST_ASSERT_EQUAL_NODE(50, &node40, &node60, RED, &node50);    
+  // TEST_ASSERT_EQUAL_NODE(100, &node80, &node120, RED, &node100);    
+  // TEST_ASSERT_EQUAL_NODE(40, NULL, NULL, BLACK, &node40);    
+  // TEST_ASSERT_EQUAL_NODE(60, NULL, NULL, BLACK, &node60);    
+  // TEST_ASSERT_EQUAL_NODE(80, NULL, NULL, BLACK, &node80);    
+  // TEST_ASSERT_EQUAL_NODE(120, NULL, NULL, BLACK, &node120);     
+}
+  
 /**
 * remove node 7 
 *     
@@ -1843,7 +1878,7 @@ void test_the_function_able_to_find_A_repalcement_node_and_it_should_return_most
 *           / \                   / \ 
 *       4(b)  9(B)               7  9(B)                    
 */
-void test_function_findReplacer_caseThree_more_longer(void){
+void xtest_function_findReplacer_caseThree_more_longer(void){
   Node *rootPtr = &node2;
   Node *deletePtr = &node7;  
   ReturnedObject ro;    
