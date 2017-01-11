@@ -894,6 +894,7 @@ void deleteRBTNode(Node **nodePtr, Node *deleteNode, ReturnedObject ro){
 }
 
 void deleteRBTNodeInt(Node **nodePtr, Node *deleteNode, ReturnedObject ro){
+  Node *returnReplacedNode;
  // ReturnedObject ro;
   int i=0;
   if((*nodePtr) == NULL){
@@ -908,9 +909,20 @@ void deleteRBTNodeInt(Node **nodePtr, Node *deleteNode, ReturnedObject ro){
   
   else if((*nodePtr)->value == deleteNode->value){
     rbtRemoveInt(deleteNode);
+    printf("<+> nodePtr value %d\n ", (*nodePtr)->value);
     if((*nodePtr)->left != NULL || (*nodePtr)->right != NULL){
-      Replacement(&(*nodePtr), deleteNode);
+      printf("<> nodePtr value %d\n ", (*nodePtr)->value);
+       printf ("return replaced node = %d\n", returnReplacedNode->value);
+     if ((*nodePtr)->right != NULL){
+      returnReplacedNode = Replacement((*nodePtr)->right);
+      (*nodePtr) = returnReplacedNode;
+     }
+     else {
+      returnReplacedNode = Replacement((*nodePtr)->left); 
+     }
     }
+   
+    //(*nodePtr) = returnReplacedNode;
     return;
   }
   
@@ -936,100 +948,70 @@ void deleteRBTNodeInt(Node **nodePtr, Node *deleteNode, ReturnedObject ro){
   printf("nodePtr value %d\n ", (*nodePtr)->value);
 }
 
-// void Replacement(Node **nodePtr, Node *deleteNode){
-  // Node *parent, *tempNode, *tempNodeLeft, *leftMost;
-  // Node *tempSwapNode, *deleteNodeLeft, *deleteNodeRight;
-
-  // if (deleteNode->value == (*nodePtr)->value){  
-    // // CASE 1: If current has no right child, then current's left child becomes
-    // //         the node pointed to by the parent
-    // if ((*nodePtr)->right == NULL){
-      // tempNode = *nodePtr;
-      // (*nodePtr) = (*nodePtr)->left;
-      // (*nodePtr)->colour = deleteNode->colour;
-      // (*nodePtr)->left = tempNode;
-      // tempNode->left = NULL;
-      // tempNode->right = NULL;
-      // return;
-    // }
-    
-    // // CASE 2: If current's right child has no left child, then current's right child
-    // //         replaces current in the tree
-    // else if ((*nodePtr)->right->left == NULL){
-      // tempNode = *nodePtr;
-      // tempNodeLeft = (*nodePtr)->left;      
-      // (*nodePtr) = (*nodePtr)->right;
-      // (*nodePtr)->colour = deleteNode->colour;
-      // (*nodePtr)->right = tempNode;
-      // (*nodePtr)->left = tempNodeLeft;
-      // tempNode->left = NULL;
-      // tempNode->right = NULL;      
-      // //return;
-    // }
-    
-    // // CASE 3: If current's right child has a left child, replace current with current's
-    // //          right child's left-most descendent    
-    // else if ((*nodePtr)->right->left != NULL){
-      // leftMost = (*nodePtr)->right->left;
-      // parent = (*nodePtr)->right;
-      // // We first need to find the right node's left-most child 
-      // while (leftMost->left != NULL){
-        // parent = leftMost;
-        // leftMost = leftMost->left;
-      // }
-      // if (leftMost->right != NULL){
-        // tempNode = (*nodePtr);
-        // deleteNodeLeft = (*nodePtr)->left;
-        // tempSwapNode = leftMost->right;
-        // deleteNodeRight = (*nodePtr)->right;
-        // (*nodePtr) = leftMost;
-        // (*nodePtr)->colour = deleteNode->colour;
-        // (*nodePtr)->right = deleteNodeRight;
-        // (*nodePtr)->left = deleteNodeLeft;
-        // // internalSwap(&leftMost, leftMost->right);
-        // leftMost = tempSwapNode;
-        // //leftMost->right = deleteNode;
-      // }
-      // else {
-        // tempNode = (*nodePtr);
-        // (*nodePtr) = leftMost;
-        // (*nodePtr)->colour = deleteNode->colour;
-        // //parent->left = deleteNode;
-      // }
-    // }
-  // }
-    
-    // else {
-      // if ((*nodePtr)->value > deleteNode->value){
-        // Replacement(&(*nodePtr)->left, deleteNode);
-      // }
-      // else if ((*nodePtr)->value < deleteNode->value){
-        // Replacement(&(*nodePtr)->right, deleteNode);
-      // }
-    // }
-// }
+Node *Replacement(Node *nodeReplace){
+  Node *parent, *leftMost, *tempNode;
+  if ((nodeReplace) == NULL){
+    return nodeReplace;
+  }
+  // for right side
+  else if ((nodeReplace) != NULL){
+    if ((nodeReplace)->left == NULL){
+       leftMost = nodeReplace;
+      // return leftMost;
+    }
+ 
+    else if ((nodeReplace)->left != NULL){
+      Replacement((nodeReplace)->left);
+      return;
+    }
+  }
+  //printf("123node ptr value = %d\n", (nodeReplace)->value);
+  if (nodeReplace->right != NULL){
+    parent = nodeReplace->right;
+    (nodeReplace) = parent;
+  }
+  //leftMost = nodeReplace;
+  return leftMost;
+  }
 
 
 
+
+
+
+/*
 void Replacement(Node **nodePtr, Node *deleteNode){
-
-  ReturnedObject ro;
-  Node *parent, *tempNode, *tempNodeLeft, *leftMost;
+  ReturnedObject ro;  
+  Node *parent, *tempNode, *tempNodeLeft, *tempNodeRight, *leftMost;
   Node *tempSwapNode, *deleteNodeLeft, *deleteNodeRight;
 
   if (deleteNode->value == (*nodePtr)->value){  
     // CASE 1: If current has no right child, then current's left child becomes
     //         the node pointed to by the parent
     if ((*nodePtr)->right == NULL){
-    ro = getReplacingNode((*nodePtr)->left);
-    return;
+      tempNode = *nodePtr;
+      (*nodePtr) = (*nodePtr)->left;
+      (*nodePtr)->colour = deleteNode->colour;
+      (*nodePtr)->left = tempNode;
+      tempNode->left = NULL;
+      tempNode->right = NULL;
+      leftMost = NULL;
+  
     }
     
     // CASE 2: If current's right child has no left child, then current's right child
     //         replaces current in the tree
     else if ((*nodePtr)->right->left == NULL){
-      ro = getReplacingNode((*nodePtr)->right);  
-      return;
+      tempNode = *nodePtr;
+      tempNodeLeft = (*nodePtr)->left;      
+      (*nodePtr) = (*nodePtr)->right;
+      (*nodePtr)->colour = deleteNode->colour;
+      (*nodePtr)->right = tempNode;
+      (*nodePtr)->left = tempNodeLeft;
+      tempNode->left = NULL;
+      tempNode->right = NULL;
+      leftMost = NULL;      
+     
     }
     
     // CASE 3: If current's right child has a left child, replace current with current's
@@ -1042,11 +1024,60 @@ void Replacement(Node **nodePtr, Node *deleteNode){
         parent = leftMost;
         leftMost = leftMost->left;
       }
-      ro = getReplacingNode(leftMost);
+      //getReplacingNode(leftMost);
+      
+      if (leftMost->right != NULL){
+        tempNode = (*nodePtr);
+        deleteNodeLeft = (*nodePtr)->left;
+        tempSwapNode = leftMost->right;
+        deleteNodeRight = (*nodePtr)->right;
+        (*nodePtr) = leftMost;
+        (*nodePtr)->colour = deleteNode->colour;
+        (*nodePtr)->right = deleteNodeRight;
+        (*nodePtr)->left = deleteNodeLeft;
+        // internalSwap(&leftMost, leftMost->right);
+        //leftMost = tempSwapNode;
+        //leftMost->right = deleteNode;
+      }
+      else {
+        //tempSwapNode = (*nodePtr);
+        tempNodeLeft = (*nodePtr)->left;
+        tempNodeRight = (*nodePtr)->right;
+        tempNode = (*nodePtr);
+        printf (" tempnode addr = %p\n", tempNode);
+        printf (" tempnode addr = %d\n", tempNode->value);
+        (*nodePtr) = leftMost;
+        (*nodePtr)->colour = deleteNode->colour;
+        (*nodePtr)->left = tempNodeLeft;
+        (*nodePtr)->right = tempNodeRight;
+        parent = (*nodePtr)->right;
+        leftMost = (*nodePtr)->right->left;
+        printf ("100 parent value = %d\n", parent->value);
+         while (leftMost->left->left != NULL){
+          parent = leftMost;
+          printf ("100 parent value = %d\n", parent->value);
+          leftMost = leftMost->left;
+        }
+        printf ("100 parent value = %d\n", parent->value);
+        if ((*nodePtr)->value == parent->value){
+           (*nodePtr)->left = deleteNode;
+         
+        }
+        else {
+          if ((*nodePtr)->value > deleteNode->value){
+            Replacement(&(*nodePtr)->left, parent);
+          }
+          else if ((*nodePtr)->value < deleteNode->value){
+            Replacement(&(*nodePtr)->right, parent);
+          }
+        }
+      }
+   
     }
   }
+  
     
-    else {
+  else {
       if ((*nodePtr)->value > deleteNode->value){
         Replacement(&(*nodePtr)->left, deleteNode);
       }
@@ -1056,7 +1087,10 @@ void Replacement(Node **nodePtr, Node *deleteNode){
     }
 }
 
-void internalSwap(Node **nodePtr, Node *ptr){
+*/
+
+
+void internalSwap(Node **nodePtr, Node *ptr, Node *left, Node *right){
   Node *tempPtrA, *tempPtrB;
   tempPtrA = ptr;
   tempPtrA->value = ptr->value;
@@ -1067,8 +1101,8 @@ void internalSwap(Node **nodePtr, Node *ptr){
   
   (*nodePtr) = tempPtrA;
   (*nodePtr)->right = ptr;
-  ptr->left = NULL;
-  ptr->right = NULL;
+  ptr->left = left;
+  ptr->right = right;
   
 }
 
@@ -1077,7 +1111,7 @@ ReturnedObject getReplacingNode(Node *replacingNode){
 
     ro.replacedNode = replacingNode;
     // ro.returnedColour = replacingNode->colour;
-    // ro.replacedNode->colour = replacingNode->colour;
-    // ro.replacedNode->value = replacingNode->value;
+    ro.replacedNode->colour = replacingNode->colour;
+    ro.replacedNode->value = replacingNode->value;
     return ro;
 }

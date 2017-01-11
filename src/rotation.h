@@ -30,8 +30,8 @@ ReturnedObject rbtRemoveInt(Node *deleteNode);
 void deleteRBTNode(Node **nodePtr, Node *deleteNode, ReturnedObject ro);
 void deleteRBTNodeInt(Node **nodePtr, Node *deleteNode, ReturnedObject ro);
 
-void Replacement(Node **nodePtr, Node *deleteNode);
-void internalSwap(Node **nodePtr, Node *ptr);
+Node *Replacement(Node *nodeReplace);
+void internalSwap(Node **nodePtr, Node *ptr, Node *left, Node *right);
 ReturnedObject getReplacingNode(Node *replacingNode);
 #endif // rotation_H
  
